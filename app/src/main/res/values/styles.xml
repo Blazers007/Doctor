@@ -9,6 +9,7 @@
     <!-- 登陆界面 -->
     <style name="LoginTheme" parent="AppTheme">
         <item name="colorPrimaryDark">#ff71beca</item>
+        <item name="colorPrimary">#ff81d8e6</item>
         <item name="android:windowActionBar">false</item>
     </style>
 

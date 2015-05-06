@@ -22,5 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.rengwuxian.materialedittext:library:2.1.3'
+    compile 'com.rengwuxian.materialedittext:library:2.1.3'/*http://www.rengwuxian.com/post/materialedittext*/
+    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
+    compile 'br.com.liveo:navigationdrawer-material:1.0.5'/*https://github.com/rudsonlive/NavigationDrawer-MaterialDesign*/
 }

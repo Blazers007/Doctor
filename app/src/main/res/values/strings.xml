@@ -23,4 +23,7 @@
 
     <!-- RegisterActivity -->
     <string name="title_activity_register">注册成为新用户</string>
+    <string name="male">男性</string>
+    <string name="female">女性</string>
+    <string name="setting_birthday">点击设定您的生日</string>
 </resources>
