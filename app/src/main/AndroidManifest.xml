@@ -26,9 +26,8 @@
             android:theme="@style/RegisterTheme"
             android:label="@string/title_activity_register" >
         </activity>
-        <activity android:name=".MainStage"
-            android:theme="@style/LoginTheme">
-        </activity>
+        <activity
+            android:name=".MainStage"
+            android:theme="@style/MainTheme"/>
     </application>
-
 </manifest>

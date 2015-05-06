@@ -10,7 +10,6 @@
     <style name="LoginTheme" parent="AppTheme">
         <item name="colorPrimaryDark">#ff71beca</item>
         <item name="colorPrimary">#ff81d8e6</item>
-        <item name="android:windowActionBar">false</item>
     </style>
 
     <!-- 注册界面 -->
@@ -18,5 +17,11 @@
         <item name="colorPrimaryDark">#039be5</item>
         <item name="colorPrimary">#03a9f4</item>
         <item name="colorAccent">#ff5722</item>
+    </style>
+
+    <!-- ZHUJIEMIAN-->
+    <style name="MainTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">#ff71beca</item>
+        <item name="colorPrimary">#ff81d8e6</item>
     </style>
 </resources>
