@@ -1,0 +1,62 @@
+<!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
+                android:background="@color/apple_white" android:paddingLeft="8dp" android:paddingRight="8dp"
+                android:paddingTop="16dp" android:paddingBottom="16dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:orientation="vertical"
+                >
+            <!-- 一下部分尽量减少背景绘制-->
+            <!-- 基本信息-->
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
+                <ImageView android:layout_width="96dp" android:layout_height="96dp"
+                           android:id="@+id/register_photo"
+                           android:src="@drawable/ic_photo_camera_grey600_48dp" android:padding="24dp"
+                           android:background="@drawable/grey_coner"/>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:id="@+id/textView7" android:layout_toRightOf="@+id/register_photo"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp" android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp" android:gravity="bottom" android:paddingLeft="48dp"
+                        android:paddingBottom="6dp" android:text="患者某某"/>
+                <com.rengwuxian.materialedittext.MaterialEditText android:layout_width="match_parent" android:layout_height="40dp" android:text="New Text"
+                          android:id="@+id/textView8" android:layout_toRightOf="@+id/register_photo"
+                          android:layout_below="@+id/textView7"
+                          android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+                          android:layout_marginLeft="8dp" android:layout_marginRight="8dp" android:gravity="bottom"
+                          android:paddingLeft="48dp" android:paddingBottom="6dp"/>
+            </RelativeLayout>
+            <!-- 以往就诊记录-->
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="以往就诊记录"
+                        android:id="@+id/textView4"/>
+            </RelativeLayout>
+            <!-- 病例-->
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="病例简历"
+                          android:id="@+id/textView5"/>
+            </RelativeLayout>
+            <!-- 个人详细信息-->
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="详细信息"
+                          android:id="@+id/textView6"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

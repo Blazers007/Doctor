@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="apple_white">#fff5f5fa</color>
+    <color name="btn_normal">#ff00c2df</color>
+    <color name="btn_clicked">#ff009eb7</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#80c3c3c3</color>
+
+    <!-- Theme1 Color-->
+    <!-- Theme2 Color-->
+</resources>

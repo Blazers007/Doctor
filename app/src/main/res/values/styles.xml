@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- 登陆界面 -->
+    <style name="LoginTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">#ff71beca</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!-- 注册界面 -->
+    <style name="RegisterTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">#039be5</item>
+        <item name="colorPrimary">#03a9f4</item>
+        <item name="colorAccent">#ff5722</item>
+    </style>
+</resources>
