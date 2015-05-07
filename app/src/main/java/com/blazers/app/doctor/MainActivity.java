@@ -14,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.liveo.interfaces.NavigationLiveoListener;
+import br.liveo.navigationliveo.NavigationLiveo;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
+public class MainActivity extends NavigationLiveo implements NavigationLiveoListener {
     /* Toolbar */
     private Toolbar mToolbar;
     /* 菜单容器 */
@@ -34,6 +37,36 @@ public class MainActivity extends AppCompatActivity
     private CharSequence mTitle;
 
     @Override
+    public void onUserInformation() {
+        this.mUserName.setText("Rudson Lima");
+        this.mUserEmail.setText("rudsonlive@gmail.com");
+        this.mUserPhoto.setImageResource(R.drawable.ic_rudsonlive);
+        this.mUserBackground.setImageResource(R.drawable.drawer_background);
+    }
+
+    @Override
+    public void onInt(Bundle bundle) {
+        setNavigationListener(this);
+        List<String> mListNameItem = new ArrayList<>();
+        mListNameItem.add(0, "First");
+        mListNameItem.add(1, "First");
+        mListNameItem.add(2, "First");
+        mListNameItem.add(3, "First");
+
+        // icons list items
+        List<Integer> mListIconItem = new ArrayList<>();
+        mListIconItem.add(0, 0);
+        mListIconItem.add(1, 0); //Item no icon set 0
+        mListIconItem.add(2, 0); //Item no icon set 0
+        mListIconItem.add(3, 0);
+
+        this.setFooterInformationDrawer("Setting", R.drawable.ic_drawer);
+
+        this.setNavigationAdapter(mListNameItem, mListIconItem);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -43,25 +76,25 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /* 设置左侧菜单 */
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+//        /* 设置左侧菜单 */
+//        mNavigationDrawerFragment = (NavigationDrawerFragment)
+//                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+//        mTitle = getTitle();
+//
+//        // Set up the drawer.
+//        mNavigationDrawerFragment.setUp(
+//                R.id.navigation_drawer,
+//                (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
+//    @Override
+//    public void onNavigationDrawerItemSelected(int position) {
+//        // update the main content by replacing fragments
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+//                .commit();
+//    }
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -111,6 +144,26 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClickNavigation(int i, int i1) {
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenuNavigation(Menu menu, int i, boolean b) {
+
+    }
+
+    @Override
+    public void onClickFooterItemNavigation(View view) {
+
+    }
+
+    @Override
+    public void onClickUserPhotoNavigation(View view) {
+
     }
 
     /**

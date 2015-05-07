@@ -23,4 +23,23 @@
 
     <!-- RegisterActivity -->
     <string name="title_activity_register">注册成为新用户</string>
+    <string name="male">男性</string>
+    <string name="female">女性</string>
+    <string name="setting_birthday">点击设定您的生日</string>
+
+    <!-- Drawer Menu-->
+    <string name="func_main_1">我的Doctor</string>
+    <string name="func_appointment">预约医生</string>
+    <string name="func_hospital_record">看病记录</string>
+    <string name="func_healthy_record">健康记录</string>
+    <string name="func_case_illness">病历管理</string>
+    <string name="func_setting">设置</string>
+
+    <!-- 预约Fragment-->
+    <string name="cure_record">就诊记录</string>
+    <string name="doctor_match">或许能帮助您的医生</string>
+    <string name="title_activity_make_appointment">MakeAppointment</string>
+
+    <!-- 预约医生Activity-->
+    <string name="title_make_appointment">预约我的医生</string>
 </resources>

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -9,7 +9,7 @@
     <!-- 登陆界面 -->
     <style name="LoginTheme" parent="AppTheme">
         <item name="colorPrimaryDark">#ff71beca</item>
-        <item name="android:windowActionBar">false</item>
+        <item name="colorPrimary">#ff81d8e6</item>
     </style>
 
     <!-- 注册界面 -->
@@ -17,5 +17,17 @@
         <item name="colorPrimaryDark">#039be5</item>
         <item name="colorPrimary">#03a9f4</item>
         <item name="colorAccent">#ff5722</item>
+    </style>
+
+    <!-- 主界面-->
+    <style name="MainTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">#ff71beca</item>
+        <item name="colorPrimary">#ff81d8e6</item>
+    </style>
+
+    <!-- 预约界面-->
+    <style name="MakeAppointment" parent="AppTheme">
+        <item name="colorPrimary">#2baf2b</item>
+        <item name="colorPrimaryDark">#0a8f08</item>
     </style>
 </resources>

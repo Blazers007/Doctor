@@ -2,9 +2,10 @@
 <resources>
 
     <color name="apple_white">#fff5f5fa</color>
-    <color name="btn_normal">#ff00c2df</color>
-    <color name="btn_clicked">#ff009eb7</color>
-
+    <color name="btn_login_normal">#ff00c2df</color>
+    <color name="btn_login_clicked">#ff009eb7</color>
+    <color name="green_normal">#2baf2b</color>
+    <color name="green_clicked">#0a8f08</color>
     <color name="transparent">#00000000</color>
     <color name="half_transparent">#80c3c3c3</color>
 

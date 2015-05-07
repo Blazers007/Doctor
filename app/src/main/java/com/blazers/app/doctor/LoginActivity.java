@@ -3,13 +3,14 @@ package com.blazers.app.doctor;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import com.blazers.app.doctor.Register.RegisterActivity;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private static final int REGISTER_CODE = 21;
 
@@ -21,6 +22,11 @@ public class LoginActivity extends ActionBarActivity {
 
     public void doRegister(View view) {
         startActivityForResult(new Intent(this, RegisterActivity.class), REGISTER_CODE);
+    }
+
+    public void doLogin(View view) {
+        startActivity(new Intent(this, MainStage.class));
+        finish();
     }
 
     @Override

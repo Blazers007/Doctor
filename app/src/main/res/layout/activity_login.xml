@@ -27,7 +27,7 @@
             android:layout_height="56dp"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText2" android:layout_below="@+id/editText" android:hint="@string/account_name"
+            android:id="@+id/editText2" android:layout_below="@+id/editText" android:hint="@string/account_pwd"
             android:paddingLeft="64dp" android:gravity="bottom" android:paddingBottom="16dp"
             android:textColor="#666" android:textColorHint="#888" android:textSize="18sp"
             android:background="@drawable/edit_corner_bottom"/>
@@ -37,7 +37,8 @@
             android:layout_height="56dp"
             android:text="登        陆"
             android:id="@+id/button" android:layout_alignParentBottom="true" android:layout_marginBottom="32dp"
-            android:textColor="#fafafa" android:textSize="20sp"/>
+            android:textColor="#fafafa" android:textSize="20sp"
+        android:onClick="doLogin" />
     <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"

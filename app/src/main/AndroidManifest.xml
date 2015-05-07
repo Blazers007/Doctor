@@ -23,8 +23,16 @@
         </activity>
         <activity
             android:name=".Register.RegisterActivity"
-            android:theme="@style/RegisterTheme"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:theme="@style/RegisterTheme" >
+        </activity>
+        <activity
+            android:name=".MainStage"
+            android:theme="@style/MainTheme" >
+        </activity>
+        <activity
+            android:name=".Appointment.MakeAppointment"
+            android:label="@string/title_activity_make_appointment" >
         </activity>
     </application>
 

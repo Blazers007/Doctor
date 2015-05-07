@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:background="#fff" android:padding="8dp">
+
+    <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/imageView3" android:src="@drawable/doctor_match" android:layout_centerVertical="true"/>
+    <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:text="张仲景"
+            android:id="@+id/textView11" android:layout_marginLeft="16dp" android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" android:textColor="#030303" android:textSize="18sp"
+            android:layout_toRightOf="@+id/imageView3"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="解放军军医大学"
+            android:id="@+id/textView12" android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" android:textColor="#333" android:layout_below="@+id/textView11"
+            android:layout_alignLeft="@+id/textView11"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的好友: 李思媛 正在接受她的治疗"
+            android:id="@+id/textView13" android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" android:layout_below="@+id/textView12"
+            android:layout_alignLeft="@+id/textView11" android:textColor="#555"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="脑外科 10年"
+            android:id="@+id/textView14" android:layout_alignTop="@+id/textView11"
+            android:layout_alignParentRight="false" android:textSize="18sp"
+            android:textColor="#222" android:layout_toRightOf="@+id/textView11" android:layout_marginLeft="8dp"/>
+    <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/imageButton" android:layout_alignParentRight="true" android:layout_centerVertical="true"
+            android:src="@drawable/abc_ic_search_api_mtrl_alpha" android:tint="#333"
+            android:background="@drawable/selector_text_normal"/>
+</RelativeLayout>
