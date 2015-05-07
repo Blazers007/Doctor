@@ -22,19 +22,19 @@
                     android:layout_marginLeft="8dp" android:layout_marginRight="8dp" android:gravity="center">
                 <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:text="某某某 主任医师" android:textColor="#e0f7fa"
-                        android:textSize="22sp" android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="从医时间 10年"
-                          android:textColor="#444" android:textSize="16sp" android:id="@+id/textView8"
+                        android:layout_height="wrap_content" android:text="某某某 主任医师" android:textColor="#444"
+                        android:textSize="18sp" android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp" android:minWidth="144dp"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="手术经验 10年"
+                          android:textColor="#444" android:textSize="14sp" android:id="@+id/textView8"
                           android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
                           android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="脑外科"
-                          android:textColor="#444" android:textSize="16sp" android:id="@+id/textView9"
+                          android:textColor="#444" android:textSize="14sp" android:id="@+id/textView9"
                           android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
                           android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="上海市第八人民医院"
-                          android:textColor="#444" android:textSize="16sp" android:id="@+id/textView10"
+                          android:textColor="#444" android:textSize="14sp" android:id="@+id/textView10"
                           android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
                           android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
                 <Button
@@ -53,20 +53,82 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@drawable/shadow_bottom"/>
-        <!-- 就诊记录-->
-        <TextView
-                android:textColor="#ff737373"
-                android:text="@string/cure_record"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp" android:textSize="16sp"/>
+        <!-- 上传病历寻找医生-->
         <android.support.v7.widget.CardView
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <TextView
-                    android:text="Test"
+            <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+                <!-- 上传您的病历便于我们帮您寻找合适的手术医生-->
+                <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:id="@+id/image_upload_file" android:src="@drawable/ic_frag_make_appoint_upload" android:padding="8dp"
+                            android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+                    <TextView
+                            android:textColor="#ff1976d2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="发布病历"
+                            android:id="@+id/text_upload_file"
+                            android:layout_toRightOf="@+id/image_upload_file"
+                            android:textSize="20sp"
+                            android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_upload_file_des" android:layout_below="@+id/text_upload_file"
+                            android:layout_alignLeft="@+id/text_upload_file" android:text="上传您的手术需要" android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp" android:textSize="12sp"/>
+                </RelativeLayout>
+                <!-- 推荐您的病友给我们 主动推荐/给我们 我们去录入-->
+                <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:id="@+id/image_help_other" android:src="@drawable/ic_frag_make_appoint_share" android:padding="8dp"
+                            android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+                    <TextView
+                            android:textColor="#ffff4b23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="帮助他人"
+                            android:id="@+id/text_help_other"
+                            android:layout_toRightOf="@+id/image_help_other"
+                            android:textSize="20sp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_upload_help_other_des" android:layout_below="@+id/text_help_other"
+                            android:layout_alignLeft="@+id/text_help_other" android:text="帮助您需要手术的病友" android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp" android:textSize="12sp"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <!-- Divider line-->
+            <View android:layout_width="1px"
+                  android:layout_marginTop="2dp"
+                  android:layout_marginBottom="2dp"
+                  android:layout_height="match_parent"
+                  android:layout_gravity="center_horizontal"
+                  android:background="#ccc"/>
         </android.support.v7.widget.CardView>
         <!-- 适合您的医生-->
         <TextView
@@ -80,5 +142,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
         </com.blazers.app.doctor.Library.WrapContentHeightViewPager>
+        <!-- 手术记录-->
+        <TextView
+                android:textColor="#ff737373"
+                android:text="@string/operation_record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" android:textSize="16sp"/>
+        <android.support.v7.widget.CardView
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </ScrollView>

@@ -12,9 +12,13 @@
                 android:background="@color/apple_white" android:paddingLeft="8dp" android:paddingRight="8dp"
                 android:paddingTop="16dp" android:paddingBottom="16dp">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                      android:orientation="vertical"
-                >
-            <!-- 一下部分尽量减少背景绘制-->
+                      android:orientation="vertical">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ccc"
+                    android:text="基本信息" android:paddingTop="4dp" android:paddingBottom="4dp"
+                    android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
             <!-- 基本信息-->
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
@@ -28,11 +32,11 @@
                         android:layout_height="wrap_content"
                         android:hint="您的姓名"
                         app:met_floatingLabel="highlight"
-                        android:id="@+id/textView7" android:layout_toRightOf="@+id/register_photo"
+                        android:id="@+id/textView7" android:layout_toRightOf="@+id/imageView8"
                         android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp" android:layout_marginLeft="32dp"
-                        android:layout_marginRight="8dp" android:gravity="bottom" android:paddingLeft="8dp"
-                        android:paddingBottom="6dp"/>
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="8dp" android:gravity="bottom"
+                        android:layout_marginLeft="16dp"/>
                 <RadioGroup
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -40,70 +44,122 @@
                     android:layout_toRightOf="@+id/register_photo"
                     android:layout_below="@+id/textView7"
                     android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="32dp"
+                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="8dp"
-                    android:paddingLeft="8dp">
+                    android:paddingLeft="8dp" android:gravity="center_vertical">
+                    <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:id="@+id/imageView5" android:src="@drawable/ic_web_grey600_36dp"/>
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/male"
-                        android:layout_marginRight="8dp" />
+                        android:layout_marginRight="8dp" android:layout_marginLeft="16dp"/>
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/female"/>
+                        android:text="@string/female" android:layout_marginLeft="8dp"/>
                 </RadioGroup>
+                <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView8" android:layout_alignTop="@+id/textView7"
+                        android:layout_alignBottom="@+id/textView7" android:layout_toRightOf="@+id/register_photo"
+                        android:layout_marginLeft="32dp" android:src="@drawable/ic_person_grey600_36dp"/>
             </RelativeLayout>
             <!-- 生日 自动计算出年龄-->
             <RelativeLayout
-                android:minHeight="56dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp">
+                    android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" android:layout_marginBottom="8dp">
                 <TextView
                     android:id="@+id/register_birthday"
                     android:clickable="true"
                     android:onClick="setBirthday"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/register_old"
-                    android:gravity="left"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/register_age"
+                    android:gravity="left|center_vertical"
                     android:hint="@string/setting_birthday"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="8dp" />
+                    android:layout_toRightOf="@+id/imageView6" android:layout_marginLeft="16dp"
+                    android:elegantTextHeight="false" android:paddingLeft="8dp"/>
                 <TextView
-                    android:id="@+id/register_old"
-                    android:text="55岁"
+                    android:id="@+id/register_age"
+                    android:text=""
                     android:layout_width="48dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="8dp" />
+                    android:layout_alignParentRight="true"
+                    android:elegantTextHeight="false" android:gravity="center_vertical" android:paddingLeft="8dp"/>
+                <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/imageView6" android:src="@drawable/ic_cake_grey600_36dp"
+                        android:layout_centerVertical="true"/>
             </RelativeLayout>
+            <!-- 居住地 可以用ActionSheet进行选择-->
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" android:layout_marginBottom="8dp">
+                <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/imageView7" android:src="@drawable/ic_location_city_grey600_36dp"
+                        android:layout_centerVertical="true"/>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                        android:orientation="horizontal" android:layout_toRightOf="@+id/imageView7"
+                              android:layout_toEndOf="@+id/imageView7" android:layout_marginLeft="24dp">
+
+                    <Spinner
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/spinner" android:layout_weight="1"/>
+                    <Spinner
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/spinner2" android:layout_weight="1"/>
+                    <Spinner
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/spinner3" android:layout_weight="1"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <!-- 主要症状-->
             <!-- 以往就诊记录-->
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ccc"
+                    android:text="以往就诊记录" android:paddingTop="4dp" android:paddingBottom="4dp"
+                    android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="以往就诊记录"
-                        android:id="@+id/textView4"/>
             </RelativeLayout>
             <!-- 病例-->
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ccc"
+                    android:text="病历" android:paddingTop="4dp" android:paddingBottom="4dp"
+                    android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="病例简历"
-                          android:id="@+id/textView5"/>
             </RelativeLayout>
             <!-- 个人详细信息-->
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ccc"
+                    android:text="详细信息" android:paddingTop="4dp" android:paddingBottom="4dp"
+                    android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="详细信息"
-                          android:id="@+id/textView6"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

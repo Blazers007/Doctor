@@ -1,8 +1,10 @@
 package com.blazers.app.doctor;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.View;
@@ -13,6 +15,9 @@ import java.util.List;
 import br.liveo.interfaces.NavigationLiveoListener;
 import br.liveo.navigationliveo.NavigationLiveo;
 import com.blazers.app.doctor.MainStageFrags.FragAppointment;
+import com.blazers.app.doctor.MainStageFrags.FragCaseIllness;
+import com.blazers.app.doctor.MainStageFrags.FragCureRecord;
+import com.blazers.app.doctor.MainStageFrags.FragHealthyRecord;
 
 /**
  * Created by Blazers on 15/5/6.
@@ -20,16 +25,18 @@ import com.blazers.app.doctor.MainStageFrags.FragAppointment;
 public class MainStage extends NavigationLiveo implements NavigationLiveoListener {
 
     private FragmentManager mFragmentManager;
-    private static final String FRAG_APP = "fragment_app";
-    private static final String FRAG_CUR = "fragment_cur";
-    private static final String FRAG_HEA = "fragment_hea";
-    private Fragment nowFrag;
-    private Fragment mAppointment, mCureRecord, mHealthyRecord;
+
+    private static final int FRAG_APP = 1;
+    private static final int FRAG_CUR = 2;
+    private static final int FRAG_HEA = 3;
+    private static final int FRAG_ILL = 4;
+    private Fragment mNowFrag;
+    private Fragment mAppointment, mCureRecord, mHealthyRecord, mIllCase;
 
     @Override
     public void onUserInformation() {
-        this.mUserName.setText("Rudson Lima");
-        this.mUserEmail.setText("rudsonlive@gmail.com");
+        this.mUserName.setText("Blazers");
+        this.mUserEmail.setText("blazersdar@gmail.com");
         this.mUserPhoto.setImageResource(R.drawable.ic_rudsonlive);
         this.mUserBackground.setImageResource(R.drawable.drawer_background);
     }
@@ -37,6 +44,7 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
     @Override
     public void onInt(Bundle bundle) {
         setNavigationListener(this);
+        getToolbar().setTitleTextColor(Color.WHITE);
 
         /* Init Fragment */
         if(bundle == null) {
@@ -74,12 +82,51 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
 
     @Override
     public void onItemClickNavigation(int i, int i1) {
-         /* Put Original */
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentManager.beginTransaction()
-                .replace(i1, new FragAppointment())
-                .commit();
-        getSupportActionBar().setTitle("我的医生");
+         /* 初次展示的页面 */
+        if(mNowFrag == null) {
+            mNowFrag = mAppointment = new FragAppointment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(i1, mCureRecord = new FragCureRecord())
+                    .add(i1, mHealthyRecord = new FragHealthyRecord())
+                    .add(i1, mIllCase = new FragCaseIllness())
+                    .add(i1, mNowFrag)
+                    .commit();
+        }else{
+            switch (i) {
+                case FRAG_APP:
+                    if(mNowFrag == mAppointment)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mAppointment).commit();
+                        mNowFrag = mAppointment;
+                    }
+                    break;
+                case FRAG_CUR:
+                    if(mNowFrag == mCureRecord)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mCureRecord).commit();
+                        mNowFrag = mCureRecord;
+                    }
+                    break;
+                case FRAG_HEA:
+                    if(mNowFrag == mHealthyRecord)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mAppointment).commit();
+                        mNowFrag = mAppointment;
+                    }
+                    break;
+                case FRAG_ILL:
+                    if(mNowFrag == mIllCase)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mIllCase).commit();
+                        mNowFrag = mAppointment;
+                    }
+                    break;
+            }
+        }
     }
 
     @Override

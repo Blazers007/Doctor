@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:gravity="center_vertical">
+
+    <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/imageView4" android:src="@drawable/ic_frag_make_appoint_upload" android:padding="12dp"/>
+    <TextView
+            android:textColor="#ff1976d2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布病历"
+            android:id="@+id/textView15" android:layout_toRightOf="@+id/imageView4" android:textSize="16sp"
+            android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView16" android:layout_below="@+id/textView15"
+            android:layout_alignLeft="@+id/textView15" android:text="上传您的手术需要给我们" android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"/>
+</RelativeLayout>

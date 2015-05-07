@@ -24,17 +24,20 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您的好友: 李思媛 正在接受她的治疗"
+            android:text="您的朋友: 李思媛 正在接受她的治疗"
             android:id="@+id/textView13" android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp" android:layout_below="@+id/textView12"
-            android:layout_alignLeft="@+id/textView11" android:textColor="#555"/>
+            android:layout_alignLeft="@+id/textView11" android:textColor="#666"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_green_corner"
             android:text="脑外科 10年"
             android:id="@+id/textView14" android:layout_alignTop="@+id/textView11"
-            android:layout_alignParentRight="false" android:textSize="18sp"
-            android:textColor="#222" android:layout_toRightOf="@+id/textView11" android:layout_marginLeft="8dp"/>
+            android:layout_alignParentRight="false" android:textSize="14sp"
+            android:textColor="#fafafa" android:layout_toRightOf="@+id/textView11" android:layout_marginLeft="8dp"
+            android:layout_alignBottom="@+id/textView11" android:paddingLeft="8dp" android:paddingRight="8dp"
+            android:paddingBottom="2dp" android:paddingTop="2dp"/>
     <ImageButton
             android:layout_width="48dp"
             android:layout_height="48dp"

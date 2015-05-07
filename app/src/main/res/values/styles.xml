@@ -1,9 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">#ff71beca</item>
+        <item name="colorPrimary">#ff81d8e6</item>
+        <item name="colorAccent">#ffff5656</item>
     </style>
 
     <!-- 登陆界面 -->
