@@ -7,4 +7,238 @@
         android:orientation="vertical"
         tools:context="com.blazers.app.doctor.Appointment.MakeAppointment">
     <include layout="@layout/toolbar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/doctor_advise"
+            android:background="#fafafa"
+            android:layout_marginBottom="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp">
+                        <ImageView
+                            android:layout_width="96dp"
+                            android:layout_height="128dp"
+                            android:id="@+id/imageView9"
+                            android:src="@drawable/doctor_match" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="主治医生 某某某"
+                            android:id="@+id/textView4"
+                            android:textColor="#222"
+                            android:paddingBottom="8dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="医生建议您:"
+                            android:id="@+id/textView5"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_vertical" />
+
+                       <ScrollView
+                           android:id="@+id/advices"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:layout_below="@+id/textView5">
+                               <LinearLayout
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:orientation="vertical">
+                                       <TextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"
+                                           android:text="1.注意术后运动"
+                                           android:id="@+id/textView6"
+                                           android:layout_marginLeft="16dp"
+                                           android:layout_marginBottom="8dp"
+                                           android:layout_marginRight="8dp" />
+
+                                       <TextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"
+                                           android:text="2.注意术后饮食，少吃油腻食物"
+                                           android:id="@+id/textView17"
+                                           android:layout_marginLeft="16dp"
+                                           android:layout_marginBottom="8dp"
+                                           android:layout_marginRight="8dp" />
+
+                                       <TextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"
+                                           android:text="3.注意术后休息，尽量每天11点之前睡觉，最好能休息好"
+                                           android:id="@+id/textView18"
+                                           android:layout_marginLeft="16dp"
+                                           android:layout_marginBottom="8dp"
+                                           android:layout_marginRight="8dp" />
+
+                                       <TextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"
+                                           android:text="4.注意术后运动"
+                                           android:id="@+id/textView19"
+                                           android:layout_marginLeft="16dp"
+                                           android:layout_marginBottom="8dp"
+                                           android:layout_marginRight="8dp" />
+                               </LinearLayout>
+                       </ScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:text="+添加到提醒"
+                        android:id="@+id/textView20"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/background_green_corner"
+                        android:textColor="#fff"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp" />
+                </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/background_search_bar_corner">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/imageView10"
+                    android:src="@drawable/abc_ic_search_api_mtrl_alpha"
+                    android:layout_marginTop="12dp"
+                    android:padding="6dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/editText3"
+                    android:hint="搜索常见问题..."
+                    android:paddingLeft="16dp" />
+        </LinearLayout>
+        <!-- 常见问题-->
+        <TextView
+            android:textColor="#ff737373"
+            android:text="@string/other_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:background="#f8f8f8">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="1 搭桥手术之后的注意事项有哪些？"
+                            android:gravity="center_vertical"
+                            android:textColor="#666"
+                            android:textSize="16sp"
+                            android:paddingLeft="16dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="#ccc"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="1 搭桥手术之后的注意事项..."
+                            android:gravity="center_vertical"
+                            android:textColor="#666"
+                            android:textSize="16sp"
+                            android:paddingLeft="16dp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="#ccc"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="1 搭桥手术之后的注意事项..."
+                            android:gravity="center_vertical"
+                            android:textColor="#666"
+                            android:textSize="16sp"
+                            android:paddingLeft="16dp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="#ccc"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="1 搭桥手术之后的注意事项..."
+                            android:gravity="center_vertical"
+                            android:textColor="#666"
+                            android:textSize="16sp"
+                            android:paddingLeft="16dp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="#ccc"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="1 搭桥手术之后的注意事项..."
+                            android:gravity="center_vertical"
+                            android:textColor="#666"
+                            android:textSize="16sp"
+                            android:paddingLeft="16dp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="#ccc"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="1 搭桥手术之后的注意事项..."
+                        android:gravity="center_vertical"
+                        android:textColor="#666"
+                        android:textSize="16sp"
+                        android:paddingLeft="16dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#ccc"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="1 搭桥手术之后的注意事项..."
+                        android:gravity="center_vertical"
+                        android:textColor="#666"
+                        android:textSize="16sp"
+                        android:paddingLeft="16dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#ccc"/>
+                </LinearLayout>
+        </ScrollView>
 </LinearLayout>

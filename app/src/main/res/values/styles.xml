@@ -27,8 +27,9 @@
 
     <!-- 主界面-->
     <style name="MainTheme" parent="AppTheme">
-        <item name="colorPrimaryDark">#ff71beca</item>
-        <item name="colorPrimary">#ff81d8e6</item>
+        <item name="colorPrimaryDark">#039be5</item>
+        <item name="colorPrimary">#03a9f4</item>
+        <item name="colorAccent">#ff5722</item>
     </style>
 
     <!-- 预约界面-->

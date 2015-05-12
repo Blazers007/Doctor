@@ -56,4 +56,7 @@
     <string name="title_activity_check_heart_rate">心率检测</string>
     <string name="title_activity_doctor_see_image">名医看图</string>
 
+    <!-- 健康贴士-->
+    <string name="other_tips">常见问题</string>
+
 </resources>
