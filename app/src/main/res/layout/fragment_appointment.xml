@@ -1,159 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <!-- Has Doctors-->
-        <RelativeLayout android:layout_width="match_parent" android:layout_height="192dp" android:background="#fafafa">
-            <ImageView
-                    android:id="@+id/doctor_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/doctor" android:layout_toLeftOf="@+id/doctor_info" android:padding="24dp"/>
-            <LinearLayout
-                    android:id="@+id/doctor_info"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <!-- Has Doctors-->
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="168dp" android:background="#fafafa">
+        <ImageView
+                android:id="@+id/doctor_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/doctor" android:layout_toLeftOf="@+id/doctor_info" android:padding="24dp"/>
+        <LinearLayout
+                android:id="@+id/doctor_info"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" android:layout_alignParentRight="true" android:padding="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginRight="8dp" android:gravity="center">
+            <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" android:layout_alignParentRight="true" android:padding="8dp"
-                    android:layout_marginLeft="8dp" android:layout_marginRight="8dp" android:gravity="center">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:text="某某某 主任医师" android:textColor="#444"
-                        android:textSize="18sp" android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp" android:minWidth="144dp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="手术经验 10年"
-                          android:textColor="#444" android:textSize="14sp" android:id="@+id/textView8"
-                          android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
-                          android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="脑外科"
-                          android:textColor="#444" android:textSize="14sp" android:id="@+id/textView9"
-                          android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
-                          android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="上海市第八人民医院"
-                          android:textColor="#444" android:textSize="14sp" android:id="@+id/textView10"
-                          android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
-                          android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
-                <Button
-                        android:id="@+id/btn_make_appointment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="立即预约"
-                        android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
-                        android:layout_marginRight="8dp"
-                        android:background="@drawable/selector_btn_green" android:textColor="#fafafa"
-                        android:textSize="18sp" android:layout_marginLeft="6dp"/>
-            </LinearLayout>
-        </RelativeLayout>
-        <!-- Shadow-->
-        <View
+                    android:layout_height="wrap_content" android:text="某某某 主任医师" android:textColor="#444"
+                    android:textSize="18sp" android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp" android:minWidth="144dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="手术经验 10年"
+                      android:textColor="#444" android:textSize="14sp" android:id="@+id/textView8"
+                      android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+                      android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="脑外科"
+                      android:textColor="#444" android:textSize="14sp" android:id="@+id/textView9"
+                      android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+                      android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="上海市第八人民医院"
+                      android:textColor="#444" android:textSize="14sp" android:id="@+id/textView10"
+                      android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+                      android:layout_marginRight="8dp" android:layout_marginLeft="6dp"/>
+            <Button
+                    android:id="@+id/btn_make_appointment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="立即预约"
+                    android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/selector_btn_green" android:textColor="#fafafa"
+                    android:textSize="18sp" android:layout_marginLeft="6dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- Shadow-->
+    <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@drawable/shadow_bottom"/>
-        <!-- 上传病历寻找医生-->
-        <android.support.v7.widget.CardView
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp"
+    <!-- 上传病历寻找医生-->
+    <android.support.v7.widget.CardView
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="72dp" android:layout_marginBottom="8dp">
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            <!-- 上传您的病历便于我们帮您寻找合适的手术医生-->
+            <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:id="@+id/image_upload_file" android:src="@drawable/ic_frag_make_appoint_upload" android:padding="8dp"
+                        android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+                <TextView
+                        android:textColor="#ff1976d2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发布病历"
+                        android:id="@+id/text_upload_file"
+                        android:layout_toRightOf="@+id/image_upload_file"
+                        android:textSize="20sp"
+                        android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/text_upload_file_des" android:layout_below="@+id/text_upload_file"
+                        android:layout_alignLeft="@+id/text_upload_file" android:text="上传您的诊治需要" android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp" android:textSize="12sp"/>
+            </RelativeLayout>
+            <!-- 推荐您的病友给我们 主动推荐/给我们 我们去录入-->
+            <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:id="@+id/image_help_other" android:src="@drawable/ic_frag_make_appoint_share" android:padding="8dp"
+                        android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
+                <TextView
+                        android:textColor="#ffff4b23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="帮助他人"
+                        android:id="@+id/text_help_other"
+                        android:layout_toRightOf="@+id/image_help_other"
+                        android:textSize="20sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/text_upload_help_other_des" android:layout_below="@+id/text_help_other"
+                        android:layout_alignLeft="@+id/text_help_other" android:text="帮助您患病的亲友" android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp" android:textSize="12sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <!-- Divider line-->
+        <View android:layout_width="1px"
+              android:layout_marginTop="2dp"
+              android:layout_marginBottom="2dp"
+              android:layout_height="match_parent"
+              android:layout_gravity="center_horizontal"
+              android:background="#ccc"/>
+    </android.support.v7.widget.CardView>
+    <!-- 适合您的医生-->
+    <TextView
+            android:visibility="gone"
+            android:textColor="#ff737373"
+            android:text="@string/doctor_match"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"/>
+    <com.blazers.app.doctor.Library.WrapContentHeightViewPager
+            android:visibility="gone"
+            android:id="@+id/doctor_match_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </com.blazers.app.doctor.Library.WrapContentHeightViewPager>
+    <!-- 五大功能 该区域需要动态计算高度保持正方形 而最上方的医生部分可以自动适应剩下的屏幕尺寸-->
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="240dp">
+        <!-- 上方下方的功能区域-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+            <!-- Chat-->
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <!-- 上传您的病历便于我们帮您寻找合适的手术医生-->
-                <RelativeLayout
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" android:gravity="center" android:background="@drawable/background_main_menu"
+                    android:clickable="true" android:id="@+id/menu_online_diagnoseig">
+                <!-- ICON-->
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_menu_heart_dignose_64" android:padding="8dp"/>
+                <!-- 文字-->
+                <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp">
-                    <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:id="@+id/image_upload_file" android:src="@drawable/ic_frag_make_appoint_upload" android:padding="8dp"
-                            android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-                    <TextView
-                            android:textColor="#ff1976d2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="发布病历"
-                            android:id="@+id/text_upload_file"
-                            android:layout_toRightOf="@+id/image_upload_file"
-                            android:textSize="20sp"
-                            android:layout_marginTop="4dp" android:layout_marginBottom="4dp"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/text_upload_file_des" android:layout_below="@+id/text_upload_file"
-                            android:layout_alignLeft="@+id/text_upload_file" android:text="上传您的手术需要" android:layout_marginTop="4dp"
-                            android:layout_marginBottom="4dp" android:textSize="12sp"/>
-                </RelativeLayout>
-                <!-- 推荐您的病友给我们 主动推荐/给我们 我们去录入-->
-                <RelativeLayout
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp">
-                    <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:id="@+id/image_help_other" android:src="@drawable/ic_frag_make_appoint_share" android:padding="8dp"
-                            android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-                    <TextView
-                            android:textColor="#ffff4b23"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="帮助他人"
-                            android:id="@+id/text_help_other"
-                            android:layout_toRightOf="@+id/image_help_other"
-                            android:textSize="20sp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginBottom="4dp"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/text_upload_help_other_des" android:layout_below="@+id/text_help_other"
-                            android:layout_alignLeft="@+id/text_help_other" android:text="帮助您需要手术的病友" android:layout_marginTop="4dp"
-                            android:layout_marginBottom="4dp" android:textSize="12sp"/>
-                </RelativeLayout>
+                        android:text="@string/online_chat"
+                        style="@style/MenuText"/>
             </LinearLayout>
-            <!-- Divider line-->
-            <View android:layout_width="1px"
-                  android:layout_marginTop="2dp"
-                  android:layout_marginBottom="2dp"
-                  android:layout_height="match_parent"
-                  android:layout_gravity="center_horizontal"
-                  android:background="#ccc"/>
-        </android.support.v7.widget.CardView>
-        <!-- 适合您的医生-->
-        <TextView
-                android:textColor="#ff737373"
-                android:text="@string/doctor_match"
+            <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" android:gravity="center" android:background="@drawable/background_main_menu"
+                    android:clickable="true" android:id="@+id/menu_doctor_see_image">
+                <!-- ICON-->
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_menu_upload_iamge_64" android:padding="8dp"/>
+                <!-- 文字-->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/upload_image"
+                        style="@style/MenuText"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp" android:textSize="16sp"/>
-        <com.blazers.app.doctor.Library.WrapContentHeightViewPager
-                android:id="@+id/doctor_match_pager"
+                android:layout_height="120dp"
+                android:orientation="horizontal" android:layout_alignParentBottom="true">
+            <!-- Chat-->
+            <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" android:gravity="center" android:background="@drawable/background_main_menu"
+                    android:clickable="true" android:id="@+id/menu_phone_call">
+                <!-- ICON-->
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_menu_phone_call_64" android:padding="8dp"/>
+                <!-- 文字-->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_chat"
+                        style="@style/MenuText"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" android:gravity="center" android:background="@drawable/background_main_menu"
+                    android:clickable="true" android:id="@+id/menu_small_tips">
+                <!-- ICON-->
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_menu_small_tips_64" android:padding="8dp"/>
+                <!-- 文字-->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/small_tips"
+                        style="@style/MenuText"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 上下左右分割线-->
+        <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-        </com.blazers.app.doctor.Library.WrapContentHeightViewPager>
-        <!-- 手术记录-->
-        <TextView
-                android:textColor="#ff737373"
-                android:text="@string/operation_record"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp" android:textSize="16sp"/>
-        <android.support.v7.widget.CardView
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-</ScrollView>
+                android:layout_height="1px"
+                android:background="#ccc"
+                android:layout_centerVertical="true"/>
+        <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#ccc"
+                android:layout_centerHorizontal="true"/>
+        <!-- 中间检测心率的部分-->
+        <LinearLayout
+                android:id="@+id/menu_heart_rate"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:orientation="vertical"
+                android:background="@drawable/background_heart_rate_round"
+                android:clickable="true"
+                android:gravity="center"
+                android:layout_centerInParent="true">
+            <!-- 图标-->
+            <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_menu_heart_rate_64"
+                    android:padding="8dp" android:layout_marginTop="8dp"/>
+            <!-- 文字-->
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/check_heart_rate"
+                    style="@style/MenuText"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

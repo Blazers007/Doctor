@@ -11,7 +11,12 @@ import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.Toast;
 import com.blazers.app.doctor.Appointment.MakeAppointment;
+import com.blazers.app.doctor.DoctorSeeImage.DoctorSeeImage;
+import com.blazers.app.doctor.HeartRate.CheckHeartRate;
+import com.blazers.app.doctor.OnlineDiagnose.OnlineDiagnose;
+import com.blazers.app.doctor.PhoneCall.PhoneCall;
 import com.blazers.app.doctor.R;
+import com.blazers.app.doctor.SmallTips.SmallTips;
 
 import java.util.ArrayList;
 
@@ -42,6 +47,12 @@ public class FragAppointment extends Fragment implements View.OnClickListener{
             root = inflater.inflate(R.layout.fragment_appointment, container, false);
             root.findViewById(R.id.btn_make_appointment).setOnClickListener(this);
             ((ViewPager)root.findViewById(R.id.doctor_match_pager)).setAdapter(new DoctorMatchAdapter(getActivity()));
+            /* Set Up Menu Click Event */
+            root.findViewById(R.id.menu_online_diagnoseig).setOnClickListener(this);
+            root.findViewById(R.id.menu_doctor_see_image).setOnClickListener(this);
+            root.findViewById(R.id.menu_phone_call).setOnClickListener(this);
+            root.findViewById(R.id.menu_small_tips).setOnClickListener(this);
+            root.findViewById(R.id.menu_heart_rate).setOnClickListener(this);
         }
         return root;
     }
@@ -95,6 +106,21 @@ public class FragAppointment extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.btn_make_appointment:
                 startActivityForResult(new Intent(getActivity(), MakeAppointment.class), MAKE_APPOINTMENT);
+                break;
+            case R.id.menu_online_diagnoseig:
+                startActivity(new Intent(getActivity(), OnlineDiagnose.class));
+                break;
+            case R.id.menu_doctor_see_image:
+                startActivity(new Intent(getActivity(), DoctorSeeImage.class));
+                break;
+            case R.id.menu_phone_call:
+                startActivity(new Intent(getActivity(), PhoneCall.class));
+                break;
+            case R.id.menu_small_tips:
+                startActivity(new Intent(getActivity(), SmallTips.class));
+                break;
+            case R.id.menu_heart_rate:
+                startActivity(new Intent(getActivity(), CheckHeartRate.class));
                 break;
         }
     }

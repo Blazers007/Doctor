@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy Operation</string>
+    <string name="app_name">心管家</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -39,7 +39,21 @@
     <string name="operation_record">手术记录</string>
     <string name="doctor_match">或许能帮助您的医生</string>
     <string name="title_activity_make_appointment">MakeAppointment</string>
+    <string name="check_heart_rate">测量心率</string>
+    <string name="phone_chat">电话诊治</string>
+    <string name="upload_image">名医看图</string>
+    <string name="small_tips">健康指南</string>
+    <string name="online_chat">在线询诊</string>
 
     <!-- 预约医生Activity-->
     <string name="title_make_appointment">预约我的医生</string>
+
+    <!-- 其他界面-->
+    <string name="title_activity_small_tips">健康指南</string>
+    <string name="title_activity_chat_online">在线诊治</string>
+    <string name="title_activity_phone_call">电话诊治</string>
+    <string name="title_activity_medicine_alert">服药提醒</string>
+    <string name="title_activity_check_heart_rate">心率检测</string>
+    <string name="title_activity_doctor_see_image">名医看图</string>
+
 </resources>

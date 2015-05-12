@@ -22,16 +22,16 @@ public class LocationParser {
     private static LocationParser mInstance;
 
     private JSONArray jsonArray;
-    /* 存储省信息 */
+
     private ArrayList<String> provinces;
-    /* 市信息 */
+
     private ArrayList<String> cities;
     private JSONArray cityJSONArray;
-    /* 区信息 */
+
     private ArrayList<String> districts;
 
     private LocationParser(Context ctx) {
-        /* 读取JSON 构造相应的数据对象 */
+
         try {
             InputStream is = ctx.getResources().getAssets().open("location.json");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
@@ -65,14 +65,14 @@ public class LocationParser {
 
     public ArrayList<String> getCitiesByProvince(String provinceName) {
         cities = new ArrayList<>();
-        if(provinceName.equals("请选择"))
+        if(provinceName.equals("璇烽�夋嫨"))
             return cities;
         for(int onePro = 0 ; onePro < jsonArray.size() ; onePro ++) {
             JSONObject province = jsonArray.getJSONObject(onePro);
             if(provinceName.equals(province.getString("label"))) {
-                /* 找出对应省份的一系列市的名字 */
+                /* */
                 JSONArray cityArray = cityJSONArray =  province.getJSONArray("children");
-                /* 遍历每个市 */
+                /* */
                 for(int oneCity = 0 ; oneCity < cityArray.size() ; oneCity ++) {
                     JSONObject city = cityArray.getJSONObject(oneCity);
                     cities.add(city.getString("label"));
@@ -85,12 +85,12 @@ public class LocationParser {
 
     public ArrayList<String> getDistrictsByCity(String cityName) {
         districts = new ArrayList<>();
-        if(cityName.equals("请选择") || cityJSONArray == null)
+        if(cityName.equals("璇烽�夋嫨") || cityJSONArray == null)
             return districts;
         for(int cityIndex = 0 ; cityIndex < cityJSONArray.size() ; cityIndex ++) {
             JSONObject city = cityJSONArray.getJSONObject(cityIndex);
             if(cityName.equals(city.getString("label"))) {
-                /* 找到这个市了 */
+                /**/
                 if(city.containsKey("children")) {
                     JSONArray districtArray = city.getJSONArray("children");
                     for(int disIndex = 0 ; disIndex < districtArray.size() ; disIndex ++) {
