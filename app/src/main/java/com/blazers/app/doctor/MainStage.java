@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.View;
@@ -14,10 +13,10 @@ import java.util.List;
 
 import br.liveo.interfaces.NavigationLiveoListener;
 import br.liveo.navigationliveo.NavigationLiveo;
-import com.blazers.app.doctor.MainStageFrags.FragAppointment;
-import com.blazers.app.doctor.MainStageFrags.FragCaseIllness;
-import com.blazers.app.doctor.MainStageFrags.FragCureRecord;
-import com.blazers.app.doctor.MainStageFrags.FragHealthyRecord;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragAppointment;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragCaseIllness;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragCureRecord;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragHealthyRecord;
 
 /**
  * Created by Blazers on 15/5/6.
@@ -35,10 +34,10 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
 
     @Override
     public void onUserInformation() {
-        this.mUserName.setText("Blazers");
+        this.mUserName.setText("患者某某某");
         this.mUserEmail.setText("blazersdar@gmail.com");
-        this.mUserPhoto.setImageResource(R.drawable.ic_rudsonlive);
-        this.mUserBackground.setImageResource(R.drawable.drawer_background);
+        this.mUserPhoto.setImageResource(R.drawable.patient);
+        this.mUserBackground.setImageResource(R.drawable.patient_home);
     }
 
     @Override
@@ -114,7 +113,7 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
                         return;
                     else {
                         getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mAppointment).commit();
-                        mNowFrag = mAppointment;
+                        mNowFrag = mHealthyRecord;
                     }
                     break;
                 case FRAG_ILL:
@@ -122,7 +121,7 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
                         return;
                     else {
                         getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mIllCase).commit();
-                        mNowFrag = mAppointment;
+                        mNowFrag = mIllCase;
                     }
                     break;
             }

@@ -28,7 +28,7 @@
     <string name="setting_birthday">点击设定您的生日</string>
 
     <!-- Drawer Menu-->
-    <string name="func_main_1">我的Doctor</string>
+    <string name="func_main_1">我的医生</string>
     <string name="func_appointment">预约医生</string>
     <string name="func_hospital_record">看病记录</string>
     <string name="func_healthy_record">健康记录</string>
@@ -58,5 +58,6 @@
 
     <!-- 健康贴士-->
     <string name="other_tips">常见问题</string>
+    <string name="title_activity_doctor_online_chat">DoctorOnlineChat</string>
 
 </resources>

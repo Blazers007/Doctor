@@ -1,33 +1,44 @@
-package com.blazers.app.doctor.HeartRate;
+package com.blazers.app.doctor.Activity.OnlineDiagnose;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import com.blazers.app.doctor.R;
 
-public class CheckHeartRate extends ActionBarActivity {
+public class DoctorOnlineChat extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_heart_rate);
+        setContentView(R.layout.activity_doctor_online_chat);
         initViews();
     }
 
     void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle(R.string.title_activity_check_heart_rate);
+        mToolbar = (Toolbar) findViewById(R.id.top);
+        /* 动态获取医生姓名 */
+        mToolbar.setTitle("张仲景医生");
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         /**/
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_check_heart_rate, menu);
+        getMenuInflater().inflate(R.menu.menu_doctor_online_chat, menu);
         return true;
     }
 

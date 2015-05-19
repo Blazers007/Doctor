@@ -5,6 +5,40 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        tools:context="com.blazers.app.doctor.Appointment.MakeAppointment">
-    <include layout="@layout/toolbar"/>
+        tools:context="com.blazers.app.doctor.Activity.Appointment.MakeAppointment">
+
+        <include layout="@layout/toolbar"/>
+
+        <!-- Recommend-->
+
+        <!-- Filter-->
+        <LinearLayout
+                android:background="?colorPrimary"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+                <!-- 按照病种类-->
+                <Spinner
+                        android:id="@+id/spinnerDiease"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                <!-- 按照地区-->
+                <Spinner
+                        android:id="@+id/spinnerCity"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+                <!-- 按照医院-->
+                <Spinner
+                        android:id="@+id/spinnerHospital"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+        </LinearLayout>
+        <!-- Content-->
+        <ListView
+                android:id="@+id/doctor_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 </LinearLayout>

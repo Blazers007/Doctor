@@ -1,4 +1,4 @@
-package com.blazers.app.doctor.MainStageFrags;
+package com.blazers.app.doctor.Fragments.MainStageFrags;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,13 +10,13 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.Toast;
-import com.blazers.app.doctor.Appointment.MakeAppointment;
-import com.blazers.app.doctor.DoctorSeeImage.DoctorSeeImage;
-import com.blazers.app.doctor.HeartRate.CheckHeartRate;
-import com.blazers.app.doctor.OnlineDiagnose.OnlineDiagnose;
-import com.blazers.app.doctor.PhoneCall.PhoneCall;
+import com.blazers.app.doctor.Activity.Appointment.MakeAppointment;
+import com.blazers.app.doctor.Activity.DoctorSeeImage.DoctorSeeImage;
+import com.blazers.app.doctor.Activity.HeartRate.CheckHeartRate;
+import com.blazers.app.doctor.Activity.OnlineDiagnose.OnlineDiagnose;
+import com.blazers.app.doctor.Activity.PhoneCall.PhoneCall;
 import com.blazers.app.doctor.R;
-import com.blazers.app.doctor.SmallTips.SmallTips;
+import com.blazers.app.doctor.Activity.SmallTips.SmallTips;
 
 import java.util.ArrayList;
 

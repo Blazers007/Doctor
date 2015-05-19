@@ -1,4 +1,4 @@
-package com.blazers.app.doctor.MainStageFrags;
+package com.blazers.app.doctor.Fragments.MainStageFrags;
 
 import android.app.Activity;
 import android.os.Bundle;

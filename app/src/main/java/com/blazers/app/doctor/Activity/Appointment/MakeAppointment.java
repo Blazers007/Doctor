@@ -1,4 +1,4 @@
-package com.blazers.app.doctor.Appointment;
+package com.blazers.app.doctor.Activity.Appointment;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

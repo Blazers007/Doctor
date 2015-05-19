@@ -1,23 +1,42 @@
-package com.blazers.app.doctor.MedicineAlert;
+package com.blazers.app.doctor.Activity.SmallTips;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 import com.blazers.app.doctor.R;
 
-public class MedicineAlert extends ActionBarActivity {
+public class SmallTips extends ActionBarActivity {
+
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medicine_alert);
+        setContentView(R.layout.activity_small_tips);
+        initViews();
     }
 
+    void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle(R.string.title_activity_small_tips);
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        /**/
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_medicine_alert, menu);
+        getMenuInflater().inflate(R.menu.menu_small_tips, menu);
         return true;
     }
 

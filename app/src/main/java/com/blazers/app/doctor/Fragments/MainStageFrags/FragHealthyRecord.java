@@ -1,4 +1,4 @@
-package com.blazers.app.doctor.MainStageFrags;
+package com.blazers.app.doctor.Fragments.MainStageFrags;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.*;
 /**
  * Created by liang on 2015/5/7.
  */
-public class FragCaseIllness extends Fragment {
+public class FragHealthyRecord extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {

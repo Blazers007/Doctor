@@ -1,10 +1,11 @@
-package com.blazers.app.doctor.PhoneCall;
+package com.blazers.app.doctor.Activity.PhoneCall;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import com.blazers.app.doctor.R;
 
 public class PhoneCall extends ActionBarActivity {
@@ -22,6 +23,13 @@ public class PhoneCall extends ActionBarActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_activity_phone_call);
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         /**/
     }
 

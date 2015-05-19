@@ -1,4 +1,4 @@
-package com.blazers.app.doctor.DoctorSeeImage;
+package com.blazers.app.doctor.Activity.DoctorSeeImage;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

@@ -5,6 +5,41 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        tools:context="com.blazers.app.doctor.Appointment.MakeAppointment">
-    <include layout="@layout/toolbar"/>
+        tools:context="com.blazers.app.doctor.Activity.Appointment.MakeAppointment">
+
+        <include layout="@layout/toolbar"/>
+
+        <!-- Content List-->
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="168dp"
+                        android:id="@+id/imageView11"
+                        android:src="@drawable/img_doctor_see_h"
+                        android:scaleType="centerCrop" />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="咨询电话：15216802306"
+                        android:id="@+id/textView26" android:textColor="#fff" android:textSize="26sp"
+                        android:textStyle="bold" android:typeface="normal"
+                        android:layout_alignParentBottom="false" android:layout_alignBottom="@+id/imageView11"
+                        android:layout_alignParentRight="true" android:layout_marginRight="16dp"
+                        android:layout_marginBottom="12dp"/>
+        </RelativeLayout>
+
+        <!-- Shadow-->
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/shadow_bottom"
+                android:layout_marginBottom="4dp" />
+
+        <!-- ListView-->
+
+        <ListView
+                android:id="@+id/phone_call_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 </LinearLayout>
