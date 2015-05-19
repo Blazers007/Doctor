@@ -89,6 +89,9 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
                     .add(i1, mHealthyRecord = new FragHealthyRecord())
                     .add(i1, mIllCase = new FragCaseIllness())
                     .add(i1, mNowFrag)
+                    .hide(mCureRecord)
+                    .hide(mHealthyRecord)
+                    .hide(mIllCase)
                     .commit();
         }else{
             switch (i) {
@@ -112,7 +115,7 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
                     if(mNowFrag == mHealthyRecord)
                         return;
                     else {
-                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mAppointment).commit();
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mHealthyRecord).commit();
                         mNowFrag = mHealthyRecord;
                     }
                     break;

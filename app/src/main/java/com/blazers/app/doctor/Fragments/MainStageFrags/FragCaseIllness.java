@@ -6,10 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.*;
 
+import com.blazers.app.doctor.R;
+
 /**
  * Created by liang on 2015/5/7.
  */
 public class FragCaseIllness extends Fragment {
+
+    private View root;
 
     @Override
     public void onAttach(Activity activity) {
@@ -26,7 +30,10 @@ public class FragCaseIllness extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        if (root == null) {
+            root = inflater.inflate(R.layout.fragment_case_illness, container, false);
+        }
+        return root;
     }
 
     @Override
