@@ -9,6 +9,7 @@ import android.view.*;
 import com.blazers.app.doctor.R;
 
 import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardExpand;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.view.CardViewNative;
 
@@ -47,9 +48,17 @@ public class FragCureRecord extends Fragment {
         /* Card1 */
         CardHeader ch1 = new CardHeader(getActivity());
         ch1.setTitle("心脏搭桥手术 - 2013年5月12日");
+        ch1.setButtonExpandVisible(true);
+
+        CardExpand ce1 = new CardExpand(getActivity());
+        ce1.setTitle("手术详细信息");
+
         Card c1 = new Card(getActivity(), R.layout.t_built_in_cure_record);
         c1.setTitle("上海市第八人民医院");
+
+
         c1.addCardHeader(ch1);
+        c1.addCardExpand(ce1);
         card1.setCard(c1);
 
         /* Card2 */

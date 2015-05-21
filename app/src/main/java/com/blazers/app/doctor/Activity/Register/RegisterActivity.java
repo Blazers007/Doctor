@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.blazers.app.doctor.R;
 import com.blazers.app.doctor.Util.LocationParser;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
@@ -19,20 +21,21 @@ import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
     /*User Info*/
-    private TextView mBirthday, mAge;
+    @InjectView(R.id.register_birthday) TextView mBirthday;
+    @InjectView(R.id.register_age) TextView mAge;
     private Spinner mProvince, mCity, mDistrict;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        ButterKnife.inject(this);
         initViews();
     }
 
     void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_activity_register);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -43,8 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         /**/
-        mBirthday = (TextView) findViewById(R.id.register_birthday);
-        mAge = (TextView) findViewById(R.id.register_age);
         /* Init Spinner */
         mProvince = (Spinner) findViewById(R.id.spinner);
         mCity = (Spinner) findViewById(R.id.spinner2);

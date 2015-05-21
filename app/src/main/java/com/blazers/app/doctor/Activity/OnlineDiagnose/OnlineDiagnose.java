@@ -12,23 +12,33 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.InjectViews;
 import com.blazers.app.doctor.R;
 
 public class OnlineDiagnose extends ActionBarActivity {
 
-    private Toolbar mToolbar;
-    private Spinner spinnerDiease, spinnerCity, spinnerHospital;
-    private ListView onlineListView;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
+    @InjectView(R.id.spinnerDiease)
+    Spinner spinnerDiease;
+    @InjectView(R.id.spinnerCity)
+    Spinner spinnerCity;
+    @InjectView(R.id.spinnerHospital)
+    Spinner spinnerHospital;
+    @InjectView(R.id.doctor_list)
+    ListView onlineListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_online);
+        ButterKnife.inject(this);
         initViews();
     }
 
     void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_activity_chat_online);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -39,14 +49,10 @@ public class OnlineDiagnose extends ActionBarActivity {
             }
         });
         /* Spinner Filter */
-        spinnerDiease = (Spinner) findViewById(R.id.spinnerDiease);
-        spinnerCity = (Spinner) findViewById(R.id.spinnerCity);
-        spinnerHospital = (Spinner) findViewById(R.id.spinnerHospital);
-        spinnerDiease.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_white_text, new String[]{"按病种筛选"}));
-        spinnerCity.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_white_text, new String[]{"按地区筛选"}));
-        spinnerHospital.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_white_text, new String[]{"按医院筛选"}));
+        spinnerDiease.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按病种筛选"}));
+        spinnerCity.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按地区筛选"}));
+        spinnerHospital.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按医院筛选"}));
         /* Doctor List */
-        onlineListView = (ListView) findViewById(R.id.doctor_list);
         onlineListView.setAdapter(new DoctorListAdapter(LayoutInflater.from(this)));
         onlineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

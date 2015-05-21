@@ -7,21 +7,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.blazers.app.doctor.R;
 
 public class DoctorOnlineChat extends AppCompatActivity {
 
-    private Toolbar mToolbar;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_online_chat);
+        ButterKnife.inject(this);
         initViews();
     }
 
     void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.top);
         /* 动态获取医生姓名 */
         mToolbar.setTitle("张仲景医生");
         setSupportActionBar(mToolbar);

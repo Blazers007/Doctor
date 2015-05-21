@@ -7,21 +7,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.blazers.app.doctor.R;
 
 public class SmallTips extends ActionBarActivity {
 
-    private Toolbar mToolbar;
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_small_tips);
+        ButterKnife.inject(this);
         initViews();
     }
 
     void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_activity_small_tips);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);

@@ -6,23 +6,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.blazers.app.doctor.R;
 
 public class MakeAppointment extends AppCompatActivity {
 
-    private Toolbar mToolbar;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_appointment);
+        ButterKnife.inject(this);
         initViews();
     }
 
     void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.title_make_appointment);
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         /**/
     }
 
