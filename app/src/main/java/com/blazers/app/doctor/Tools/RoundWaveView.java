@@ -75,10 +75,7 @@ public class RoundWaveView extends View {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(getMeasuredWidth() != 0)
-                fai = (fai + 5) % getMeasuredWidth();
-            else
-                fai += 5;
+            fai += 5;
             invalidate();
             sendEmptyMessageDelayed(0, 16);
         }
@@ -108,7 +105,7 @@ public class RoundWaveView extends View {
         wavePaint = new Paint();
         wavePaint.setAntiAlias(true);
         wavePaint.setColor(Color.WHITE);
-        wavePaint.setAlpha(4);
+        wavePaint.setAlpha(64);
 
         /* Init Path */
         wavePath = new Path();
@@ -122,16 +119,20 @@ public class RoundWaveView extends View {
         int centerY = getMeasuredHeight() / 2;
         int radius = Math.min(centerX, centerY)- 20; /* 缩小一个padding */
 
-        canvas.drawCircle(centerX, centerY, radius, roundPaint);
+        canvas.drawCircle(centerX, centerY, radius + 20, roundPaint);
         RectF rectF = new RectF(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
         canvas.drawArc(rectF, 0, 360, true, roundPaint);
         /* Wave */
         setPath();
+
         canvas.save();
+
         Path round = new Path();
         round.addCircle(centerX, centerY, radius, Path.Direction.CCW);
         canvas.clipPath(round, Region.Op.REPLACE);
+
         canvas.drawPath(wavePath, wavePaint);
+
         canvas.restore();
 
     }

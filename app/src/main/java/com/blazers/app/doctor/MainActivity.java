@@ -17,117 +17,82 @@ import android.support.v4.widget.DrawerLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import br.liveo.interfaces.NavigationLiveoListener;
 import br.liveo.navigationliveo.NavigationLiveo;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragAppointment;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragCaseIllness;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragCureRecord;
+import com.blazers.app.doctor.Fragments.MainStageFrags.FragHealthyRecord;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.model.*;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
-public class MainActivity extends NavigationLiveo implements NavigationLiveoListener {
+public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerItemClickListener{
+    /*  */
+    private static final int FRAG_APP = 0;
+    private static final int FRAG_CUR = 1;
+    private static final int FRAG_HEA = 2;
+    private static final int FRAG_ILL = 3;
+    private Fragment mNowFrag;
+    private Fragment mAppointment, mCureRecord, mHealthyRecord, mIllCase;
     /* Toolbar */
-    private Toolbar mToolbar;
+    @InjectView(R.id.toolbar)Toolbar mToolbar;
     /* 菜单容器 */
     private DrawerLayout mDrawerLayout;
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
-
-    @Override
-    public void onUserInformation() {
-        this.mUserName.setText("Rudson Lima");
-        this.mUserEmail.setText("rudsonlive@gmail.com");
-        this.mUserPhoto.setImageResource(R.drawable.ic_rudsonlive);
-        this.mUserBackground.setImageResource(R.drawable.drawer_background);
-    }
-
-    @Override
-    public void onInt(Bundle bundle) {
-        setNavigationListener(this);
-        List<String> mListNameItem = new ArrayList<>();
-        mListNameItem.add(0, "First");
-        mListNameItem.add(1, "First");
-        mListNameItem.add(2, "First");
-        mListNameItem.add(3, "First");
-
-        // icons list items
-        List<Integer> mListIconItem = new ArrayList<>();
-        mListIconItem.add(0, 0);
-        mListIconItem.add(1, 0); //Item no icon set 0
-        mListIconItem.add(2, 0); //Item no icon set 0
-        mListIconItem.add(3, 0);
-
-        this.setFooterInformationDrawer("Setting", R.drawable.ic_drawer);
-
-        this.setNavigationAdapter(mListNameItem, mListIconItem);
-
-    }
+    private int i1 = R.id.main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.inject(this);
         /* 设置Toolbar */
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        /* 设置左侧菜单 */
-//        mNavigationDrawerFragment = (NavigationDrawerFragment)
-//                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-//        mTitle = getTitle();
-//
-//        // Set up the drawer.
-//        mNavigationDrawerFragment.setUp(
-//                R.id.navigation_drawer,
-//                (DrawerLayout) findViewById(R.id.drawer_layout));
+        /* Init Drawer */
+
+        AccountHeader.Result header = new AccountHeader()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.patient_home)
+                .addProfiles(
+                        new ProfileDrawerItem()
+                                .withName("患者某")
+                                .withEmail("blazers_d_ar@gmail.com")
+                        .withIcon(getResources().getDrawable(R.drawable.patient))
+                )
+                .build();
+
+        Drawer.Result result = new Drawer()
+                .withActivity(this)
+                .withToolbar(mToolbar)
+                .withAccountHeader(header)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName(R.string.func_appointment).withIcon(R.drawable.ic_drawer_phone),
+                        new SecondaryDrawerItem().withName(R.string.func_hospital_record).withIcon(R.drawable.ic_drawer_heart),
+                        new SecondaryDrawerItem().withName(R.string.func_healthy_record).withIcon(R.drawable.ic_drawer_ecg),
+                        new SecondaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
+                        new SectionDrawerItem().withName("设置"),
+                        new SwitchDrawerItem().withName("后台提醒").withIcon(R.drawable.ic_settings_black_24dp)
+                )
+                .withSelectedItem(0)
+                .withOnDrawerItemClickListener(this)
+                .build();
+        result.setSelection(0);
     }
 
-//    @Override
-//    public void onNavigationDrawerItemSelected(int position) {
-//        // update the main content by replacing fragments
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-//                .commit();
-//    }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        mToolbar.setTitle(mTitle);
-    }
-
-    public Toolbar getToolbar() {
-        return mToolbar;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -147,63 +112,73 @@ public class MainActivity extends NavigationLiveo implements NavigationLiveoList
     }
 
     @Override
-    public void onItemClickNavigation(int i, int i1) {
-
+    public void onBackPressed() {
+        new MaterialDialog.Builder(this)
+                .title("退出")
+                .content("确定要离开心管家?")
+                .positiveText("退出")
+                .positiveColor(R.color.blue500)
+                .negativeText("取消")
+                .negativeColor(R.color.md_black_1000)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        MainActivity.super.onBackPressed();
+                    }
+                })
+                .build()
+                .show();
     }
 
     @Override
-    public void onPrepareOptionsMenuNavigation(Menu menu, int i, boolean b) {
-
-    }
-
-    @Override
-    public void onClickFooterItemNavigation(View view) {
-
-    }
-
-    @Override
-    public void onClickUserPhotoNavigation(View view) {
-
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
+         /* 初次展示的页面 */
+        if(mNowFrag == null) {
+            mNowFrag = mAppointment = new FragAppointment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(i1, mCureRecord = new FragCureRecord())
+                    .add(i1, mHealthyRecord = new FragHealthyRecord())
+                    .add(i1, mIllCase = new FragCaseIllness())
+                    .add(i1, mNowFrag)
+                    .hide(mCureRecord)
+                    .hide(mHealthyRecord)
+                    .hide(mIllCase)
+                    .commit();
+        }else{
+            switch (i) {
+                case FRAG_APP:
+                    if(mNowFrag == mAppointment)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mAppointment).commit();
+                        mNowFrag = mAppointment;
+                    }
+                    break;
+                case FRAG_CUR:
+                    if(mNowFrag == mCureRecord)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mCureRecord).commit();
+                        mNowFrag = mCureRecord;
+                    }
+                    break;
+                case FRAG_HEA:
+                    if(mNowFrag == mHealthyRecord)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mHealthyRecord).commit();
+                        mNowFrag = mHealthyRecord;
+                    }
+                    break;
+                case FRAG_ILL:
+                    if(mNowFrag == mIllCase)
+                        return;
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mIllCase).commit();
+                        mNowFrag = mIllCase;
+                    }
+                    break;
+            }
         }
     }
-
 }

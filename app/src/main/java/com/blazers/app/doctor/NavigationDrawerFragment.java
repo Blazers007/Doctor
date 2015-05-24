@@ -265,7 +265,8 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private Toolbar getActionBar() {
-        return ((MainActivity) getActivity()).getToolbar();
+//        return ((MainActivity) getActivity()).getToolbar();
+        return null;
     }
 
     /**

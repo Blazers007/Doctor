@@ -42,4 +42,10 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     /* Inject Views */
     compile 'com.jakewharton:butterknife:6.1.0'
+    /* Use new material drawer instead */
+    compile('com.mikepenz:materialdrawer:2.9.8@aar') {
+        transitive = true
+    }
+    /* Material Dialog https://github.com/afollestad/material-dialogs */
+    compile 'com.afollestad:material-dialogs:0.7.4.2'
 }
