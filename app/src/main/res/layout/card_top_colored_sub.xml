@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:paddingLeft="8dp" android:paddingRight="8dp"
+                android:paddingTop="12dp" android:paddingBottom="8dp">
+
+    <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imageView15" android:src="@drawable/ic_assignment_ind_grey600_36dp"
+            android:layout_margin="4dp" android:padding="6dp"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="徐医生"
+            android:id="@+id/textView27" android:layout_toRightOf="@+id/imageView15"
+            android:layout_toEndOf="@+id/imageView15" android:layout_margin="4dp" android:gravity="center_vertical|right"
+            android:paddingLeft="8dp" android:paddingRight="8dp" android:textColor="#444"/>
+    <ImageView android:layout_width="32dp" android:layout_height="32dp" android:id="@+id/imageView16"
+               android:src="@drawable/ic_assignment_grey600_36dp" android:layout_margin="4dp"
+               android:layout_below="@+id/imageView15" android:padding="6dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="32dp" android:text="New Text"
+              android:id="@+id/textView28" android:layout_toRightOf="@+id/imageView16"
+              android:layout_toEndOf="@+id/imageView15" android:layout_margin="4dp" android:gravity="center_vertical|right"
+              android:layout_below="@+id/imageView15" android:paddingLeft="8dp" android:paddingRight="8dp"
+              android:textColor="#444"/>
+    <ImageView android:layout_width="32dp" android:layout_height="32dp" android:id="@+id/imageView17"
+               android:src="@drawable/ic_schedule_grey600_36dp" android:layout_margin="4dp"
+               android:layout_below="@+id/imageView16" android:padding="6dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="32dp" android:text="2015年5月25日14:18:02"
+              android:id="@+id/textView29" android:layout_toRightOf="@+id/imageView16"
+              android:layout_toEndOf="@+id/imageView15" android:layout_margin="4dp" android:gravity="center_vertical|right"
+              android:layout_below="@+id/imageView16" android:paddingLeft="8dp" android:paddingRight="8dp"
+              android:textColor="#444"/>
+</RelativeLayout>

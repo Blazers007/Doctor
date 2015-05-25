@@ -40,6 +40,8 @@ dependencies {
     /* Form Cards https://github.com/gabrielemariotti/cardslib */
     //Core
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
+    //Optional for built-in cards
+    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
     /* Inject Views */
     compile 'com.jakewharton:butterknife:6.1.0'
     /* Use new material drawer instead */

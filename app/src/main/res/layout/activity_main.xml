@@ -7,7 +7,14 @@
         android:orientation="vertical">
     <include layout="@layout/toolbar"/>
     <FrameLayout
-            android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+        <FrameLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        <!-- Shadow -->
+        <View android:layout_width="match_parent" android:layout_height="4dp"
+              android:background="@drawable/shadow_bottom"/>
+    </FrameLayout>
 </LinearLayout>
