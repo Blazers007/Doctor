@@ -3,6 +3,7 @@ package com.blazers.app.doctor.Activity.Register;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +14,18 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.bmob.v3.listener.SaveListener;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
+import com.blazers.app.doctor.BmobModel.RegisterInfo;
 import com.blazers.app.doctor.R;
 import com.blazers.app.doctor.Util.LocationParser;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -25,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     /*User Info*/
     @InjectView(R.id.register_birthday) TextView mBirthday;
     @InjectView(R.id.register_age) TextView mAge;
+
+    @InjectView(R.id.register_username) MaterialEditText mUsername;
     private Spinner mProvince, mCity, mDistrict;
 
     @Override
@@ -113,10 +123,58 @@ public class RegisterActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                sendSMSCode();
+                return true;
+            case R.id.action_submit:
+                submit();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void sendSMSCode() {
+        //打开注册页面
+        RegisterPage registerPage = new RegisterPage();
+        registerPage.setRegisterCallback(new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                // 解析注册结果
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    @SuppressWarnings("unchecked")
+                    HashMap<String,Object> phoneMap = (HashMap<String, Object>) data;
+                    String country = (String) phoneMap.get("country");
+                    String phone = (String) phoneMap.get("phone");
+
+                    // 提交用户信息
+                    Log.e("Register Info", "C:" + country +  "  P:" + phone);
+//                    registerUser(country, phone);
+                    phoneNumber = phone;
+                }
+            }
+        });
+        registerPage.show(this);
+    }
+
+    private String phoneNumber;
+
+    void submit() {
+        final RegisterInfo register = new RegisterInfo();
+        register.setUserName(mUsername.getText().toString());
+        register.setUserPhone(phoneNumber);
+        register.setUserPwd("taaita1314");
+
+        register.save(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.e("Save Success", "ID: " + register.getObjectId());
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
     }
 }
