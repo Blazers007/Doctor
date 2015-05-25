@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blazers.app.doctor" >
 
-    <!-- Share SDK-->
+    <!-- Share SDK -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,15 +12,40 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- Bmob-->
-    <uses-permission android:name="android.permission.READ_LOGS"/>
 
+    <!-- Bmob -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- Bomb talk -->
+    <permission
+        android:name="cn.bmob.permission.push"
+        android:protectionLevel="normal" >
+    </permission>
+
+    <uses-permission android:name="cn.bmob.permission.push" />
+
+    <!-- Baidu Map-->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- 定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <!-- Application -->
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- Sugar Database-->
         <meta-data
             android:name="DATABASE"
             android:value="blazers_doctor.db" />
@@ -33,6 +58,11 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.blazers.app.doctor.DatabaseModel" />
+
+        <!-- Baidu MAP-->
+        <meta-data
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="QRo0gqLpUXfcRGh1Us3yVGZN" />
 
         <activity
             android:name=".LoginActivity"
@@ -90,12 +120,59 @@
             android:label="@string/title_activity_doctor_online_chat" >
         </activity>
 
-        <!-- Share SDK SMS-->
+        <!-- Share SDK SMS -->
         <activity
-                android:name="com.mob.tools.MobUIShell"
-                android:configChanges="keyboardHidden|orientation|screenSize"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!-- Share SDK CHAT -->
+        <!-- IM聊天所需的Push start -->
+        <service
+            android:name="cn.bmob.push.lib.service.PushService"
+            android:exported="true"
+            android:label="PushService"
+            android:permission="cn.bmob.permission.push"
+            android:process="cn.bmob.push" >
+            <intent-filter>
+                <action android:name="cn.bmob.push.lib.service.PushService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="cn.bmob.push.PushReceiver" >
+            <intent-filter android:priority="2147483647" > <!-- 优先级加最高 -->
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 监听网络连通性 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <!-- 聊天消息接收器 -->
+        <receiver android:name=".Receiver.ChatMessageReceiver" >
+            <intent-filter>
+                <action android:name="cn.bmob.push.action.MESSAGE" />
+            </intent-filter>
+        </receiver>
+        <!-- IM聊天所需的Push end -->
+
+
+        <!-- 个性功能中的启动定时检测服务，可选功能 -->
+        <service android:name="cn.bmob.im.poll.BmobPollService" >
+            <intent-filter>
+                <action android:name="cn.bmob.im.service.BmobPollService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".Activity.Hospital.HospitalAroundMe"
+            android:label="@string/title_activity_hospital_around_me" >
+        </activity>
+
+        <!-- Baidu Location-->
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"/>
     </application>
 
 </manifest>

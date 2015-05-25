@@ -1,6 +1,7 @@
 package com.blazers.app.doctor;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import br.liveo.navigationliveo.NavigationLiveo;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.blazers.app.doctor.Activity.Hospital.HospitalAroundMe;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragAppointment;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragCaseIllness;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragCureRecord;
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                         new SecondaryDrawerItem().withName(R.string.func_hospital_record).withIcon(R.drawable.ic_drawer_heart),
                         new SecondaryDrawerItem().withName(R.string.func_healthy_record).withIcon(R.drawable.ic_drawer_ecg),
                         new SecondaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
+                        new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_illness),
                         new SectionDrawerItem().withName("设置"),
                         new SwitchDrawerItem().withName("后台提醒").withIcon(R.drawable.ic_settings_black_24dp)
                 )
@@ -178,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                         mNowFrag = mIllCase;
                     }
                     break;
+                default:
+                    startActivity(new Intent(this, HospitalAroundMe.class));
             }
         }
     }

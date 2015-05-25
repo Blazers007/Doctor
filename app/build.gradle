@@ -17,10 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+        preDexLibraries = false
+    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'com.android.support:recyclerview-v7:22.0.0'
@@ -57,4 +60,8 @@ dependencies {
     /* SMS Service http://dashboard.mob.com/Sms/#/quickstarts/android */
     compile project(':sMSSDK')
     compile files('libs/BmobSDK_V3.3.8_0521.jar')
+    compile files('libs/BmobIM_V1.1.8beta_20150408.jar')
+    compile files('libs/baidumapapi_v3_4_0.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/baidumapapi_v3_0_0.jar')
 }

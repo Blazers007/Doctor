@@ -33,6 +33,7 @@
     <string name="func_hospital_record">看病记录</string>
     <string name="func_healthy_record">健康记录</string>
     <string name="func_case_illness">病历管理</string>
+    <string name="func_around_me">周围医院</string>
     <string name="func_setting">设置</string>
 
     <!-- 预约Fragment-->
@@ -59,5 +60,6 @@
     <!-- 健康贴士-->
     <string name="other_tips">常见问题</string>
     <string name="title_activity_doctor_online_chat">DoctorOnlineChat</string>
+    <string name="title_activity_hospital_around_me">HospitalAroundMe</string>
 
 </resources>

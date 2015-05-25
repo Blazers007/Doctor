@@ -8,13 +8,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindCallback;
+import cn.bmob.v3.listener.FindListener;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.Activity.Register.RegisterActivity;
 import com.blazers.app.doctor.BmobModel.RegisterInfo;
 import org.json.JSONArray;
+
+import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,15 +45,37 @@ public class LoginActivity extends AppCompatActivity {
 //        finish();
         BmobQuery<RegisterInfo> query = new BmobQuery<>();
         query.addWhereEqualTo("userPhone", user.getText().toString());
-        query.addWhereEqualTo("userPwd", password.getText().toString());
-        query.findObjects(this, new FindCallback() {
+        query.findObjects(this, new FindListener<RegisterInfo>() {
             @Override
-            public void onSuccess(JSONArray jsonArray) {
-                Log.e("Success", jsonArray.toString());
+            public void onSuccess(List<RegisterInfo> list) {
+                if (list.size() == 0) {
+                    new MaterialDialog.Builder(LoginActivity.this)
+                            .title("该手机号尚未注册")
+                            .content("您输入的手机号码尚未注册，是否注册新用户?")
+                            .negativeText("算了")
+                            .positiveText("免费注册")
+                            .callback(new MaterialDialog.ButtonCallback() {
+                                @Override
+                                public void onPositive(MaterialDialog dialog) {
+                                    super.onPositive(dialog);
+                                    startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), REGISTER_CODE);
+                                }
+                            })
+                            .build()
+                            .show();
+                } else if (list.size() == 1) {
+                    if (list.get(0).getUserPwd().equals(password.getText().toString())) {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        /* 密码错误！ */
+                        Toast.makeText(LoginActivity.this, "密码错误!", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
 
             @Override
-            public void onFailure(int i, String s) {
+            public void onError(int i, String s) {
                 Log.e("Failure", s);
             }
         });
