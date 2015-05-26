@@ -12,7 +12,7 @@
             android:layout_width="96dp"
             android:layout_height="wrap_content"
             android:text="张仲景"
-            android:id="@+id/textView11" android:layout_marginLeft="16dp" android:layout_marginTop="4dp"
+            android:id="@+id/doctor_name" android:layout_marginLeft="16dp" android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp" android:textColor="#030303" android:textSize="18sp"
             android:layout_toRightOf="@+id/imageView3"/>
     <TextView
@@ -20,24 +20,24 @@
             android:layout_height="wrap_content"
             android:text="解放军军医大学"
             android:id="@+id/textView12" android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp" android:textColor="#333" android:layout_below="@+id/textView11"
-            android:layout_alignLeft="@+id/textView11"/>
+            android:layout_marginBottom="4dp" android:textColor="#333" android:layout_below="@+id/doctor_name"
+            android:layout_alignLeft="@+id/doctor_name"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="您的朋友: 李思媛 正在接受她的治疗"
             android:id="@+id/textView13" android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp" android:layout_below="@+id/textView12"
-            android:layout_alignLeft="@+id/textView11" android:textColor="#666"/>
+            android:layout_alignLeft="@+id/doctor_name" android:textColor="#666"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/background_green_corner"
             android:text="脑外科 10年"
-            android:id="@+id/textView14" android:layout_alignTop="@+id/textView11"
+            android:id="@+id/textView14" android:layout_alignTop="@+id/doctor_name"
             android:layout_alignParentRight="false" android:textSize="14sp"
-            android:textColor="#fafafa" android:layout_toRightOf="@+id/textView11" android:layout_marginLeft="8dp"
-            android:layout_alignBottom="@+id/textView11" android:paddingLeft="8dp" android:paddingRight="8dp"
+            android:textColor="#fafafa" android:layout_toRightOf="@+id/doctor_name" android:layout_marginLeft="8dp"
+            android:layout_alignBottom="@+id/doctor_name" android:paddingLeft="8dp" android:paddingRight="8dp"
             android:paddingBottom="2dp" android:paddingTop="2dp"/>
     <ImageButton
             android:layout_width="48dp"

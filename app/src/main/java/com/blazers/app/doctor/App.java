@@ -50,6 +50,7 @@ public class App extends SugarApp {
         /* Bmob Init */
         BmobChat.DEBUG_MODE = true;
         BmobChat.getInstance(this).init("f0d74dc5fda96aa9becdbd2a0875225c");
+//        BmobChat.getInstance(this).startPollService(30);
         /* Baidu map */
         SDKInitializer.initialize(getApplicationContext());
         initBaiduLocClient();

@@ -12,12 +12,11 @@ import android.widget.*;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.im.BmobUserManager;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.RegisterPage;
-import com.blazers.app.doctor.BmobModel.RegisterInfo;
+import com.blazers.app.doctor.BmobModel.AppUserModel;
 import com.blazers.app.doctor.R;
 import com.blazers.app.doctor.Util.LocationParser;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
@@ -158,13 +157,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     /* 用于注册的相关信息 */
     private String phoneNumber;
-    private RegisterInfo register;
+    private AppUserModel register;
 
     void submit() {
-        register = new RegisterInfo();
+        register = new AppUserModel();
         register.setUsername("18321704036");
         register.setPassword("taaita1314");
         register.setEmail("308802880@qq.com");
+        register.setRole("patient");
         /* Extra */
         register.setRealName(mRealname.getText().toString());
         /* 必须采用 signUp方法进行注册 */

@@ -8,20 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.Activity.Register.RegisterActivity;
-import com.blazers.app.doctor.BmobModel.RegisterInfo;
-import com.blazers.app.doctor.BusEvents.LoginEvent;
-import de.greenrobot.event.EventBus;
-import org.json.JSONArray;
+import com.blazers.app.doctor.BmobModel.AppUserModel;
 
 import java.util.List;
 
@@ -39,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
         /* 判断是否已经登陆 */
-        RegisterInfo user = BmobUser.getCurrentUser(this, RegisterInfo.class);
+        AppUserModel user = BmobUser.getCurrentUser(this, AppUserModel.class);
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.putExtra("tour", false);
@@ -58,11 +53,11 @@ public class LoginActivity extends AppCompatActivity {
     public void doLogin(View view) {
 //        startActivity(new Intent(this, MainActivity.class));
 //        finish();
-        BmobQuery<RegisterInfo> query = new BmobQuery<>();
+        BmobQuery<AppUserModel> query = new BmobQuery<>();
         query.addWhereEqualTo("username", user.getText().toString());
-        query.findObjects(this, new FindListener<RegisterInfo>() {
+        query.findObjects(this, new FindListener<AppUserModel>() {
             @Override
-            public void onSuccess(List<RegisterInfo> list) {
+            public void onSuccess(List<AppUserModel> list) {
                 if (list.size() == 0) {
                     new MaterialDialog.Builder(LoginActivity.this)
                             .title("该手机号尚未注册")
@@ -90,14 +85,14 @@ public class LoginActivity extends AppCompatActivity {
                             .show();
                 } else {
                      /* 重构采用登陆方法进行登陆 */
-                    RegisterInfo login = new RegisterInfo();
+                    AppUserModel login = new AppUserModel();
                     login.setUsername(user.getText().toString());
                     login.setPassword(password.getText().toString());
                     login.login(LoginActivity.this, new SaveListener() {
                         @Override
                         public void onSuccess() {
                             /* 缓存登陆数据 */
-                            RegisterInfo user = BmobUser.getCurrentUser(LoginActivity.this, RegisterInfo.class);
+                            AppUserModel user = BmobUser.getCurrentUser(LoginActivity.this, AppUserModel.class);
                             /* 跳转页面 */
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("tour", false);
@@ -135,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REGISTER_CODE) {
-            RegisterInfo user = BmobUser.getCurrentUser(this, RegisterInfo.class);
+            AppUserModel user = BmobUser.getCurrentUser(this, AppUserModel.class);
             if (user != null) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("tour", false);

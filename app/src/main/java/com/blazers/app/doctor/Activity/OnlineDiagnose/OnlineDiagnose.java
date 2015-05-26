@@ -21,8 +21,10 @@ import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.config.BmobConfig;
 import cn.bmob.im.inteface.MsgTag;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.PushListener;
+import com.blazers.app.doctor.BmobModel.AppUserModel;
 import com.blazers.app.doctor.R;
 
 import java.util.List;
@@ -40,13 +42,18 @@ public class OnlineDiagnose extends ActionBarActivity {
     @InjectView(R.id.doctor_list)
     ListView onlineListView;
 
+    /* Vars */
+    private DoctorListAdapter doctorListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_online);
         ButterKnife.inject(this);
         initViews();
-        queryAndInitList();
+
+        queryByEvents();
+//        queryAndInitList();
     }
 
     void initViews() {
@@ -66,6 +73,32 @@ public class OnlineDiagnose extends ActionBarActivity {
         spinnerHospital.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按医院筛选"}));
     }
 
+    void queryByEvents() {
+        BmobQuery<AppUserModel> query = new BmobQuery<>();
+        query.addWhereEqualTo("role", "doctor");
+        query.findObjects(this, new FindListener<AppUserModel>() {
+            @Override
+            public void onSuccess(List<AppUserModel> list) {
+                doctorListAdapter = new DoctorListAdapter(OnlineDiagnose.this, list);
+                onlineListView.setAdapter(doctorListAdapter);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+
+        onlineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AppUserModel doctor = (AppUserModel)doctorListAdapter.getItem(i);
+                Intent intent = new Intent(OnlineDiagnose.this, DoctorOnlineChat.class);
+                intent.putExtra("user", doctor);
+                startActivity(intent);
+            }
+        });
+    }
 
     private BmobChatUser testTargetId;
 
@@ -76,7 +109,7 @@ public class OnlineDiagnose extends ActionBarActivity {
                     @Override
                     public void onSuccess(List<BmobChatUser> list) {
                         for (BmobChatUser user : list) {
-                            Log.e("User Info", user.getObjectId());
+                            Log.e("User Info", user.getUsername());
                             testTargetId = user;
                         }
                     }
@@ -88,12 +121,11 @@ public class OnlineDiagnose extends ActionBarActivity {
                     }
                 });
         /* Doctor List */
-        onlineListView.setAdapter(new DoctorListAdapter(LayoutInflater.from(this)));
+//        onlineListView.setAdapter(new DoctorListAdapter(LayoutInflater.from(this)));
         onlineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(OnlineDiagnose.this, DoctorOnlineChat.class);
-                /* 直接传递会造成NULL因为引用已经被释放？ */
                 intent.putExtra("user", testTargetId);
                 startActivity(intent);
             }
