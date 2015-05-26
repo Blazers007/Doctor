@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +16,16 @@ import android.widget.Spinner;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
+import cn.bmob.im.BmobChatManager;
+import cn.bmob.im.BmobUserManager;
+import cn.bmob.im.bean.BmobChatUser;
+import cn.bmob.im.config.BmobConfig;
+import cn.bmob.im.inteface.MsgTag;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.PushListener;
 import com.blazers.app.doctor.R;
+
+import java.util.List;
 
 public class OnlineDiagnose extends ActionBarActivity {
 
@@ -36,6 +46,7 @@ public class OnlineDiagnose extends ActionBarActivity {
         setContentView(R.layout.activity_chat_online);
         ButterKnife.inject(this);
         initViews();
+        queryAndInitList();
     }
 
     void initViews() {
@@ -48,19 +59,48 @@ public class OnlineDiagnose extends ActionBarActivity {
                 finish();
             }
         });
+
         /* Spinner Filter */
         spinnerDiease.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按病种筛选"}));
         spinnerCity.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按地区筛选"}));
         spinnerHospital.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按医院筛选"}));
+    }
+
+
+    private BmobChatUser testTargetId;
+
+    void queryAndInitList() {
+        /* Query */
+        BmobUserManager.getInstance(this)
+                .queryCurrentContactList(new FindListener<BmobChatUser>() {
+                    @Override
+                    public void onSuccess(List<BmobChatUser> list) {
+                        for (BmobChatUser user : list) {
+                            Log.e("User Info", user.getObjectId());
+                            testTargetId = user;
+                        }
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        /* 如果没有好友也会出现该情况 */
+                        Log.e("Query List", s);
+                    }
+                });
         /* Doctor List */
         onlineListView.setAdapter(new DoctorListAdapter(LayoutInflater.from(this)));
         onlineListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(OnlineDiagnose.this, DoctorOnlineChat.class));
+                Intent intent = new Intent(OnlineDiagnose.this, DoctorOnlineChat.class);
+                /* 直接传递会造成NULL因为引用已经被释放？ */
+                intent.putExtra("user", testTargetId);
+                startActivity(intent);
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,6 +118,18 @@ public class OnlineDiagnose extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            /* Test Add Doctor LI */
+            BmobChatManager.getInstance(this).sendTagMessage(BmobConfig.TAG_ADD_CONTACT, "R12lZZZe", new PushListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+
+                }
+            });
             return true;
         }
 

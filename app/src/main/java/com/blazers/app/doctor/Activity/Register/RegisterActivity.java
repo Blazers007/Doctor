@@ -7,13 +7,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.bmob.im.BmobUserManager;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -34,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     @InjectView(R.id.register_birthday) TextView mBirthday;
     @InjectView(R.id.register_age) TextView mAge;
 
-    @InjectView(R.id.register_username) MaterialEditText mUsername;
+    @InjectView(R.id.register_username) MaterialEditText mRealname;
     private Spinner mProvince, mCity, mDistrict;
 
     @Override
@@ -157,23 +156,32 @@ public class RegisterActivity extends AppCompatActivity {
         registerPage.show(this);
     }
 
+    /* 用于注册的相关信息 */
     private String phoneNumber;
+    private RegisterInfo register;
 
     void submit() {
-        final RegisterInfo register = new RegisterInfo();
-        register.setUserName(mUsername.getText().toString());
-        register.setUserPhone(phoneNumber);
-        register.setUserPwd("taaita1314");
-
-        register.save(this, new SaveListener() {
+        register = new RegisterInfo();
+        register.setUsername("18321704036");
+        register.setPassword("taaita1314");
+        register.setEmail("308802880@qq.com");
+        /* Extra */
+        register.setRealName(mRealname.getText().toString());
+        /* 必须采用 signUp方法进行注册 */
+        register.signUp(this, new SaveListener() {
             @Override
             public void onSuccess() {
                 Log.e("Save Success", "ID: " + register.getObjectId());
+                Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                BmobUserManager.getInstance(RegisterActivity.this).bindInstallationForRegister(register.getObjectId());
+                /* 更新地理信息 */
+                setResult(RESULT_OK);
+                finish();
             }
 
             @Override
             public void onFailure(int i, String s) {
-
+                Log.e("Save Failed", s);
             }
         });
     }

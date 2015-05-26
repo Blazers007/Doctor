@@ -24,8 +24,11 @@ import br.liveo.interfaces.NavigationLiveoListener;
 import br.liveo.navigationliveo.NavigationLiveo;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.bmob.im.BmobUserManager;
+import cn.bmob.v3.BmobUser;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.Activity.Hospital.HospitalAroundMe;
+import com.blazers.app.doctor.BusEvents.LoginEvent;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragAppointment;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragCaseIllness;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragCureRecord;
@@ -34,6 +37,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.*;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerItemClickListener{
@@ -59,19 +63,39 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /* Init Drawer */
+        initDrawer();
 
-        AccountHeader.Result header = new AccountHeader()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.patient_home)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("患者某")
-                                .withEmail("blazers_d_ar@gmail.com")
-                        .withIcon(getResources().getDrawable(R.drawable.patient))
-                )
-                .build();
+    }
 
+    /* 接受EventBus发出的Login消息 在主线程上运行才可更新UI */
+    void initDrawer() {
+        Intent intent = getIntent();
+        AccountHeader.Result header;
+        if (intent.getBooleanExtra("tour", true)) {
+            /* 游客模式 */
+            header = new AccountHeader()
+                    .withActivity(this)
+                    .withHeaderBackground(R.drawable.patient_home)
+                    .addProfiles(
+                            new ProfileDrawerItem()
+                                    .withName("随便看")
+                                    .withEmail("尚未注册")
+                                    .withIcon(getResources().getDrawable(R.drawable.patient))
+                    )
+                    .build();
+        } else {
+            header = new AccountHeader()
+                    .withActivity(this)
+                    .withHeaderBackground(R.drawable.patient_home)
+                    .addProfiles(
+                            new ProfileDrawerItem()
+                                    .withName(intent.getStringExtra("name"))
+                                    .withEmail(intent.getStringExtra("email"))
+                                    .withIcon(intent.getStringExtra("icon"))
+                    )
+                    .build();
+        }
+         /* 用户模式 */
         Drawer.Result result = new Drawer()
                 .withActivity(this)
                 .withToolbar(mToolbar)
@@ -83,14 +107,14 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                         new SecondaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
                         new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_illness),
                         new SectionDrawerItem().withName("设置"),
-                        new SwitchDrawerItem().withName("后台提醒").withIcon(R.drawable.ic_settings_black_24dp)
+                        new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_illness),
+                        new SwitchDrawerItem().withName("登出用户").withIcon(R.drawable.ic_settings_black_24dp)
                 )
                 .withSelectedItem(0)
                 .withOnDrawerItemClickListener(this)
                 .build();
         result.setSelection(0);
     }
-
 
 
     @Override
@@ -181,9 +205,19 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                         mNowFrag = mIllCase;
                     }
                     break;
-                default:
+                case 4:
                     startActivity(new Intent(this, HospitalAroundMe.class));
+                    break;
+                case 6:
+                    BmobUserManager.getInstance(this).logout();
+                    finish();
+                    break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

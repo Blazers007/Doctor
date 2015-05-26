@@ -12,11 +12,15 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.Activity.Register.RegisterActivity;
 import com.blazers.app.doctor.BmobModel.RegisterInfo;
+import com.blazers.app.doctor.BusEvents.LoginEvent;
+import de.greenrobot.event.EventBus;
 import org.json.JSONArray;
 
 import java.util.List;
@@ -34,6 +38,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        /* 判断是否已经登陆 */
+        RegisterInfo user = BmobUser.getCurrentUser(this, RegisterInfo.class);
+        if (user != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("tour", false);
+            intent.putExtra("name", user.getRealName());
+            intent.putExtra("email", user.getEmail());
+            intent.putExtra("icon", "http://www.ttoou.com/qqtouxiang/allimg/120328/co12032PR929-3-lp.jpg");
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void doRegister(View view) {
@@ -44,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 //        startActivity(new Intent(this, MainActivity.class));
 //        finish();
         BmobQuery<RegisterInfo> query = new BmobQuery<>();
-        query.addWhereEqualTo("userPhone", user.getText().toString());
+        query.addWhereEqualTo("username", user.getText().toString());
         query.findObjects(this, new FindListener<RegisterInfo>() {
             @Override
             public void onSuccess(List<RegisterInfo> list) {
@@ -52,30 +67,58 @@ public class LoginActivity extends AppCompatActivity {
                     new MaterialDialog.Builder(LoginActivity.this)
                             .title("该手机号尚未注册")
                             .content("您输入的手机号码尚未注册，是否注册新用户?")
-                            .negativeText("算了")
+                            .negativeText("随便看看")
                             .positiveText("免费注册")
+                            .neutralText("算了")
                             .callback(new MaterialDialog.ButtonCallback() {
                                 @Override
                                 public void onPositive(MaterialDialog dialog) {
                                     super.onPositive(dialog);
                                     startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), REGISTER_CODE);
                                 }
+
+                                @Override
+                                public void onNegative(MaterialDialog dialog) {
+                                    super.onNegative(dialog);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("tour", true);
+                                    startActivity(intent);
+                                    finish();
+                                }
                             })
                             .build()
                             .show();
-                } else if (list.size() == 1) {
-                    if (list.get(0).getUserPwd().equals(password.getText().toString())) {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                    } else {
-                        /* 密码错误！ */
-                        Toast.makeText(LoginActivity.this, "密码错误!", Toast.LENGTH_SHORT).show();
-                    }
+                } else {
+                     /* 重构采用登陆方法进行登陆 */
+                    RegisterInfo login = new RegisterInfo();
+                    login.setUsername(user.getText().toString());
+                    login.setPassword(password.getText().toString());
+                    login.login(LoginActivity.this, new SaveListener() {
+                        @Override
+                        public void onSuccess() {
+                            /* 缓存登陆数据 */
+                            RegisterInfo user = BmobUser.getCurrentUser(LoginActivity.this, RegisterInfo.class);
+                            /* 跳转页面 */
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("tour", false);
+                            intent.putExtra("name", user.getRealName());
+                            intent.putExtra("email", user.getEmail());
+                            intent.putExtra("icon", "http://www.ttoou.com/qqtouxiang/allimg/120328/co12032PR929-3-lp.jpg");
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            Log.e("登录失败", s);
+                        }
+                    });
                 }
             }
 
             @Override
             public void onError(int i, String s) {
+                /* 登录失败 */
                 Log.e("Failure", s);
             }
         });
@@ -86,6 +129,23 @@ public class LoginActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REGISTER_CODE) {
+            RegisterInfo user = BmobUser.getCurrentUser(this, RegisterInfo.class);
+            if (user != null) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("tour", false);
+                intent.putExtra("name", user.getRealName());
+                intent.putExtra("email", user.getEmail());
+                intent.putExtra("icon", "http://www.ttoou.com/qqtouxiang/allimg/120328/co12032PR929-3-lp.jpg");
+                startActivity(intent);
+                finish();
+            }
+        }
     }
 
     @Override

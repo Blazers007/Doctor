@@ -1,22 +1,25 @@
 package com.blazers.app.doctor.BmobModel;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by liang on 2015/5/25.
  */
-public class RegisterInfo extends BmobObject{
+public class RegisterInfo extends BmobUser{
 
-    private String userName;
+    /* 自带的 用户名 密码 电子邮件 */
+    /* 拓展部分 */
+    private String realName;
     private String userPhone;
-    private String userPwd;
+    private String userHead;
 
-    public String getUserName() {
-        return userName;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getUserPhone() {
@@ -27,11 +30,11 @@ public class RegisterInfo extends BmobObject{
         this.userPhone = userPhone;
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    public String getUserHead() {
+        return userHead;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    public void setUserHead(String userHead) {
+        this.userHead = userHead;
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/patient"
+            app:border_width="0dp"
+            app:border_color="#ffc8c8c8" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp" android:layout_marginRight="8dp" android:layout_alignParentRight="true"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2dp"
+            android:text="您好医生，怀疑得了冠心病做什么检查？"
+            android:id="@+id/chat_send_text" android:layout_marginTop="24dp"
+            android:background="@drawable/bg_input_white" android:textSize="16sp" android:textColor="#333"
+            android:paddingLeft="8dp" android:paddingRight="24dp"
+            android:layout_marginBottom="8dp" android:paddingTop="8dp" android:paddingBottom="8dp"
+            android:layout_toLeftOf="@+id/profile_image" android:layout_marginLeft="8dp"/>
+
+</RelativeLayout>

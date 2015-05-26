@@ -61,5 +61,6 @@
     <string name="other_tips">常见问题</string>
     <string name="title_activity_doctor_online_chat">DoctorOnlineChat</string>
     <string name="title_activity_hospital_around_me">HospitalAroundMe</string>
+    <string name="title_activity_new_friend">NewFriendActivity</string>
 
 </resources>
