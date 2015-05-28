@@ -60,6 +60,8 @@ dependencies {
     /* EventBus */
     compile 'de.greenrobot:eventbus:2.4.0'
     /* SMS Service http://dashboard.mob.com/Sms/#/quickstarts/android */
+    /* Wave View */
+    compile 'com.github.john990:WaveView:16a10c1f9b'
     compile project(':sMSSDK')
     compile files('libs/BmobSDK_V3.3.8_0521.jar')
     compile files('libs/BmobIM_V1.1.8beta_20150408.jar')

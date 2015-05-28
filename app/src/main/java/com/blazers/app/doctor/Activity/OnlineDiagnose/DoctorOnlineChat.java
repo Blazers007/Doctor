@@ -20,11 +20,19 @@ import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.bean.BmobMsg;
 import cn.bmob.im.inteface.UploadListener;
 import cn.bmob.v3.BmobRealTimeData;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.UploadFileListener;
 import cn.bmob.v3.listener.ValueEventListener;
 import com.blazers.app.doctor.Adapter.DoctorOnlineChatAdapter;
 import com.blazers.app.doctor.BmobModel.AppUserModel;
+import com.blazers.app.doctor.BmobModel.ChatModel;
+import com.blazers.app.doctor.DatabaseModel.DoctorOnlineChatModel;
 import com.blazers.app.doctor.R;
+import com.blazers.app.doctor.Util.PictureUtils;
 import com.blazers.app.doctor.Util.StorageConfig;
+import com.bmob.BTPFileResponse;
+import com.bmob.BmobProFile;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -50,6 +58,7 @@ public class DoctorOnlineChat extends AppCompatActivity {
         /* 并不适用于 RealTimeData因为没有专一的表结构供一对一交流 */
         testTargetId = (AppUserModel)getIntent().getSerializableExtra("user");
         initViews();
+        initRealTimeListener();
     }
 
     void initViews() {
@@ -68,11 +77,66 @@ public class DoctorOnlineChat extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    public void testSend(View view) {
-        BmobMsg msg = BmobMsg.createTextSendMsg(this, testTargetId.getObjectId(), chatEditText.getText().toString());
-        BmobChatManager.getInstance(this).sendTextMessage(testTargetId, msg);
+    void initRealTimeListener() {
+        final BmobRealTimeData rtd = new BmobRealTimeData();
+        rtd.start(this, new ValueEventListener() {
+            @Override
+            public void onDataChange(JSONObject data) {
+                Log.e("bmob", data.toString());
+                try {
+                    JSONObject jsonObject = data.getJSONObject("data");
+                    // judge
+                    int type = data.getInt("type");
+                    if (type == -1 || type == -2) {
+                        saveDatabase(type, jsonObject.getString("content"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-        /* TODO:报错 the bind value at index 1 is null */
+            @Override
+            public void onConnectCompleted() {
+                rtd.subTableUpdate("ChatModel");
+            }
+        });
+    }
+
+    public void testSend(View view) {
+        String msg = chatEditText.getText().toString();
+        sendMessage(1, msg);
+        saveDatabase(1, msg);
+        chatEditText.setText("");
+
+    }
+
+    void saveDatabase(int type, String msg) {
+         /* Save database notify */
+        DoctorOnlineChatModel model = new DoctorOnlineChatModel();
+        model.setToId(testTargetId.getObjectId());
+        model.setFromId("患者");
+        model.setDate("2015年05月28日22:21:09");
+        model.setType(type);
+        model.setContent(msg);
+        model.save();
+
+        adapter.notifyDataSetChanged();
+    }
+
+    void sendMessage(int type, String msg) {
+        ChatModel chat = new ChatModel();
+        chat.setType(type);
+        chat.setContent(msg);
+        chat.setSender("患者");
+        chat.setDate("2015年05月28日18:35:11");
+
+        chat.save(this);
+    }
+
+    void sendMessageWithIM() {
+        BmobMsg message = BmobMsg.createTextSendMsg(this, testTargetId.getObjectId(), chatEditText.getText().toString());
+        BmobChatManager.getInstance(this).sendTextMessage(testTargetId, message);
+
     }
 
     private String localCameraPath;
@@ -98,18 +162,38 @@ public class DoctorOnlineChat extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case StorageConfig.REQUESTCODE_TAKE_CAMERA:// µ±È¡µ½ÖµµÄÊ±ºò²ÅÉÏ´«pathÂ·¾¶ÏÂµÄÍ¼Æ¬µ½·þÎñÆ÷
-                    sendImageMessage(localCameraPath);
+                    String path = PictureUtils.compressBitmap(localCameraPath);
+                    sendImageMessage(path);
+                    saveDatabase(2, path);
                     break;
             }
         }
     }
 
-    private void sendImageMessage(String local) {
-//        if (layout_more.getVisibility() == View.VISIBLE) {
-//            layout_more.setVisibility(View.GONE);
-//            layout_add.setVisibility(View.GONE);
-//            layout_emo.setVisibility(View.GONE);
-//        }
+    private void sendImageMessage(final String filePath) {
+        BTPFileResponse response = BmobProFile.getInstance(this).upload(filePath, new com.bmob.btp.callback.UploadListener() {
+            @Override
+            public void onSuccess(String fileName, String url) {
+                String URL =BmobProFile.getInstance(DoctorOnlineChat.this)
+                        .signURL(fileName, url, "eb5830969fd9f69c26e4e4f57ec772f7", 0, null);
+                sendMessage(2, URL);
+                Log.e("URL", URL);
+            }
+
+            @Override
+            public void onProgress(int ratio) {
+                Log.e("Progress", "" + ratio);
+                adapter.updateProgress(filePath, ratio);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    void sendImageMessageWithIM(String local) {
         BmobChatManager.getInstance(this).sendImageMessage(testTargetId, local, new UploadListener() {
 
             @Override

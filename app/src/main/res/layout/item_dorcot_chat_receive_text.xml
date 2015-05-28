@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:lineSpacingExtra="2dp"
             android:text="您好，为及早发现冠心病，应定期做以下的检查：每年作一次血压检查，每年作一次血糖检查，若属于冠心病的高危人群就要请查看是否需要接受心电图检查，若需要进一步的检查，可能要安排做一项运动试验以测出在踩固定脚车或踩运动平板机时的心电图，而冠状动脉造影检查是诊断冠心病最肯定的方法。希望我的回答给您带来帮助，祝您健康快乐。"
-            android:id="@+id/textView25" android:layout_toRightOf="@+id/profile_image" android:layout_marginTop="24dp"
+            android:id="@+id/chat_receive" android:layout_toRightOf="@+id/profile_image" android:layout_marginTop="24dp"
             android:background="@drawable/bg_message_green" android:textSize="16sp" android:textColor="#333"
             android:paddingLeft="24dp" android:paddingRight="8dp" android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp" android:paddingTop="8dp" android:paddingBottom="8dp"/>

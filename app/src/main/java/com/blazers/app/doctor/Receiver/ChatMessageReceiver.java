@@ -203,9 +203,6 @@ public class ChatMessageReceiver extends BroadcastReceiver {
             trueMsg = "[位置]";
         }else{
             trueMsg = msg.getContent();
-            /* 普通文字消息 */
-            DoctorOnlineChatModel o = new DoctorOnlineChatModel(trueMsg);
-            o.save();
         }
         CharSequence tickerText = msg.getBelongUsername() + ":" + trueMsg;
         String contentTitle = msg.getBelongUsername()+ " (" + mNewNum + "条新消息)";

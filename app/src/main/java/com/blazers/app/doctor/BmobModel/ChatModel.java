@@ -9,8 +9,9 @@ import cn.bmob.v3.datatype.BmobFile;
 public class ChatModel extends BmobObject {
 
     private int type;
-    private String str;
-    private BmobFile pic;
+    private String content;
+
+    private String sender;
     private String date;
 
     public int getType() {
@@ -21,20 +22,20 @@ public class ChatModel extends BmobObject {
         this.type = type;
     }
 
-    public String getStr() {
-        return str;
+    public String getContent() {
+        return content;
     }
 
-    public void setStr(String str) {
-        this.str = str;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public BmobFile getPic() {
-        return pic;
+    public String getSender() {
+        return sender;
     }
 
-    public void setPic(BmobFile pic) {
-        this.pic = pic;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public String getDate() {

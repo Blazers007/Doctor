@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+                xmlns:wave="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,13 +16,32 @@
             app:border_width="0dp"
             app:border_color="#ffc8c8c8" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
             android:layout_marginLeft="4dp" android:layout_marginRight="8dp" android:layout_alignParentRight="true"/>
-    <ImageView
+    <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView25" android:layout_marginTop="24dp"
-            android:background="@drawable/bg_input_white" android:textSize="16sp" android:textColor="#333"
-            android:paddingLeft="4dp" android:paddingRight="18dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_input_white"
+            android:paddingLeft="4dp" android:paddingRight="14dp"
             android:layout_marginBottom="8dp" android:paddingTop="4dp" android:paddingBottom="4dp"
-            android:layout_toLeftOf="@+id/profile_image" android:layout_marginLeft="8dp" android:src="@drawable/map"/>
+            android:layout_toLeftOf="@+id/profile_image" android:layout_marginLeft="8dp">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_imageview"
+                android:textSize="16sp" android:textColor="#333"
+                android:scaleType="centerCrop" android:src="@drawable/map"/>
+        <com.john.waveview.WaveView
+                android:id="@+id/send_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#33aaaaaa"
+                wave:above_wave_color="@android:color/white"
+                wave:blow_wave_color="@android:color/white"
+                wave:wave_height="little"
+                wave:wave_hz="normal"
+                wave:wave_length="middle" android:layout_alignTop="@+id/send_imageview"
+                android:layout_alignLeft="@+id/send_imageview" android:layout_alignRight="@+id/send_imageview"
+                android:layout_alignBottom="@+id/send_imageview" android:visibility="invisible"/>
+    </RelativeLayout>
 
 </RelativeLayout>
