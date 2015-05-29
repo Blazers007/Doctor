@@ -2,9 +2,11 @@ package com.blazers.app.doctor.Activity.Hospital;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.baidu.location.BDLocation;
@@ -20,6 +22,7 @@ import com.blazers.app.doctor.R;
 public class HospitalAroundMe extends ActionBarActivity {
 
     @InjectView(R.id.map) MapView mMapView;
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
     /*  Location */
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -36,6 +39,16 @@ public class HospitalAroundMe extends ActionBarActivity {
     }
 
     void requestLocation() {
+        mToolbar.setTitle(R.string.title_make_appointment);
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        /**/
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
@@ -55,9 +68,7 @@ public class HospitalAroundMe extends ActionBarActivity {
         poiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener() {
             @Override
             public void onGetPoiResult(PoiResult poiResult) {
-//                for (PoiInfo poiInfo : poiResult.getAllPoi()) {
-//                    Log.e("POI Result", poiInfo.name);
-//                }
+
             }
 
             @Override

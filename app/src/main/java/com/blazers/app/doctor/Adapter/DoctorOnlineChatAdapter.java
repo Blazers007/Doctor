@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.blazers.app.doctor.BmobModel.ChatModel;
 import com.blazers.app.doctor.DatabaseModel.DoctorOnlineChatModel;
 import com.blazers.app.doctor.R;
 import com.john.waveview.WaveView;
@@ -61,30 +62,124 @@ public class DoctorOnlineChatAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return 4;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return chatModels.get(position).getType();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         /* 判断 */
+        ViewHolder1 viewHolder1 = null;
+        ViewHolder2 viewHolder2 = null;
+        ViewHolderN1 viewHolderN1 = null;
+        ViewHolderN2 viewHolderN2 = null;
         DoctorOnlineChatModel model = chatModels.get(position);
+        int type = model.getType();
 
-        switch (model.getType()) {
+        if (convertView == null) {
+            switch (type) {
+                case 1:
+                    convertView = inflater.inflate(R.layout.item_doctor_chat_send_text, parent, false);
+                    viewHolder1 = new ViewHolder1();
+                    viewHolder1.textView = (TextView) convertView.findViewById(R.id.chat_send_text);
+                    convertView.setTag(viewHolder1);
+                    break;
+                case 2:
+                    convertView = inflater.inflate(R.layout.item_doctor_chat_send_image, parent, false);
+                    viewHolder2 = new ViewHolder2();
+                    viewHolder2.imageView = (ImageView) convertView.findViewById(R.id.send_imageview);
+                    viewHolder2.waveView = (WaveView) convertView.findViewById(R.id.send_progress);
+                    waveViewHashMap.put(model.getContent(), viewHolder2.waveView);
+                    convertView.setTag(viewHolder2);
+                    break;
+                case -1:
+                    convertView = inflater.inflate(R.layout.item_doctor_chat_receive_text, parent, false);
+                    viewHolderN1 = new ViewHolderN1();
+                    viewHolderN1.textView = (TextView) convertView.findViewById(R.id.chat_receive);
+                    convertView.setTag(viewHolderN1);
+                    break;
+                case -2:
+                    convertView = inflater.inflate(R.layout.item_doctor_chat_receive_image, parent, false);
+                    viewHolderN2 = new ViewHolderN2();
+                    viewHolderN2.imageView = (ImageView) convertView.findViewById(R.id.send_imageview);
+                    viewHolderN2.waveView = (WaveView) convertView.findViewById(R.id.send_progress);
+                    waveViewHashMap.put(model.getContent(), viewHolderN2.waveView);
+                    convertView.setTag(viewHolderN2);
+                    break;
+            }
+        } else {
+            switch (type) {
+                case 1:
+                    viewHolder1 = (ViewHolder1) convertView.getTag();
+                    break;
+                case 2:
+                    viewHolder2 = (ViewHolder2) convertView.getTag();
+                    break;
+                case -1:
+                    viewHolderN1 = (ViewHolderN1) convertView.getTag();
+                    break;
+                case -2:
+                    viewHolderN2 = (ViewHolderN2) convertView.getTag();
+                    break;
+            }
+        }
+
+        switch (type) {
             case 1:
-                convertView = inflater.inflate(R.layout.item_dortor_chat_send_text, parent, false);
-                ((TextView) convertView.findViewById(R.id.chat_send_text)).setText(model.getContent());
+                viewHolder1.textView.setText(model.getContent());
                 break;
             case 2:
-                convertView = inflater.inflate(R.layout.item_dortor_chat_send_image, parent, false);
-                ImageLoader.getInstance().displayImage(model.getContent(),
-                        (ImageView) convertView.findViewById(R.id.send_imageview));
-                /**/
-                WaveView waveView = (WaveView) convertView.findViewById(R.id.send_progress);
-                waveViewHashMap.put(model.getContent(), waveView);
+                ImageLoader.getInstance().displayImage("file://" + model.getContent(), viewHolder2.imageView);
                 break;
             case -1:
-                convertView = inflater.inflate(R.layout.item_dorcot_chat_receive_text, parent, false);
-                ((TextView) convertView.findViewById(R.id.chat_receive)).setText(model.getContent());
+                viewHolderN1.textView.setText(model.getContent());
+                break;
+            case -2:
+                ImageLoader.getInstance().displayImage(model.getContent(), viewHolderN2.imageView);
                 break;
         }
+
         /* 填入内容 */
         return convertView;
+    }
+
+    /* 返回该List内部含有的所有Image的URI */
+    public ArrayList<String> getContainUrls() {
+        ArrayList<String> urls = new ArrayList<>();
+        for (DoctorOnlineChatModel model : chatModels) {
+            if (model.getType() == 2) {
+                /* 发送的都是本地图片 */
+                urls.add("file://" + model.getContent());
+            }
+            if (model.getType() == -2) {
+                urls.add(model.getContent());
+            }
+        }
+        return urls;
+    }
+
+    /* ViewHolders */
+    class ViewHolder1 {
+        public TextView textView;
+    }
+
+    class ViewHolder2 {
+        public ImageView imageView;
+        public WaveView waveView;
+    }
+
+    class ViewHolderN1 {
+        public TextView textView;
+    }
+
+    class ViewHolderN2 {
+        public ImageView imageView;
+        public WaveView waveView;
     }
 
     public void updateProgress(String file, int ratio) {

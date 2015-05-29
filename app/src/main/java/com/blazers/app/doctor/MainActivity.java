@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                         new SecondaryDrawerItem().withName(R.string.func_hospital_record).withIcon(R.drawable.ic_drawer_heart),
                         new SecondaryDrawerItem().withName(R.string.func_healthy_record).withIcon(R.drawable.ic_drawer_ecg),
                         new SecondaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
-                        new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_illness),
+                        new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_map),
                         new SectionDrawerItem().withName("设置"),
-                        new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_illness),
-                        new SwitchDrawerItem().withName("登出用户").withIcon(R.drawable.ic_settings_black_24dp)
+                        new SwitchDrawerItem().withName(R.string.func_alert).withIcon(R.drawable.ic_drawer_switch_alert),
+                        new SecondaryDrawerItem().withName(R.string.func_logout).withIcon(R.drawable.ic_drawer_exit)
                 )
                 .withSelectedItem(0)
                 .withOnDrawerItemClickListener(this)
@@ -209,6 +209,9 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                     startActivity(new Intent(this, HospitalAroundMe.class));
                     break;
                 case 6:
+                    /* 开关推送功能 */
+                    break;
+                case 7:
                     BmobUserManager.getInstance(this).logout();
                     finish();
                     break;

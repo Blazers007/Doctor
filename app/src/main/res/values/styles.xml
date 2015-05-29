@@ -37,4 +37,9 @@
         <item name="colorPrimary">#2baf2b</item>
         <item name="colorPrimaryDark">#0a8f08</item>
     </style>
+
+    <!-- 图片查看功能 全屏显示-->
+    <style name="FullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

@@ -34,12 +34,14 @@
     <string name="func_healthy_record">健康记录</string>
     <string name="func_case_illness">病历管理</string>
     <string name="func_around_me">周围医院</string>
+    <string name="func_logout">退出登录</string>
+    <string name="func_alert">后台提醒</string>
     <string name="func_setting">设置</string>
 
     <!-- 预约Fragment-->
     <string name="operation_record">手术记录</string>
     <string name="doctor_match">或许能帮助您的医生</string>
-    <string name="title_activity_make_appointment">MakeAppointment</string>
+    <string name="title_activity_make_appointment">预约医生</string>
     <string name="check_heart_rate">测量心率</string>
     <string name="phone_chat">电话诊治</string>
     <string name="upload_image">名医看图</string>
@@ -62,5 +64,7 @@
     <string name="title_activity_doctor_online_chat">DoctorOnlineChat</string>
     <string name="title_activity_hospital_around_me">HospitalAroundMe</string>
     <string name="title_activity_new_friend">NewFriendActivity</string>
+    <string name="title_activity_image_viewer">ImageViewerActivity</string>
+    <string name="title_activity_share">发送给我的医生</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import butterknife.ButterKnife;
@@ -30,6 +31,7 @@ import com.blazers.app.doctor.DatabaseModel.DoctorOnlineChatModel;
 import com.blazers.app.doctor.R;
 import com.blazers.app.doctor.Util.PictureUtils;
 import com.blazers.app.doctor.Util.StorageConfig;
+import com.blazers.app.doctor.ui.ImageViewerActivity;
 import com.bmob.BTPFileResponse;
 import com.bmob.BmobProFile;
 import org.json.JSONException;
@@ -75,6 +77,18 @@ public class DoctorOnlineChat extends AppCompatActivity {
         /**/
         adapter = new DoctorOnlineChatAdapter(this, testTargetId.getObjectId());
         listView.setAdapter(adapter);
+        listView.smoothScrollToPosition(adapter.getCount());
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int type = adapter.getItemViewType(position);
+                if (Math.abs(type) == 2) {
+                    Intent intent = new Intent(DoctorOnlineChat.this, ImageViewerActivity.class);
+                    intent.putExtra("urls", adapter.getContainUrls());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     void initRealTimeListener() {
@@ -86,7 +100,7 @@ public class DoctorOnlineChat extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = data.getJSONObject("data");
                     // judge
-                    int type = data.getInt("type");
+                    int type = jsonObject.getInt("type");
                     if (type == -1 || type == -2) {
                         saveDatabase(type, jsonObject.getString("content"));
                     }
@@ -102,6 +116,7 @@ public class DoctorOnlineChat extends AppCompatActivity {
         });
     }
 
+    /* 模仿微信的效果  没有文字的情况下为扩展功能 有文字的情况下发送文字 */
     public void testSend(View view) {
         String msg = chatEditText.getText().toString();
         sendMessage(1, msg);
@@ -121,6 +136,7 @@ public class DoctorOnlineChat extends AppCompatActivity {
         model.save();
 
         adapter.notifyDataSetChanged();
+        listView.smoothScrollToPosition(adapter.getCount());
     }
 
     void sendMessage(int type, String msg) {
@@ -161,10 +177,10 @@ public class DoctorOnlineChat extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case StorageConfig.REQUESTCODE_TAKE_CAMERA:// µ±È¡µ½ÖµµÄÊ±ºò²ÅÉÏ´«pathÂ·¾¶ÏÂµÄÍ¼Æ¬µ½·þÎñÆ÷
+                case StorageConfig.REQUESTCODE_TAKE_CAMERA:
                     String path = PictureUtils.compressBitmap(localCameraPath);
-                    sendImageMessage(path);
                     saveDatabase(2, path);
+                    sendImageMessage(path);
                     break;
             }
         }

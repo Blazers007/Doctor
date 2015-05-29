@@ -62,6 +62,8 @@ dependencies {
     /* SMS Service http://dashboard.mob.com/Sms/#/quickstarts/android */
     /* Wave View */
     compile 'com.github.john990:WaveView:16a10c1f9b'
+    /* PhotoView https://github.com/chrisbanes/PhotoView */
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile project(':sMSSDK')
     compile files('libs/BmobSDK_V3.3.8_0521.jar')
     compile files('libs/BmobIM_V1.1.8beta_20150408.jar')
