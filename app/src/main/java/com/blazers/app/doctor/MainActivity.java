@@ -16,10 +16,7 @@ import butterknife.InjectView;
 import cn.bmob.im.BmobUserManager;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.Activity.Hospital.HospitalAroundMe;
-import com.blazers.app.doctor.Fragments.MainStageFrags.FragAppointment;
-import com.blazers.app.doctor.Fragments.MainStageFrags.FragCaseIllness;
-import com.blazers.app.doctor.Fragments.MainStageFrags.FragCureRecord;
-import com.blazers.app.doctor.Fragments.MainStageFrags.FragHealthyRecord;
+import com.blazers.app.doctor.Fragments.MainStageFrags.*;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.*;
@@ -149,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
         if(mNowFrag == null) {
             mNowFrag = mAppointment = new FragAppointment();
             getSupportFragmentManager().beginTransaction()
-                    .add(i1, mCureRecord = new FragCureRecord())
+                    .add(i1, mCureRecord = new FragRecords())
                     .add(i1, mHealthyRecord = new FragHealthyRecord())
                     .add(i1, mIllCase = new FragCaseIllness())
                     .add(i1, mNowFrag)
