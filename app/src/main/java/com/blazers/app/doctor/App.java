@@ -17,6 +17,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
 import com.blazers.app.doctor.Util.SharePreferenceUtil;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -60,6 +61,8 @@ public class App extends SugarApp {
         mNotificationManager = (NotificationManager) getSystemService(android.content.Context.NOTIFICATION_SERVICE);
         /* Universal Image Loader */
         initImageLoader(getApplicationContext());
+        /* Fresco Instead pf UILoader */
+        Fresco.initialize(this);
         // 若用户登陆过，则先从好友数据库中取出好友list存入内存中
         if (BmobUserManager.getInstance(getApplicationContext())
                 .getCurrentUser() != null) {

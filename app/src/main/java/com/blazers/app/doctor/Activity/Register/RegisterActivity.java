@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @InjectView(R.id.register_username) MaterialEditText mRealname;
     private Spinner mProvince, mCity, mDistrict;
+    @InjectView(R.id.register_doctor_info) AutoCompleteTextView doctorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,26 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+
+        /* 获取医生的列表与信息 输入的时候能够立刻联想到 */
+        doctorName.setAdapter(new ArrayAdapter<>(
+                this,
+                R.layout.item_register_doc_info,
+                R.id.textView7,
+                new String[]{"张仲景", "张仲景", "张仲景", "张仲景", "张仲景", "张仲景"}));
+        doctorName.setCompletionHint("是否是?");
+        doctorName.setDropDownHeight(628);
+        doctorName.setThreshold(1);
+        doctorName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    ((AutoCompleteTextView) v).showDropDown();
+                }
+            }
+        });
     }
+
     public void setBirthday(View view) {
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {

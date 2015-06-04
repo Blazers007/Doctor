@@ -29,7 +29,7 @@
 
     <!-- Drawer Menu-->
     <string name="func_main_1">我的医生</string>
-    <string name="func_appointment">预约医生</string>
+    <string name="func_my_doctor">我的医生</string>
     <string name="func_hospital_record">看病记录</string>
     <string name="func_healthy_record">健康记录</string>
     <string name="func_case_illness">病历管理</string>

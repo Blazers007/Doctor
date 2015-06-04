@@ -52,7 +52,7 @@ public class MainStage extends NavigationLiveo implements NavigationLiveoListene
 
         List<String> mListNameItem = new ArrayList<>();
         mListNameItem.add(0, getString(R.string.func_main_1));
-        mListNameItem.add(1, getString(R.string.func_appointment));
+        mListNameItem.add(1, getString(R.string.func_my_doctor));
         mListNameItem.add(2, getString(R.string.func_hospital_record));
         mListNameItem.add(3, getString(R.string.func_healthy_record));
         mListNameItem.add(4, getString(R.string.func_case_illness));

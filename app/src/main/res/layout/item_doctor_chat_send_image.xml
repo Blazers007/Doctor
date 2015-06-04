@@ -23,15 +23,14 @@
             android:background="@drawable/bg_input_white"
             android:paddingLeft="4dp" android:paddingRight="14dp"
             android:layout_marginBottom="8dp" android:paddingTop="4dp" android:paddingBottom="4dp"
-            android:layout_toLeftOf="@+id/profile_image" android:layout_marginLeft="8dp"
+            android:layout_toLeftOf="@+id/profile_image" android:layout_marginLeft="48dp"
             android:layout_alignParentRight="false">
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/send_imageview"
                 android:textSize="16sp" android:textColor="#333"
-                android:scaleType="centerCrop" android:layout_alignParentRight="false"
-                />
+                android:scaleType="centerCrop" android:layout_alignParentRight="false"/>
         <com.john.waveview.WaveView
                 android:id="@+id/send_progress"
                 android:layout_width="wrap_content"

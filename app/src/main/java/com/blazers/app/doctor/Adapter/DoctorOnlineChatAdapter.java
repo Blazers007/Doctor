@@ -135,6 +135,7 @@ public class DoctorOnlineChatAdapter extends BaseAdapter {
                 break;
             case 2:
                 ImageLoader.getInstance().displayImage("file://" + model.getContent(), viewHolder2.imageView);
+                /* Try use Fresco */
                 break;
             case -1:
                 viewHolderN1.textView.setText(model.getContent());

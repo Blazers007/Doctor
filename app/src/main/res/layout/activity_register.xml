@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/male"
-                        android:layout_marginRight="8dp" android:layout_marginLeft="16dp"/>
+                        android:layout_marginRight="8dp" android:layout_marginLeft="16dp" android:checked="true"/>
                     <android.support.v7.widget.AppCompatRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,6 +129,29 @@
                             android:id="@+id/spinner3" android:layout_weight="1"/>
                 </LinearLayout>
             </RelativeLayout>
+            <!-- 主治医生信息-->
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ccc"
+                    android:text="我的医生" android:paddingTop="4dp" android:paddingBottom="4dp"
+                    android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
+                <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/image_doc" android:src="@drawable/ic_location_city_grey600_36dp"
+                        android:layout_centerVertical="true"/>
+                <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="New AutoCompleteTextView"
+                        android:id="@+id/register_doctor_info" android:layout_toRightOf="@+id/image_doc"
+                        android:layout_marginLeft="16dp" android:paddingLeft="8dp"
+                        android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
             <!-- 主要症状-->
             <!-- 以往就诊记录-->
             <TextView
@@ -156,11 +179,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#ccc"
-                    android:text="详细信息" android:paddingTop="4dp" android:paddingBottom="4dp"
+                    android:text="支架信息" android:paddingTop="4dp" android:paddingBottom="4dp"
                     android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
             </RelativeLayout>
+            <!-- -->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

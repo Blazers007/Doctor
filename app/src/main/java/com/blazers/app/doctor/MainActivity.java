@@ -1,34 +1,21 @@
 package com.blazers.app.doctor;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import br.liveo.interfaces.NavigationLiveoListener;
-import br.liveo.navigationliveo.NavigationLiveo;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.bmob.im.BmobUserManager;
-import cn.bmob.v3.BmobUser;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.Activity.Hospital.HospitalAroundMe;
-import com.blazers.app.doctor.BusEvents.LoginEvent;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragAppointment;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragCaseIllness;
 import com.blazers.app.doctor.Fragments.MainStageFrags.FragCureRecord;
@@ -37,7 +24,6 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.*;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerItemClickListener{
@@ -101,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                 .withToolbar(mToolbar)
                 .withAccountHeader(header)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.func_appointment).withIcon(R.drawable.ic_drawer_phone),
+                        new PrimaryDrawerItem().withName(R.string.func_my_doctor).withIcon(R.drawable.ic_drawer_phone),
                         new SecondaryDrawerItem().withName(R.string.func_hospital_record).withIcon(R.drawable.ic_drawer_heart),
                         new SecondaryDrawerItem().withName(R.string.func_healthy_record).withIcon(R.drawable.ic_drawer_ecg),
                         new SecondaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
