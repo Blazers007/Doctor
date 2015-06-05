@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobNotifyManager;
 import cn.bmob.im.BmobUserManager;
@@ -20,7 +19,6 @@ import cn.bmob.im.util.BmobJsonUtil;
 import cn.bmob.im.util.BmobLog;
 import cn.bmob.v3.listener.FindListener;
 import com.blazers.app.doctor.App;
-import com.blazers.app.doctor.DatabaseModel.DoctorOnlineChatModel;
 import com.blazers.app.doctor.MainActivity;
 import com.blazers.app.doctor.R;
 import com.blazers.app.doctor.SocialController.NewFriendActivity;
@@ -37,7 +35,7 @@ import java.util.List;
 public class ChatMessageReceiver extends BroadcastReceiver {
 
     // 事件监听
-    public static ArrayList<EventListener> ehList = new ArrayList<EventListener>();
+    public static final ArrayList<EventListener> ehList = new ArrayList<>();
 
     public static final int NOTIFY_ID = 0x000;
     public static int mNewNum = 0;//
@@ -119,55 +117,59 @@ public class ChatMessageReceiver extends BroadcastReceiver {
                         });
 
                     }else{//带tag标签
-                        if(tag.equals(BmobConfig.TAG_ADD_CONTACT)){
-                            //保存好友请求道本地，并更新后台的未读字段
-                            BmobInvitation message = BmobChatManager.getInstance(context).saveReceiveInvite(json, toId);
-                            if(currentUser!=null){//有登陆用户
-                                if(toId.equals(currentUser.getObjectId())){
-                                    if (ehList.size() > 0) {// 有监听的时候，传递下去
-                                        for (EventListener handler : ehList)
-                                            handler.onAddUser(message);
-                                    }else{
-                                        showOtherNotify(context, message.getFromname(), toId,  message.getFromname()+"请求添加好友", NewFriendActivity.class);
+                        switch (tag) {
+                            case BmobConfig.TAG_ADD_CONTACT:
+                                //保存好友请求道本地，并更新后台的未读字段
+                                BmobInvitation message = BmobChatManager.getInstance(context).saveReceiveInvite(json, toId);
+                                if (currentUser != null) {//有登陆用户
+                                    if (toId.equals(currentUser.getObjectId())) {
+                                        if (ehList.size() > 0) {// 有监听的时候，传递下去
+                                            for (EventListener handler : ehList)
+                                                handler.onAddUser(message);
+                                        } else {
+                                            showOtherNotify(context, message.getFromname(), toId, message.getFromname() + "请求添加好友", NewFriendActivity.class);
+                                        }
                                     }
                                 }
-                            }
-                        }else if(tag.equals(BmobConfig.TAG_ADD_AGREE)){
-                            String username = BmobJsonUtil.getString(jo, BmobConstant.PUSH_KEY_TARGETUSERNAME);
-                            //收到对方的同意请求之后，就得添加对方为好友--已默认添加同意方为好友，并保存到本地好友数据库
-                            BmobUserManager.getInstance(context).addContactAfterAgree(username, new FindListener<BmobChatUser>() {
+                                break;
+                            case BmobConfig.TAG_ADD_AGREE:
+                                String username = BmobJsonUtil.getString(jo, BmobConstant.PUSH_KEY_TARGETUSERNAME);
+                                //收到对方的同意请求之后，就得添加对方为好友--已默认添加同意方为好友，并保存到本地好友数据库
+                                BmobUserManager.getInstance(context).addContactAfterAgree(username, new FindListener<BmobChatUser>() {
 
-                                @Override
-                                public void onError(int arg0, final String arg1) {
-                                    // TODO Auto-generated method stub
+                                    @Override
+                                    public void onError(int arg0, final String arg1) {
+                                        // TODO Auto-generated method stub
 
-                                }
+                                    }
 
-                                @Override
-                                public void onSuccess(List<BmobChatUser> arg0) {
-                                    // TODO Auto-generated method stub
-                                    //保存到内存中
-                                    App.getInstance().setContactList(CollectionUtils.list2map(BmobDB.create(context).getContactList()));
-                                }
-                            });
-                            //显示通知 TODO:提示同意添加好友
+                                    @Override
+                                    public void onSuccess(List<BmobChatUser> arg0) {
+                                        // TODO Auto-generated method stub
+                                        //保存到内存中
+                                        App.getInstance().setContactList(CollectionUtils.list2map(BmobDB.create(context).getContactList()));
+                                    }
+                                });
+                                //显示通知 TODO:提示同意添加好友
 //                            showOtherNotify(context, username, toId,  username+"同意添加您为好友", MainActivity.class);
-                            showOtherNotify(context, username, toId,  username+"同意添加您为好友", MainActivity.class);
-                            //创建一个临时验证会话--用于在会话界面形成初始会话
-                            BmobMsg.createAndSaveRecentAfterAgree(context, json);
+                                showOtherNotify(context, username, toId, username + "同意添加您为好友", MainActivity.class);
+                                //创建一个临时验证会话--用于在会话界面形成初始会话
+                                BmobMsg.createAndSaveRecentAfterAgree(context, json);
 
-                        }else if(tag.equals(BmobConfig.TAG_READED)){//已读回执
-                            String conversionId = BmobJsonUtil.getString(jo,BmobConstant.PUSH_READED_CONVERSIONID);
-                            if(currentUser!=null){
-                                //更改某条消息的状态
-                                BmobChatManager.getInstance(context).updateMsgStatus(conversionId, msgTime);
-                                if(toId.equals(currentUser.getObjectId())){
-                                    if (ehList.size() > 0) {// 有监听的时候，传递下去--便于修改界面
-                                        for (EventListener handler : ehList)
-                                            handler.onReaded(conversionId, msgTime);
+                                break;
+                            case BmobConfig.TAG_READED: //已读回执
+                                String conversionId = BmobJsonUtil.getString(jo, BmobConstant.PUSH_READED_CONVERSIONID);
+                                if (currentUser != null) {
+                                    //更改某条消息的状态
+                                    BmobChatManager.getInstance(context).updateMsgStatus(conversionId, msgTime);
+                                    if (toId.equals(currentUser.getObjectId())) {
+                                        if (ehList.size() > 0) {// 有监听的时候，传递下去--便于修改界面
+                                            for (EventListener handler : ehList)
+                                                handler.onReaded(conversionId, msgTime);
+                                        }
                                     }
                                 }
-                            }
+                                break;
                         }
                     }
                 }else{//在黑名单期间所有的消息都应该置为已读，不然等取消黑名单之后又可以查询的到
@@ -226,7 +228,7 @@ public class ChatMessageReceiver extends BroadcastReceiver {
         boolean isAllowVibrate = App.getInstance().getSpUtil().isAllowVibrate();
         if(isAllow && currentUser!=null && currentUser.getObjectId().equals(toId)){
             //同时提醒通知
-            BmobNotifyManager.getInstance(context).showNotify(isAllowVoice,isAllowVibrate,R.drawable.ic_launcher, ticker,username, ticker.toString(),NewFriendActivity.class);
+            BmobNotifyManager.getInstance(context).showNotify(isAllowVoice,isAllowVibrate,R.drawable.ic_launcher, ticker,username, ticker,NewFriendActivity.class);
         }
     }
 }

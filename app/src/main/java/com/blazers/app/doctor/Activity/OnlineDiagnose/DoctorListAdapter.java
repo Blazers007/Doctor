@@ -16,10 +16,10 @@ import java.util.List;
  */
 public class DoctorListAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
-    private Context ctx;
-    private List<AppUserModel> list;
+    private final Context ctx;
+    private final List<AppUserModel> list;
 
     public DoctorListAdapter(Context ctx, List<AppUserModel> list) {
         this.ctx = ctx;
@@ -47,7 +47,9 @@ public class DoctorListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         /* Bind */
-        convertView = inflater.inflate(R.layout.test_doctor, null);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.test_doctor, parent, false);
+        }
         /* Fill */
         AppUserModel userModel = list.get(position);
         ((TextView) convertView.findViewById(R.id.doctor_name)).setText(userModel.getRealName());

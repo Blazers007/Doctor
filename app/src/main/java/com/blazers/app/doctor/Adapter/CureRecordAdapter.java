@@ -2,17 +2,11 @@ package com.blazers.app.doctor.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 import com.blazers.app.doctor.R;
 import it.gmariotti.cardslib.library.cards.topcolored.TopColoredCard;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardExpand;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardViewNative;
 
 /**
@@ -21,8 +15,8 @@ import it.gmariotti.cardslib.library.view.CardViewNative;
 public class CureRecordAdapter extends BaseAdapter {
 
 
-    private Context ctx;
-    private LayoutInflater inflater;
+    private final Context ctx;
+    private final LayoutInflater inflater;
 
     public CureRecordAdapter(Context ctx) {
         this.ctx = ctx;
@@ -46,7 +40,9 @@ public class CureRecordAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.item_cure_record_card, parent, false);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_cure_record_card, parent, false);
+        }
         /* Init Card From Database */
         CardViewNative cardViewNative = (CardViewNative) convertView.findViewById(R.id.card);
 

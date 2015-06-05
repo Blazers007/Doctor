@@ -23,6 +23,7 @@ import com.mikepenz.materialdrawer.model.*;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerItemClickListener{
     /*  */
     private static final int FRAG_APP = 0;
@@ -33,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
     private Fragment mAppointment, mCureRecord, mHealthyRecord, mIllCase;
     /* Toolbar */
     @InjectView(R.id.toolbar)Toolbar mToolbar;
+    @InjectView(R.id.toolbar_shadow)View toolbarShadow;
     /* 菜单容器 */
     private DrawerLayout mDrawerLayout;
-    private int i1 = R.id.main;
+    private final int i1 = R.id.main;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
         ButterKnife.inject(this);
         /* 设置Toolbar */
         setSupportActionBar(mToolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initDrawer();
@@ -85,13 +89,13 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                 .withAccountHeader(header)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.func_my_doctor).withIcon(R.drawable.ic_drawer_phone),
-                        new SecondaryDrawerItem().withName(R.string.func_hospital_record).withIcon(R.drawable.ic_drawer_heart),
-                        new SecondaryDrawerItem().withName(R.string.func_healthy_record).withIcon(R.drawable.ic_drawer_ecg),
-                        new SecondaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
-                        new SecondaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_map),
+                        new PrimaryDrawerItem().withName(R.string.func_hospital_record).withIcon(R.drawable.ic_drawer_heart),
+                        new PrimaryDrawerItem().withName(R.string.func_healthy_record).withIcon(R.drawable.ic_drawer_ecg),
+                        new PrimaryDrawerItem().withName(R.string.func_case_illness).withIcon(R.drawable.ic_drawer_illness),
+                        new PrimaryDrawerItem().withName(R.string.func_around_me).withIcon(R.drawable.ic_drawer_map),
                         new SectionDrawerItem().withName("设置"),
                         new SwitchDrawerItem().withName(R.string.func_alert).withIcon(R.drawable.ic_drawer_switch_alert),
-                        new SecondaryDrawerItem().withName(R.string.func_logout).withIcon(R.drawable.ic_drawer_exit)
+                        new PrimaryDrawerItem().withName(R.string.func_logout).withIcon(R.drawable.ic_drawer_exit)
                 )
                 .withSelectedItem(0)
                 .withOnDrawerItemClickListener(this)
@@ -155,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                     .hide(mIllCase)
                     .commit();
         }else{
+            setToolbarShadow(true);
             switch (i) {
                 case FRAG_APP:
                     if(mNowFrag == mAppointment)
@@ -170,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                     else {
                         getSupportFragmentManager().beginTransaction().hide(mNowFrag).show(mCureRecord).commit();
                         mNowFrag = mCureRecord;
+                        setToolbarShadow(false);
                     }
                     break;
                 case FRAG_HEA:
@@ -200,6 +206,13 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                     break;
             }
         }
+    }
+
+    public void setToolbarShadow(boolean show) {
+        if (show)
+            toolbarShadow.setVisibility(View.VISIBLE);
+        else
+            toolbarShadow.setVisibility(View.INVISIBLE);
     }
 
     @Override

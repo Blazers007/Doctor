@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         mProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mCity.setAdapter(new ArrayAdapter<String>(RegisterActivity.this,
+                mCity.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
                         android.R.layout.simple_spinner_dropdown_item,
                         LocationParser.getInstance(RegisterActivity.this).getCitiesByProvince(parent.getSelectedItem().toString())));
             }
@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
         mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mDistrict.setAdapter(new ArrayAdapter<String>(RegisterActivity.this,
+                mDistrict.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
                         android.R.layout.simple_spinner_dropdown_item,
                         LocationParser.getInstance(RegisterActivity.this).getDistrictsByCity(parent.getSelectedItem().toString())));
             }

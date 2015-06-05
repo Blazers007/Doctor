@@ -30,8 +30,6 @@ public class PictureUtils {
             fileOutputStream.close();
             temp.delete();
             return path.substring(0, path.lastIndexOf(".")) + "_compressed.jpg";
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -45,7 +45,9 @@ public class IllnessCaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.item_illness_case, parent, false);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_illness_case, parent, false);
+        }
         /**/
         CardViewNative cardViewNative = (CardViewNative) convertView.findViewById(R.id.carddemo_largeimagetext);
 

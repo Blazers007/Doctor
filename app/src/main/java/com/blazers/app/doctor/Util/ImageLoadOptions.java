@@ -9,7 +9,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 public class ImageLoadOptions {
 
     public static DisplayImageOptions getOptions() {
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
+        return new DisplayImageOptions.Builder()
                 // // 设置图片在下载期间显示的图片
                 // .showImageOnLoading(R.drawable.small_image_holder_listpage)
                 // // 设置图片Uri为空或是错误的时候显示的图片
@@ -35,8 +35,5 @@ public class ImageLoadOptions {
                         // .displayer(new RoundedBitmapDisplayer(20))//是否设置为圆角，弧度为多少
                 .displayer(new FadeInBitmapDisplayer(100))// 淡入
                 .build();
-
-        return options;
     }
-
 }

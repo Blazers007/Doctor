@@ -8,8 +8,6 @@ import android.preference.PreferenceManager;
 import cn.bmob.im.BmobChat;
 import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.smssdk.SMSSDK;
 import com.baidu.location.BDLocation;

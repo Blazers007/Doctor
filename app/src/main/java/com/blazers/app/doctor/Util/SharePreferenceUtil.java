@@ -12,16 +12,16 @@ import android.content.SharedPreferences;
  */
 @SuppressLint("CommitPrefEdits")
 public class SharePreferenceUtil {
-	private SharedPreferences mSharedPreferences;
+	private final SharedPreferences mSharedPreferences;
 	private static SharedPreferences.Editor editor;
 
 	public SharePreferenceUtil(Context context, String name) {
 		mSharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
 		editor = mSharedPreferences.edit();
 	}
-	private String SHARED_KEY_NOTIFY = "shared_key_notify";
-	private String SHARED_KEY_VOICE = "shared_key_sound";
-	private String SHARED_KEY_VIBRATE = "shared_key_vibrate";
+	private final String SHARED_KEY_NOTIFY = "shared_key_notify";
+	private final String SHARED_KEY_VOICE = "shared_key_sound";
+	private final String SHARED_KEY_VIBRATE = "shared_key_vibrate";
 
 	// 是否允许推送通知
 	public boolean isAllowPushNotify() {

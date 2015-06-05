@@ -1,9 +1,6 @@
 package com.blazers.app.doctor.BmobModel;
 
-import cn.bmob.im.BmobChat;
 import cn.bmob.im.bean.BmobChatUser;
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobUser;
 
 /**
  * Created by liang on 2015/5/25.

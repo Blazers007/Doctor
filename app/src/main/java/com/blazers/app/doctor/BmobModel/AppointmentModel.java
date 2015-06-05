@@ -7,16 +7,22 @@ import cn.bmob.v3.BmobObject;
  */
 public class AppointmentModel extends BmobObject {
 
-    private String state;
+    private String state;               /* 当前状态: 申请预约-预约接受-处理中- 预约失败 : 预约成功 - 诊治结束 */
     private String doctorId;
     private String patientId;
-    private String date;
+    private String createDate;
     private String appointment;
+    private String appointmentDate;
     private String detail;
     private String backup;
 
+    private String handleDate;
     private String result;
     private String reason;
+
+    private String endDate;
+
+    /* */
 
     public String getState() {
         return state;
@@ -42,12 +48,12 @@ public class AppointmentModel extends BmobObject {
         this.patientId = patientId;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public String getAppointment() {
@@ -56,6 +62,14 @@ public class AppointmentModel extends BmobObject {
 
     public void setAppointment(String appointment) {
         this.appointment = appointment;
+    }
+
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
     public String getDetail() {
@@ -74,6 +88,14 @@ public class AppointmentModel extends BmobObject {
         this.backup = backup;
     }
 
+    public String getHandleDate() {
+        return handleDate;
+    }
+
+    public void setHandleDate(String handleDate) {
+        this.handleDate = handleDate;
+    }
+
     public String getResult() {
         return result;
     }
@@ -88,5 +110,13 @@ public class AppointmentModel extends BmobObject {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

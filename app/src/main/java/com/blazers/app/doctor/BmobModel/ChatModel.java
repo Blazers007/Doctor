@@ -1,7 +1,6 @@
 package com.blazers.app.doctor.BmobModel;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by liang on 2015/5/26.

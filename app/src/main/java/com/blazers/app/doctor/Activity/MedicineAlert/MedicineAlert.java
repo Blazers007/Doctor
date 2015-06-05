@@ -2,11 +2,12 @@ package com.blazers.app.doctor.Activity.MedicineAlert;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.blazers.app.doctor.R;
 
-public class MedicineAlert extends ActionBarActivity {
+public class MedicineAlert extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

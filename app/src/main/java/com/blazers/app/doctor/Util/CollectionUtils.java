@@ -13,10 +13,7 @@ import cn.bmob.im.bean.BmobChatUser;
 public class CollectionUtils {
 
 	public static boolean isNotNull(Collection<?> collection) {
-		if (collection != null && collection.size() > 0) {
-			return true;
-		}
-		return false;
+		return collection != null && collection.size() > 0;
 	}
 	
 	/** listתmap
@@ -25,7 +22,7 @@ public class CollectionUtils {
 	  * @throws
 	  */
 	public static Map<String,BmobChatUser> list2map(List<BmobChatUser> users){
-		Map<String,BmobChatUser> friends = new HashMap<String, BmobChatUser>();
+		Map<String,BmobChatUser> friends = new HashMap<>();
 		for(BmobChatUser user : users){
 			friends.put(user.getUsername(), user);
 		}
@@ -39,10 +36,8 @@ public class CollectionUtils {
 	  * @throws
 	  */
 	public static List<BmobChatUser> map2list(Map<String,BmobChatUser> maps){
-		List<BmobChatUser> users = new ArrayList<BmobChatUser>();
-		Iterator<Entry<String, BmobChatUser>> iterator = maps.entrySet().iterator();
-		while(iterator.hasNext()){
-			Entry<String, BmobChatUser> entry = iterator.next();
+		List<BmobChatUser> users = new ArrayList<>();
+		for (Entry<String, BmobChatUser> entry : maps.entrySet()) {
 			users.add(entry.getValue());
 		}
 		return users;

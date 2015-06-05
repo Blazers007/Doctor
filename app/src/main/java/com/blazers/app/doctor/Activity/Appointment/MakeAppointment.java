@@ -1,7 +1,7 @@
 package com.blazers.app.doctor.Activity.Appointment;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,10 +11,15 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.blazers.app.doctor.R;
 
+/*
+*   该界面为预约的最终场景  应该有一个可预约列表 点击后进入该医生的预约场景进行数据的填写并提交预约
+* */
+
 public class MakeAppointment extends AppCompatActivity {
 
-    @InjectView(R.id.toolbar)
-    Toolbar mToolbar;
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
+    @InjectView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout toolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +39,8 @@ public class MakeAppointment extends AppCompatActivity {
                 finish();
             }
         });
-
         /*  */
+        toolbarLayout.setTitle(getString(R.string.title_make_appointment));
     }
 
 

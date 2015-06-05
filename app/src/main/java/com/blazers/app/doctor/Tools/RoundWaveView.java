@@ -8,8 +8,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.blazers.app.doctor.R;
 
-import java.util.Random;
-
 /**
  * Created by liang on 2015/5/21.
  */
@@ -71,7 +69,7 @@ public class RoundWaveView extends View {
         return result;
     }
 
-    Handler handler = new Handler() {
+    final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -140,11 +138,11 @@ public class RoundWaveView extends View {
     // 左右偏移 φ
     private int fai = 0;
     // 上下偏移
-    private float k = 200;
+    private final float k = 200;
     // 角速度
-    private float w = 0.7f;
+    private final float w = 0.7f;
     // 振幅
-    private int a = 20;
+    private final int a = 20;
 
     void setPath() {
         int x = 0;

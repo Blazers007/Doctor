@@ -29,9 +29,9 @@ public abstract class BaseListAdapter<E> extends BaseAdapter {
 
     public List<E> list;
 
-    public Context mContext;
+    public final Context mContext;
 
-    public LayoutInflater mInflater;
+    public final LayoutInflater mInflater;
 
     public List<E> getList() {
         return list;
@@ -113,12 +113,12 @@ public abstract class BaseListAdapter<E> extends BaseAdapter {
 
     public void setOnInViewClickListener(Integer key, onInternalClickListener onClickListener) {
         if (canClickItem == null)
-            canClickItem = new HashMap<Integer, onInternalClickListener>();
+            canClickItem = new HashMap<>();
         canClickItem.put(key, onClickListener);
     }
 
     public interface onInternalClickListener {
-        public void OnClickListener(View parentV, View v, Integer position,
+        void OnClickListener(View parentV, View v, Integer position,
                                     Object values);
     }
 

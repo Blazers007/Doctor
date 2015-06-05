@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.FindListener;
 import com.blazers.app.doctor.BmobModel.AppointmentModel;
 import com.blazers.app.doctor.R;
-import com.daimajia.swipe.SwipeLayout;
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +20,10 @@ import java.util.List;
  */
 public class AppointmentRecordsAdapter extends BaseAdapter {
 
-    private Context context;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final LayoutInflater inflater;
+    private final List<AppointmentModel> appointmentModelList;
     private int cursor;
-    private List<AppointmentModel> appointmentModelList;
 
     public AppointmentRecordsAdapter(Context context) {
         this.context = context;

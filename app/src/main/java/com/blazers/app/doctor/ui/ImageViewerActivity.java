@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -14,7 +15,7 @@ import uk.co.senab.photoview.PhotoView;
 
 import java.util.ArrayList;
 
-public class ImageViewerActivity extends ActionBarActivity {
+public class ImageViewerActivity extends AppCompatActivity {
 
     @InjectView(R.id.viewPager)
     ViewPager viewPager;
@@ -36,7 +37,7 @@ public class ImageViewerActivity extends ActionBarActivity {
 
     class ImageViewerPagerAdapter extends PagerAdapter {
 
-        private ArrayList<String> urls;
+        private final ArrayList<String> urls;
 
         public ImageViewerPagerAdapter(ArrayList<String> urls) {
             this.urls = urls;

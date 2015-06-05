@@ -1,9 +1,10 @@
 package com.blazers.app.doctor.Activity.Hospital;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,17 +16,16 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.*;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.poi.*;
 import com.blazers.app.doctor.R;
 
-public class HospitalAroundMe extends ActionBarActivity {
+public class HospitalAroundMe extends AppCompatActivity {
 
     @InjectView(R.id.map) MapView mMapView;
     @InjectView(R.id.toolbar) Toolbar mToolbar;
     /*  Location */
     public LocationClient mLocationClient = null;
-    public BDLocationListener myListener = new MyLocationListener();
+    public final BDLocationListener myListener = new MyLocationListener();
     BaiduMap mBaiduMap;
     boolean isFirstLoc = true;// 是否首次定位
 
@@ -101,7 +101,7 @@ public class HospitalAroundMe extends ActionBarActivity {
                 MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
                 mBaiduMap.animateMapStatus(u);
                 /* Poi */
-                requestHospitals(ll);
+//                requestHospitals(ll);
             }
         }
 

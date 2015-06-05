@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.blazers.app.doctor.BmobModel.ChatModel;
 import com.blazers.app.doctor.DatabaseModel.DoctorOnlineChatModel;
 import com.blazers.app.doctor.R;
 import com.john.waveview.WaveView;
@@ -22,13 +21,13 @@ import java.util.List;
  */
 public class DoctorOnlineChatAdapter extends BaseAdapter {
 
-    private Context ctx;
-    private String targetId;
+    private final Context ctx;
+    private final String targetId;
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
     private List<DoctorOnlineChatModel> chatModels;
 
-    private HashMap<String, WaveView> waveViewHashMap;
+    private final HashMap<String, WaveView> waveViewHashMap;
 
     public DoctorOnlineChatAdapter(Context ctx, String targetId) {
         this.ctx = ctx;

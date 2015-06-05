@@ -3,9 +3,9 @@ package com.blazers.app.doctor.Activity.OnlineDiagnose;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +15,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.InjectViews;
 import cn.bmob.im.BmobChatManager;
 import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
 import cn.bmob.im.config.BmobConfig;
-import cn.bmob.im.inteface.MsgTag;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.PushListener;
@@ -29,7 +27,7 @@ import com.blazers.app.doctor.R;
 
 import java.util.List;
 
-public class OnlineDiagnose extends ActionBarActivity {
+public class OnlineDiagnose extends AppCompatActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;

@@ -12,11 +12,6 @@ import butterknife.InjectView;
 import com.blazers.app.doctor.Adapter.CureRecordAdapter;
 import com.blazers.app.doctor.R;
 
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardExpand;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.view.CardViewNative;
-
 /**
  * Created by liang on 2015/5/7.
  */

@@ -8,10 +8,7 @@ public class CommonUtils {
 
 	public static boolean isNetworkAvailable(Context context) {
 		NetworkInfo info = getNetworkInfo(context);
-		if (info != null) {
-			return info.isAvailable();
-		}
-		return false;
+		return info != null && info.isAvailable();
 	}
 
 
@@ -43,11 +40,8 @@ public class CommonUtils {
 
 
 	public static boolean checkSdCard() {
-		if (android.os.Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED))
-			return true;
-		else
-			return false;
+		return android.os.Environment.getExternalStorageState().equals(
+				android.os.Environment.MEDIA_MOUNTED);
 	}
 
 }

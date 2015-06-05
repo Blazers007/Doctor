@@ -7,19 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.*;
 
 import android.widget.ListView;
-import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.blazers.app.doctor.Adapter.IllnessCaseAdapter;
 import com.blazers.app.doctor.R;
-import it.gmariotti.cardslib.library.cards.actions.BaseSupplementalAction;
-import it.gmariotti.cardslib.library.cards.actions.IconSupplementalAction;
-import it.gmariotti.cardslib.library.cards.actions.TextSupplementalAction;
-import it.gmariotti.cardslib.library.cards.material.MaterialLargeImageCard;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.view.CardViewNative;
-
-import java.util.ArrayList;
 
 /**
  * Created by liang on 2015/5/7.

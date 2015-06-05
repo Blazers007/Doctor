@@ -59,7 +59,7 @@ public class FragAppointment extends Fragment implements View.OnClickListener{
 
     class DoctorMatchAdapter extends PagerAdapter {
 
-        private ArrayList<View> viewArrayList;
+        private final ArrayList<View> viewArrayList;
 
         public DoctorMatchAdapter(Context ctx) {
             LayoutInflater inflater = LayoutInflater.from(ctx);
