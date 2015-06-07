@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
 
 android {
     compileSdkVersion 22
@@ -37,7 +38,7 @@ dependencies {
     /*http://satyan.github.io/sugar/index.html*/
     /* https://github.com/daimajia/AndroidSwipeLayout */
     compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:support-v4:22.2.0'
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     /* https://github.com/rey5137/material */
     compile 'com.github.rey5137:material:1.1.1'
