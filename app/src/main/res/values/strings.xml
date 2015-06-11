@@ -50,6 +50,7 @@
 
     <!-- 预约医生Activity-->
     <string name="title_make_appointment">预约我的医生</string>
+    <string name="submit_appointment">立即预约!</string>
 
     <!-- 其他界面-->
     <string name="title_activity_small_tips">健康指南</string>

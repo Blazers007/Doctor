@@ -8,7 +8,7 @@ import cn.bmob.v3.BmobObject;
 public class AppointmentModel extends BmobObject {
 
     private String state;               /* 当前状态: 申请预约-预约接受-处理中- 预约失败 : 预约成功 - 诊治结束 */
-    private String doctorId;
+    private String doctorId; /* 应该是病人的主键 通过该主键来查询病人的信息 */
     private String patientId;
     private String createDate;
     private String appointment;
@@ -20,6 +20,7 @@ public class AppointmentModel extends BmobObject {
     private String result;
     private String reason;
 
+    /* 添加字段 如：最大可能接受的预约时间 */
     private String endDate;
 
     /* */
