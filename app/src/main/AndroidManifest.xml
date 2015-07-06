@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-          package="com.blazers.app.doctor">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.blazers.app.doctor" >
 
     <!-- Share SDK -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -10,15 +11,15 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!-- Bmob -->
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- Bomb talk -->
     <permission
-        android:name="cn.bmob.permission.push"
-        android:protectionLevel="normal" >
+            android:name="cn.bmob.permission.push"
+            android:protectionLevel="normal" >
     </permission>
 
     <uses-permission android:name="cn.bmob.permission.push" />
@@ -37,121 +38,136 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
-    <!--http://www.cnblogs.com/kangyi/p/4409221.html-->
+    <!-- http://www.cnblogs.com/kangyi/p/4409221.html -->
     <!-- Application -->
     <application
-        tools:replace="android:icon, android:theme"
-        android:name=".App"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+            android:name=".App"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme"
+            tools:replace="android:icon, android:theme" >
 
         <!-- Sugar Database -->
         <meta-data
-            android:name="DATABASE"
-            android:value="blazers_doctor.db" />
+                android:name="DATABASE"
+                android:value="blazers_doctor.db" />
         <meta-data
-            android:name="VERSION"
-            android:value="1" />
+                android:name="VERSION"
+                android:value="1" />
         <meta-data
-            android:name="QUERY_LOG"
-            android:value="true" />
+                android:name="QUERY_LOG"
+                android:value="true" />
         <meta-data
-            android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.blazers.app.doctor.DatabaseModel" />
+                android:name="DOMAIN_PACKAGE_NAME"
+                android:value="com.blazers.app.doctor.DatabaseModel" />
 
         <!-- Baidu MAP -->
         <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="QRo0gqLpUXfcRGh1Us3yVGZN" />
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="QRo0gqLpUXfcRGh1Us3yVGZN" />
 
         <!-- 登录界面 -->
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/LoginTheme" >
+                android:name=".ui.activity.LoginActivity"
+                android:theme="@style/LoginTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- 主界面-->
+        <!-- 主界面 -->
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+                android:name=".ui.activity.MainActivity"
+                android:label="@string/app_name" >
         </activity>
         <!-- 注册界面 -->
         <activity
-            android:name=".Activity.Register.RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:theme="@style/RegisterTheme" >
+                android:name=".ui.activity.register.RegisterActivity"
+                android:label="@string/title_activity_register"
+                android:theme="@style/RegisterTheme" >
         </activity>
-        <!--  废弃的主界面 -->
+        <!-- 预约界面 -->
         <activity
-            android:name=".MainStage"
-            android:theme="@style/MainTheme" >
+                android:name=".ui.activity.appointment.MakeAppointment"
+                android:label="@string/title_activity_make_appointment" >
         </activity>
+        <!-- 健康指南界面 -->
         <activity
-            android:name=".Activity.Appointment.MakeAppointment"
-            android:label="@string/title_activity_make_appointment" >
+                android:name=".ui.activity.tips.SmallTips"
+                android:label="@string/title_activity_small_tips" >
         </activity>
+        <!-- 在线询诊的聊天界面 -->
         <activity
-            android:name=".Activity.SmallTips.SmallTips"
-            android:label="@string/title_activity_small_tips" >
-        </activity>
-        <activity
-            android:name=".Activity.OnlineDiagnose.OnlineDiagnose"
-            android:label="@string/title_activity_chat_online" >
+                android:name=".ui.activity.diagnose.OnlineDiagnose"
+                android:label="@string/title_activity_chat_online" >
         </activity>
         <activity
-            android:name=".Activity.PhoneCall.PhoneCall"
-            android:label="@string/title_activity_phone_call" >
+                android:name=".ui.activity.call.PhoneCall"
+                android:label="@string/title_activity_phone_call" >
         </activity>
         <activity
-            android:name=".Activity.MedicineAlert.MedicineAlert"
-            android:label="@string/title_activity_medicine_alert" >
+                android:name=".ui.activity.medicine.MedicineAlert"
+                android:label="@string/title_activity_medicine_alert" >
         </activity>
         <activity
-            android:name=".Activity.HeartRate.CheckHeartRate"
-            android:label="@string/title_activity_check_heart_rate" >
+                android:name=".ui.activity.heart.CheckHeartRate"
+                android:label="@string/title_activity_check_heart_rate" >
         </activity>
         <activity
-            android:name=".Activity.DoctorSeeImage.DoctorSeeImage"
-            android:label="@string/title_activity_doctor_see_image" >
+                android:name=".ui.activity.cardiograph.DoctorSeeImage"
+                android:label="@string/title_activity_doctor_see_image" >
         </activity>
         <activity
-            android:name=".Activity.OnlineDiagnose.DoctorOnlineChat"
-            android:label="@string/title_activity_doctor_online_chat" >
+                android:name=".ui.activity.diagnose.DoctorOnlineChat"
+                android:label="@string/title_activity_doctor_online_chat" >
+        </activity>
+        <activity
+                android:name=".ui.activity.hospital.HospitalAroundMe"
+                android:label="@string/title_activity_hospital_around_me" >
+        </activity>
+        <activity
+                android:name=".ui.activity.social.NewFriendActivity"
+                android:label="@string/title_activity_new_friend" >
+        </activity>
+        <activity
+                android:name=".ui.common.ImageViewerActivity"
+                android:label="@string/title_activity_image_viewer"
+                android:theme="@style/FullScreen" >
         </activity>
 
-        <!-- TODO: 增加分享图片给医生的接口！-->
+        <!-- TODO: 增加分享图片给医生的接口！ -->
         <activity
-            android:name=".Share.ShareToDoctor"
-            android:label="@string/title_activity_share">
+                android:name=".share.ShareToDoctor"
+                android:label="@string/title_activity_share" >
             <intent-filter>
-                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT"/>
-                <action android:name="ANDROID.INTENT.ACTION.VIEW"/>
-                <action android:name="ANDROID.INTENT.ACTION.SEND"/>
-                <action android:name="ANDROID.INTENT.ACTION.SEND_MULTIPLE"/>
-                <action android:name="ANDROID.INTENT.ACTION.SENDTO"/>
-                <data android:mimeType="image/*"/>
+                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
+
+                <action android:name="ANDROID.INTENT.ACTION.VIEW" />
+                <action android:name="ANDROID.INTENT.ACTION.SEND" />
+                <action android:name="ANDROID.INTENT.ACTION.SEND_MULTIPLE" />
+                <action android:name="ANDROID.INTENT.ACTION.SENDTO" />
+
+                <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
         <!-- Share SDK SMS -->
         <activity
-            android:name="com.mob.tools.MobUIShell"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
+                android:name="com.mob.tools.MobUIShell"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:windowSoftInputMode="stateHidden|adjustResize" />
         <!-- Share SDK CHAT -->
+
+
         <!-- IM聊天所需的Push start -->
         <service
-            android:name="cn.bmob.push.lib.service.PushService"
-            android:exported="true"
-            android:label="PushService"
-            android:permission="cn.bmob.permission.push"
-            android:process="cn.bmob.push" >
+                android:name="cn.bmob.push.lib.service.PushService"
+                android:exported="true"
+                android:label="PushService"
+                android:permission="cn.bmob.permission.push"
+                android:process="cn.bmob.push" >
             <intent-filter>
                 <action android:name="cn.bmob.push.lib.service.PushService" />
             </intent-filter>
@@ -168,7 +184,9 @@
             </intent-filter>
         </receiver>
         <!-- 聊天消息接收器 -->
-        <receiver android:name=".Receiver.ChatMessageReceiver" >
+        <receiver
+                android:name=".receiver.ChatMessageReceiver"
+                tools:ignore="ExportedReceiver" >
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE" />
             </intent-filter>
@@ -177,31 +195,27 @@
 
 
         <!-- 个性功能中的启动定时检测服务，可选功能 -->
-        <service android:name="cn.bmob.im.poll.BmobPollService" >
+        <service
+                android:name="cn.bmob.im.poll.BmobPollService"
+                tools:ignore="ExportedService" >
             <intent-filter>
                 <action android:name="cn.bmob.im.service.BmobPollService" />
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".Activity.Hospital.HospitalAroundMe"
-            android:label="@string/title_activity_hospital_around_me" >
-        </activity>
-
         <!-- Baidu Location -->
         <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
+                android:name="com.baidu.location.f"
+                android:enabled="true"
+                android:process=":remote" />
 
         <activity
-            android:name=".SocialController.NewFriendActivity"
-            android:label="@string/title_activity_new_friend" >
+                android:name=".test.TestActivity"
+                android:label="@string/title_activity_test" >
         </activity>
         <activity
-            android:theme="@style/FullScreen"
-            android:name=".ui.ImageViewerActivity"
-            android:label="@string/title_activity_image_viewer" >
+                android:name=".ui.activity.register.LostMyPassword"
+                android:label="@string/title_activity_lost_my_password" >
         </activity>
     </application>
 

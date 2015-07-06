@@ -36,6 +36,7 @@ dependencies {
     /*https://github.com/prolificinteractive/material-calendarview*/
     compile 'com.github.satyan:sugar:1.3'
     /*http://satyan.github.io/sugar/index.html*/
+
     /* https://github.com/daimajia/AndroidSwipeLayout */
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
@@ -45,6 +46,7 @@ dependencies {
     /* https://github.com/hdodenhof/CircleImageView */
     compile 'de.hdodenhof:circleimageview:1.3.0'
     /* Form Cards https://github.com/gabrielemariotti/cardslib */
+
     //Core
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     //Optional for built-in cards
@@ -60,15 +62,17 @@ dependencies {
     /* EventBus */
     compile 'de.greenrobot:eventbus:2.4.0'
     /* SMS Service http://dashboard.mob.com/Sms/#/quickstarts/android */
+
     /* Wave View */
     compile 'com.github.john990:WaveView:16a10c1f9b'
     /* PhotoView https://github.com/chrisbanes/PhotoView */
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     /* Use Fresco instead of UILoader */
+
     /* http://blog.honx.in/dev-only/   DEV ONLY honx */
     compile 'com.facebook.fresco:fresco:0.5.0+'
     /* Use OK HTTP */
-    compile ('com.github.florent37:materialviewpager:1.0.4@aar'){
+    compile('com.github.florent37:materialviewpager:1.0.4@aar') {
         transitive = true
     }
     /* Use DragTopLayout instead for material viewpager a while */
@@ -78,11 +82,11 @@ dependencies {
     /* Combine up two together */
     /* Android Support Design */
     compile 'com.android.support:design:22.2.0'
-    compile project(':sMSSDK')
-    compile files('libs/BmobSDK_V3.3.8_0521.jar')
-    compile files('libs/BmobIM_V1.1.8beta_20150408.jar')
-    compile files('libs/baidumapapi_v3_4_0.jar')
-    compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/baidumapapi_v3_0_0.jar')
+    compile files('libs/Bmob_Push_V0.6beta_20150408.jar')
+    compile files('libs/BmobIM_V1.1.8beta_20150408.jar')
+    compile files('libs/BmobSDK_V3.4.0_0616.jar')
+    compile files('libs/fastjson-1.1.43.android.jar')
+    compile files('libs/locSDK_4.2.jar')
     compile files('libs/universal-image-loader-1.9.2_sources.jar')
 }
