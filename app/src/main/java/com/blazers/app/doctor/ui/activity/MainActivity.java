@@ -16,7 +16,6 @@ import butterknife.InjectView;
 import cn.bmob.im.BmobUserManager;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.R;
-import com.blazers.app.doctor.test.TestActivity;
 import com.blazers.app.doctor.ui.activity.hospital.HospitalAroundMe;
 import com.blazers.app.doctor.ui.fragments.main.*;
 import com.mikepenz.materialdrawer.Drawer;
@@ -203,9 +202,8 @@ public class MainActivity extends AppCompatActivity implements Drawer.OnDrawerIt
                     /* 开关推送功能 */
                     break;
                 case 7:
-                    startActivity(new Intent(this, TestActivity.class));
-//                    BmobUserManager.getInstance(this).logout();
-//                    finish();
+                    BmobUserManager.getInstance(this).logout();
+                    finish();
                     break;
             }
         }

@@ -32,7 +32,7 @@ public class OnlineDiagnose extends AppCompatActivity {
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
     @InjectView(R.id.spinnerDisease)
-    Spinner spinnerDiease;
+    Spinner spinnerDisease;
     @InjectView(R.id.spinnerCity)
     Spinner spinnerCity;
     @InjectView(R.id.spinnerHospital)
@@ -66,7 +66,7 @@ public class OnlineDiagnose extends AppCompatActivity {
         });
 
         /* Spinner Filter */
-        spinnerDiease.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按病种筛选"}));
+        spinnerDisease.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按病种筛选"}));
         spinnerCity.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按地区筛选"}));
         spinnerHospital.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_white_text, new String[]{"按医院筛选"}));
     }

@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import cn.bmob.im.BmobChat;
 import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -44,6 +45,7 @@ public class App extends SugarApp {
     public void onCreate() {
         super.onCreate();
         /* Bmob Init */
+//        Bmob.initialize(this, "f0d74dc5fda96aa9becdbd2a0875225c");
         BmobChat.DEBUG_MODE = true;
         BmobChat.getInstance(this).init("f0d74dc5fda96aa9becdbd2a0875225c");
 //        BmobChat.getInstance(this).startPollService(30);

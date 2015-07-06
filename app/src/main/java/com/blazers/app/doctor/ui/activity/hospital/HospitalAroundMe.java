@@ -91,6 +91,8 @@ public class HospitalAroundMe extends AppCompatActivity {
                     // 此处设置开发者获取到的方向信息，顺时针0-360
                     .direction(100).latitude(bdLocation.getLatitude())
                     .longitude(bdLocation.getLongitude()).build();
+            if(mBaiduMap == null)
+                return;
             mBaiduMap.setMyLocationData(locData);
             if (isFirstLoc) {
                 isFirstLoc = false;

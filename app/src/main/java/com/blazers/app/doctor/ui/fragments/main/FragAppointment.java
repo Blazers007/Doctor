@@ -12,11 +12,11 @@ import android.view.*;
 import android.widget.Toast;
 import com.blazers.app.doctor.ui.activity.appointment.MakeAppointment;
 import com.blazers.app.doctor.ui.activity.cardiograph.DoctorSeeImage;
-import com.blazers.app.doctor.ui.activity.heart.CheckHeartRate;
 import com.blazers.app.doctor.ui.activity.diagnose.OnlineDiagnose;
 import com.blazers.app.doctor.ui.activity.call.PhoneCall;
 import com.blazers.app.doctor.R;
 import com.blazers.app.doctor.ui.activity.tips.SmallTips;
+import com.blazers.app.doctor.ui.activity.trace.UpdateMyStatus;
 
 import java.util.ArrayList;
 
@@ -52,7 +52,7 @@ public class FragAppointment extends Fragment implements View.OnClickListener{
             root.findViewById(R.id.menu_doctor_see_image).setOnClickListener(this);
             root.findViewById(R.id.menu_phone_call).setOnClickListener(this);
             root.findViewById(R.id.menu_small_tips).setOnClickListener(this);
-            root.findViewById(R.id.menu_heart_rate).setOnClickListener(this);
+            root.findViewById(R.id.menu_updata_my_status).setOnClickListener(this);
         }
         return root;
     }
@@ -119,8 +119,8 @@ public class FragAppointment extends Fragment implements View.OnClickListener{
             case R.id.menu_small_tips:
                 startActivity(new Intent(getActivity(), SmallTips.class));
                 break;
-            case R.id.menu_heart_rate:
-                startActivity(new Intent(getActivity(), CheckHeartRate.class));
+            case R.id.menu_updata_my_status:
+                startActivity(new Intent(getActivity(), UpdateMyStatus.class));
                 break;
         }
     }

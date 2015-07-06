@@ -17,7 +17,9 @@
 
     <!-- LoginActivity -->
     <string name="account_name">手机号</string>
+    <string name="account_verify">验证码</string>
     <string name="account_pwd">输入您的密码</string>
+    <string name="account_confirm_pwd">确认您的密码</string>
     <string name="register">注册使用</string>
     <string name="forget_pwd">忘记密码</string>
 
@@ -26,6 +28,7 @@
     <string name="male">男性</string>
     <string name="female">女性</string>
     <string name="setting_birthday">点击设定您的生日</string>
+    <string name="setting_phone">填写您的手机号码</string>
 
     <!-- Drawer Menu-->
     <string name="func_main_1">我的医生</string>
@@ -42,7 +45,7 @@
     <string name="operation_record">手术记录</string>
     <string name="doctor_match">或许能帮助您的医生</string>
     <string name="title_activity_make_appointment">预约医生</string>
-    <string name="check_heart_rate">测量心率</string>
+    <string name="update_my_status">健康记录</string>
     <string name="phone_chat">电话诊治</string>
     <string name="upload_image">名医看图</string>
     <string name="small_tips">健康指南</string>
@@ -57,7 +60,7 @@
     <string name="title_activity_chat_online">在线诊治</string>
     <string name="title_activity_phone_call">电话诊治</string>
     <string name="title_activity_medicine_alert">服药提醒</string>
-    <string name="title_activity_check_heart_rate">心率检测</string>
+    <string name="title_activity_update_my_status">反馈健康记录</string>
     <string name="title_activity_doctor_see_image">名医看图</string>
 
     <!-- 健康贴士-->
@@ -67,5 +70,8 @@
     <string name="title_activity_new_friend">NewFriendActivity</string>
     <string name="title_activity_image_viewer">ImageViewerActivity</string>
     <string name="title_activity_share">发送给我的医生</string>
+    <string name="title_activity_fullfill_profile">FullfillProfile</string>
 
+
+    <!-- For  test -->
 </resources>

@@ -34,14 +34,14 @@ public class DoctorOnlineChatMessageAdapter extends BaseAdapter {
         this.targetId = targetId;
         /* Init Inflater */
         inflater = LayoutInflater.from(ctx);
-        /* Read From database */
+        /* Read From database TODO:这里容易报错！ */
         chatModels = DoctorOnlineChatModel.listAll(DoctorOnlineChatModel.class);
         waveViewHashMap = new HashMap<>();
     }
 
     @Override
     public int getCount() {
-        return chatModels.size();
+        return chatModels == null ? 0 : chatModels.size();
     }
 
     @Override

@@ -14,7 +14,7 @@
                 android:paddingBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <com.blazers.app.doctor.Views.StateProgressView
+            <com.blazers.app.doctor.library.view.progress.StateProgressView
                     android:id="@+id/state_view"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"/>

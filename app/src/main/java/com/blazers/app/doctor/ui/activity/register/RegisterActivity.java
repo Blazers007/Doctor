@@ -17,32 +17,32 @@ import android.widget.*;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import cn.bmob.im.BmobUserManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.RequestSMSCodeListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.VerifySMSCodeListener;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.model.bmob.AppUserModel;
 import com.blazers.app.doctor.R;
+import com.blazers.app.doctor.model.bmob.DoctorSetting;
+import com.blazers.app.doctor.model.bmob.Invite;
 import com.blazers.app.doctor.util.LocationParser;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
     @InjectView(R.id.toolbar) Toolbar mToolbar;
     /*User Info*/
-    @InjectView(R.id.register_birthday) TextView mBirthday;
-    @InjectView(R.id.register_age) TextView mAge;
-
-    @InjectView(R.id.register_username) MaterialEditText mRealname;
-    private Spinner mProvince, mCity, mDistrict;
-    @InjectView(R.id.register_doctor_info) AutoCompleteTextView doctorName;
 
     /* Vars */
     private String PHONE_NUMBER;
@@ -66,93 +66,19 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /**/
-        /* Init Spinner */
-        mProvince = (Spinner) findViewById(R.id.spinner);
-        mCity = (Spinner) findViewById(R.id.spinner2);
-        mDistrict = (Spinner) findViewById(R.id.spinner3);
 
-        mProvince.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                LocationParser.getInstance(this).getProvinces()));
-        mProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mCity.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
-                        android.R.layout.simple_spinner_dropdown_item,
-                        LocationParser.getInstance(RegisterActivity.this).getCitiesByProvince(parent.getSelectedItem().toString())));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mDistrict.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
-                        android.R.layout.simple_spinner_dropdown_item,
-                        LocationParser.getInstance(RegisterActivity.this).getDistrictsByCity(parent.getSelectedItem().toString())));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        /* 获取医生的列表与信息 输入的时候能够立刻联想到 */
-        doctorName.setAdapter(new ArrayAdapter<>(
-                this,
-                R.layout.item_register_doc_info,
-                R.id.textView7,
-                new String[]{"张仲景", "张仲景", "张仲景", "张仲景", "张仲景", "张仲景"}));
-        doctorName.setCompletionHint("是否是?");
-        doctorName.setDropDownHeight(628);
-        doctorName.setThreshold(1);
-        doctorName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ((AutoCompleteTextView) v).showDropDown();
-                }
-            }
-        });
     }
 
-    public void setBirthday(View view) {
-        DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePickerDialog datePickerDialog, int i, int i1, int i2) {
-                        String str = String.format("%04d 年 %02d 月 %02d 日", i, i1, i2);
-                        /* 填入生日 */
-                        mBirthday.setText(str);
-                        /* 计算年龄 */
-                        mAge.setText(Calendar.getInstance().get(Calendar.YEAR) - i+"岁");
-                    }
-                }, 1980, 0, 1);
-        datePickerDialog.setVibrate(false);
-        datePickerDialog.show(getSupportFragmentManager(), "PICKER");
-    }
+   
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case R.id.action_settings:
                 sendSMSCode();
@@ -165,41 +91,46 @@ public class RegisterActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void getPhoneNumber() {
+    /* 弹出填写手机号码的弹窗 */
+    void popUpVerify() {
+        if (PHONE_NUMBER != null && PHONE_NUMBER.length() >= 11)
+            sendSMSCode();
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("填写您的手机号")
+                .customView(editText, false)
+                .positiveText("确定发送")
+                .negativeText("取消")
+                .cancelable(false)
+                .autoDismiss(false)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                            /* 验证合法性 并有动画震动提示 */
+                        if (editText.length() < 11) {
+                                /* 提示输入错误 */
+                            Snackbar.make(mToolbar, "输入的手机号过短", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            PHONE_NUMBER = editText.getText().toString();
+                            sendSMSCode();
+                            dialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        super.onNegative(dialog);
+                    }
+                })
+                .build();
+        dialog.show();
         /* 获取手机号码 如果不能获取则弹框要求填写 */
         TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         String tel = tm.getLine1Number();//手机号码
         if (tel == null || tel.length() <= 11) {
             final EditText editText = new EditText(this);
             editText.setInputType(InputType.TYPE_CLASS_PHONE);
-            MaterialDialog dialog = new MaterialDialog.Builder(this)
-                    .title("填写您的手机号")
-                    .customView(editText, false)
-                    .positiveText("确定发送")
-                    .negativeText("取消")
-                    .cancelable(false)
-                    .autoDismiss(false)
-                    .callback(new MaterialDialog.ButtonCallback() {
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            /* 验证合法性 并有动画震动提示 */
-                            if (editText.length() < 11) {
-                                /* 提示输入错误 */
-                                Snackbar.make(mToolbar, "输入的手机号过短", Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                PHONE_NUMBER = editText.getText().toString();
-                                sendSMSCode();
-                                dialog.dismiss();
-                            }
-                        }
 
-                        @Override
-                        public void onNegative(MaterialDialog dialog) {
-                            super.onNegative(dialog);
-                        }
-                    })
-                    .build();
-            dialog.show();
         } else {
             PHONE_NUMBER = tel;
             sendSMSCode();
@@ -220,24 +151,77 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /* 可以自动调用(读短信取验证码) 或手动调用验证 */
-    void verifyCode(String code) {
+    void verifyCode() {
+        String code = mPhone.getText().toString();
+        if(code.length() < 6) {
+            return;
+        }
+        /* 本地校验 */
         BmobSMS.verifySmsCode(this, PHONE_NUMBER, code, new VerifySMSCodeListener() {
             @Override
             public void done(BmobException e) {
                 if(e == null){
-                //短信验证码已验证成功
+                    //短信验证码已验证成功
                     Log.i("smile", "验证通过");
+                    /* 根据号码读取配置 */
+                    BmobQuery<Invite> query = new BmobQuery<>();
+                    query.addWhereEqualTo("PatientPhone", PHONE_NUMBER);
+                    query.findObjects(RegisterActivity.this, new FindListener<Invite>() {
+                        @Override
+                        public void onSuccess(List<Invite> list) {
+                            Log.e("查询要请","[ 成功 ] ->" + list.size());
+                            if (list.size() == 0) {
+                                 makeNormalForm();
+                            } else {
+                                Invite invite = list.get(0);
+                                makeSpecialForm(invite.getDoctorId(), invite.getArray());
+                            }
+                        }
+
+                        @Override
+                        public void onError(int i, String s) {
+                            /* TODO:有漏洞，如果为读取失败 而并非不存在该条数据怎么办 */
+                            Log.e("查询要请","[ 失败 ]");
+                            makeNormalForm();
+                        }
+                    });
                 }else{
-                    Log.i("smile", "验证失败：code ="+e.getErrorCode()+",msg = "+e.getLocalizedMessage());
+                    Log.i("smile", "验证失败：code =" + e.getErrorCode() + ",msg = " + e.getLocalizedMessage());
                 }
             }
         });
     }
 
+
+    /* 如果被邀请 则读取配置文件生成填写的表单 */
+    void makeSpecialForm(String doc, String array) {
+        BmobQuery<DoctorSetting> query = new BmobQuery<>();
+        query.addWhereEqualTo("DoctorId",doc);
+        query.findObjects(this, new FindListener<DoctorSetting>() {
+            @Override
+            public void onSuccess(List<DoctorSetting> list) {
+                Log.e("JSON", list.get(0).getInviteSetting());
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    /* 未被邀请的则只填写基本情况 */
+    void makeNormalForm(){
+
+    }
+
     /* 提交注册信息 并返回注册结果 自动跳转 */
     void submit() {
+        /* 校验相关字段是否完整 或使用InputChecker 或 EditText Wrapper */
+
+        /* 组装Register数据 提交 并显示进度条 */
         register = new AppUserModel();
-        register.setUsername("18321704036");
+        register.setUsername(PHONE_NUMBER);
         register.setPassword("taaita1314");
         register.setEmail("308802880@qq.com");
         register.setRole("patient");

@@ -64,7 +64,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/build/data-binding-info" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
@@ -125,13 +124,13 @@
     <orderEntry type="library" exported="" name="kenburnsview-1.0.6" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Bmob_Push_V0.6beta_20150408" level="project" />
     <orderEntry type="library" exported="" name="material-1.1.1" level="project" />
     <orderEntry type="library" exported="" name="library-0.0.2" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.9" level="project" />
     <orderEntry type="library" exported="" name="fresco-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="butterknife-6.1.0" level="project" />
-    <orderEntry type="library" exported="" name="BmobSDK_V3.3.8_0521" level="project" />
     <orderEntry type="library" exported="" name="library-1.2.4" level="project" />
     <orderEntry type="library" exported="" name="imagepipeline-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.2_sources" level="project" />
@@ -139,15 +138,14 @@
     <orderEntry type="library" exported="" name="library-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.1.43.android" level="project" />
-    <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
     <orderEntry type="library" exported="" name="okio-1.4.0" level="project" />
+    <orderEntry type="library" exported="" name="BmobSDK_V3.4.0_0616" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="drawee-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="MaterialTabs-0.11" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="library-2.1.3" level="project" />
     <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="baidumapapi_v3_4_0" level="project" />
     <orderEntry type="library" exported="" name="locSDK_4.2" level="project" />
     <orderEntry type="library" exported="" name="materialdrawer-2.9.8" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
@@ -164,6 +162,5 @@
     <orderEntry type="library" exported="" name="material-calendarview-0.3.2" level="project" />
     <orderEntry type="library" exported="" name="design-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.2.0" level="project" />
-    <orderEntry type="module" module-name="sMSSDK" exported="" />
   </component>
 </module>

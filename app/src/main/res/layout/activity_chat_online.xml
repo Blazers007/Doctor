@@ -19,7 +19,7 @@
                 android:layout_height="56dp">
                 <!-- 按照病种类-->
                 <Spinner
-                        android:id="@+id/spinnerDiease"
+                        android:id="@+id/spinnerDisease"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
