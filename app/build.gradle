@@ -25,62 +25,39 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:cardview-v7:22.2.0'
-    compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.rengwuxian.materialedittext:library:2.1.3'
     /*http://www.rengwuxian.com/post/materialedittext*/
-    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
     /*https://github.com/rudsonlive/NavigationDrawer-MaterialDesign*/
-    compile 'com.prolificinteractive:material-calendarview:0.3.2'
     /*https://github.com/prolificinteractive/material-calendarview*/
-    compile 'com.github.satyan:sugar:1.3'
     /*http://satyan.github.io/sugar/index.html*/
     /* https://github.com/daimajia/AndroidSwipeLayout */
     compile 'com.android.support:recyclerview-v7:22.2.0'
-    compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     /* https://github.com/rey5137/material */
-    compile 'com.github.rey5137:material:1.1.1'
     /* https://github.com/hdodenhof/CircleImageView */
-    compile 'de.hdodenhof:circleimageview:1.3.0'
     /* Form Cards https://github.com/gabrielemariotti/cardslib */
 
     //Core
-    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     //Optional for built-in cards
-    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
     /* Inject Views */
-    compile 'com.jakewharton:butterknife:6.1.0'
     /* Use new material drawer instead */
     compile('com.mikepenz:materialdrawer:2.9.8@aar') {
         transitive = true
     }
     /* Material Dialog https://github.com/afollestad/material-dialogs */
-    compile 'com.afollestad:material-dialogs:0.7.4.2'
     /* EventBus */
-    compile 'de.greenrobot:eventbus:2.4.0'
     /* SMS Service http://dashboard.mob.com/Sms/#/quickstarts/android */
 
     /* Wave View */
-    compile 'com.github.john990:WaveView:16a10c1f9b'
     /* PhotoView https://github.com/chrisbanes/PhotoView */
-    compile 'com.github.chrisbanes.photoview:library:1.2.4'
     /* Use Fresco instead of UILoader */
 
     /* http://blog.honx.in/dev-only/   DEV ONLY honx */
-    compile 'com.facebook.fresco:fresco:0.5.0+'
     /* Use OK HTTP */
     compile('com.github.florent37:materialviewpager:1.0.4@aar') {
         transitive = true
     }
     /* Use DragTopLayout instead for material viewpager a while */
-    compile 'com.github.chenupt.android:dragtoplayout:1.2.1@aar'
-    compile 'it.neokree:MaterialTabs:0.11'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
     /* Combine up two together */
     /* Android Support Design */
-    compile 'com.android.support:design:22.2.0'
     compile files('libs/baidumapapi_v3_0_0.jar')
     compile files('libs/Bmob_Push_V0.6beta_20150408.jar')
     compile files('libs/BmobIM_V1.1.8beta_20150408.jar')
@@ -88,4 +65,27 @@ dependencies {
     compile files('libs/fastjson-1.1.43.android.jar')
     compile files('libs/locSDK_4.2.jar')
     compile files('libs/universal-image-loader-1.9.2_sources.jar')
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:cardview-v7:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.3'
+    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
+    compile 'com.prolificinteractive:material-calendarview:0.3.2'
+    compile 'com.github.satyan:sugar:1.3'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'com.github.rey5137:material:1.1.1'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
+    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.afollestad:material-dialogs:0.7.4.2'
+    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.github.john990:WaveView:16a10c1f9b'
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    compile 'com.facebook.fresco:fresco:0.5.0'
+    compile 'com.github.chenupt.android:dragtoplayout:1.2.1@aar'
+    compile 'it.neokree:MaterialTabs:0.11'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.android.support:design:22.2.0'
 }

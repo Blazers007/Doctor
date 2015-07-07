@@ -1,45 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
     <EditText
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/editText" android:layout_below="@+id/textView" android:layout_marginTop="96dp"
-            android:inputType="phone" android:hint="@string/account_verify" android:paddingLeft="64dp" android:gravity="bottom"
+            android:id="@+id/page1_phoneNumber" android:layout_marginTop="96dp"
+            android:inputType="phone" android:hint="@string/account_name" android:paddingLeft="64dp"
+            android:gravity="bottom"
             android:paddingBottom="16dp" android:textColor="#666" android:textColorHint="#888"
             android:textSize="18sp" android:background="@drawable/edit_corner_upper"/>
     <EditText
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/editText2" android:layout_below="@+id/editText" android:hint="@string/account_pwd"
+            android:inputType="number"
+            android:ems="6"
+            android:id="@+id/page1_smsCode" android:layout_below="@+id/page1_phoneNumber"
+            android:hint="@string/account_verify"
             android:paddingLeft="64dp" android:gravity="bottom" android:paddingBottom="16dp"
             android:textColor="#666" android:textColorHint="#888" android:textSize="18sp"
             android:background="@drawable/edit_corner_middle"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/page1_pwd" android:hint="@string/account_pwd"
+            android:paddingLeft="64dp" android:gravity="bottom" android:paddingBottom="16dp"
+            android:textColor="#666" android:textColorHint="#888" android:textSize="18sp"
+            android:background="@drawable/edit_corner_middle" android:layout_below="@+id/page1_smsCode"
+            android:layout_marginTop="8dp"/>
     <!-- Icon-->
     <EditText android:layout_width="match_parent" android:layout_height="56dp" android:inputType="textPassword"
-              android:ems="10" android:id="@+id/editText4" android:layout_below="@+id/editText2"
+              android:ems="10" android:id="@+id/page1_confirm" android:layout_below="@+id/page1_pwd"
               android:hint="@string/account_confirm_pwd" android:paddingLeft="64dp" android:gravity="bottom"
               android:paddingBottom="16dp" android:textColor="#666" android:textColorHint="#888"
               android:textSize="18sp" android:background="@drawable/edit_corner_bottom"/>
+    <!-- Send SMS Code -->
+    <Button
+            android:id="@+id/page1_smsBtn"
+            android:text="@string/send_sms_code"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:layout_alignTop="@+id/page1_phoneNumber"
+            android:layout_alignRight="@+id/page1_phoneNumber"
+            android:layout_marginTop="4dp" android:layout_marginRight="8dp" android:gravity="center"/>
+    <!-- Icon-->
     <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:id="@+id/imageView" android:layout_alignLeft="@+id/editText"
-            android:layout_alignTop="@+id/editText" android:layout_marginLeft="8dp"
-            android:src="@drawable/ic_stay_primary_portrait_grey600_36dp" android:paddingLeft="12dp"
-            android:paddingRight="12dp" android:paddingTop="12dp"/>
-    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/imageView2"
-               android:layout_alignLeft="@+id/editText" android:layout_alignTop="@+id/editText2"
+            android:id="@+id/ic_phone"
+            android:layout_alignLeft="@+id/page1_phoneNumber"
+            android:layout_alignTop="@+id/page1_phoneNumber"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_stay_primary_portrait_grey600_36dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="12dp"/>
+    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/ic_code"
+               android:layout_alignLeft="@+id/page1_phoneNumber" android:layout_alignTop="@+id/page1_smsCode"
+               android:layout_marginLeft="8dp" android:src="@drawable/ic_sms_failed_grey600_36dp"
+               android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="12dp"/>
+    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/ic_pwd"
+               android:layout_alignLeft="@+id/page1_phoneNumber" android:layout_alignTop="@+id/page1_pwd"
                android:layout_marginLeft="8dp" android:src="@drawable/ic_vpn_key_grey600_36dp"
+               android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="12dp"/>
+    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/ic_confirm"
+               android:layout_alignLeft="@+id/page1_phoneNumber" android:layout_alignTop="@+id/page1_confirm"
+               android:layout_marginLeft="8dp" android:src="@drawable/ic_done_grey600_36dp"
                android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="12dp"/>
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="下一步"
-            android:id="@+id/button2"
+            android:id="@+id/btn_next1"
             android:layout_alignParentBottom="true" android:layout_marginBottom="28dp"/>
 </RelativeLayout>

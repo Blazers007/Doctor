@@ -149,8 +149,8 @@
     <orderEntry type="library" exported="" name="locSDK_4.2" level="project" />
     <orderEntry type="library" exported="" name="materialdrawer-2.9.8" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
-    <orderEntry type="library" exported="" name="cardslib-cards-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="android-observablescrollview-1.5.0" level="project" />
+    <orderEntry type="library" exported="" name="cardslib-cards-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="materialviewpager-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_v3_0_0" level="project" />
     <orderEntry type="library" exported="" name="dragtoplayout-1.2.1" level="project" />

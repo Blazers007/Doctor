@@ -1,7 +1,6 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -9,7 +8,7 @@
         tools:context="com.blazers.app.doctor.Activity.Register.RegisterActivity">
     <include layout="@layout/toolbar"/>
     <!-- Step indicator-->
-    <android.support.v4.view.ViewPager
+    <com.blazers.app.doctor.library.view.LockedViewPager
             android:id="@+id/register_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

@@ -54,9 +54,9 @@ public class FullfillProfile extends AppCompatActivity {
         mProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mCity.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
+                mCity.setAdapter(new ArrayAdapter<>(FullfillProfile.this,
                         android.R.layout.simple_spinner_dropdown_item,
-                        LocationParser.getInstance(RegisterActivity.this).getCitiesByProvince(parent.getSelectedItem().toString())));
+                        LocationParser.getInstance(FullfillProfile.this).getCitiesByProvince(parent.getSelectedItem().toString())));
             }
 
             @Override
@@ -68,9 +68,9 @@ public class FullfillProfile extends AppCompatActivity {
         mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mDistrict.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
+                mDistrict.setAdapter(new ArrayAdapter<>(FullfillProfile.this,
                         android.R.layout.simple_spinner_dropdown_item,
-                        LocationParser.getInstance(RegisterActivity.this).getDistrictsByCity(parent.getSelectedItem().toString())));
+                        LocationParser.getInstance(FullfillProfile.this).getDistrictsByCity(parent.getSelectedItem().toString())));
             }
 
             @Override
