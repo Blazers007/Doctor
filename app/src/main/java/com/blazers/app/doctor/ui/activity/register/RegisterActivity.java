@@ -345,10 +345,7 @@ public class RegisterActivity extends AppCompatActivity {
         /* 组装Register数据 提交 并显示进度条 */
         JSONObject location = null, extend = null;
         try {
-            location = new JSONObject();
-            location.put("province", mProvince.getSelectedItem().toString());
-            location.put("province", mProvince.getSelectedItem().toString());
-            location.put("province", mProvince.getSelectedItem().toString());
+            extend = new JSONObject();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -359,7 +356,7 @@ public class RegisterActivity extends AppCompatActivity {
         register.setUserHeadSrc("http://apks.bj.bcebos.com/head.jpg?responseContentDisposition=attachment");
         register.setEmail("308802880@qq.com");
         register.setBirthday(mBirthday.getText().toString());
-        register.setLocation(location == null? "{}" : location.toString());
+        register.setLocation(mProvince.getSelectedItem().toString()+"-"+mCity.getSelectedItem().toString()+"-"+mDistrict.getSelectedItem().toString());
         register.setRole("patient");
         /* Extra */
         /* 必须采用 signUp方法进行注册 */
