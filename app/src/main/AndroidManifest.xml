@@ -212,6 +212,16 @@
             android:name=".service.MyIntentService"
             android:exported="false" >
         </service>
+
+        <!-- Receiver Widget -->
+        <receiver android:name=".noti.MedicalNotify" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/medical_notify_info" />
+        </receiver>
     </application>
 
 </manifest>

@@ -107,6 +107,7 @@ public class DoctorOnlineChat extends AppCompatActivity {
 
             @Override
             public void onConnectCompleted() {
+                /* 开始监听ChatModel表格 */
                 rtd.subTableUpdate("ChatModel");
             }
         });

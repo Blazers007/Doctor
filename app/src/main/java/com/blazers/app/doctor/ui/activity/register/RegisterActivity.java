@@ -5,8 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -37,9 +39,20 @@ import com.blazers.app.doctor.library.view.LockedViewPager;
 import com.blazers.app.doctor.model.bmob.AppUserModel;
 import com.blazers.app.doctor.model.bmob.DoctorSetting;
 import com.blazers.app.doctor.model.bmob.Invite;
+import com.blazers.app.doctor.util.LocationParser;
+import com.blazers.app.doctor.util.PictureUtils;
+import com.blazers.app.doctor.util.StorageConfig;
+import com.bmob.BTPFileResponse;
+import com.bmob.BmobProFile;
+import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.rengwuxian.materialedittext.MaterialEditText;
+import org.json.JSONObject;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -54,9 +67,14 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mPhoneNumber, mSMSCode, mPassword, mConfirm;;
     private Button mSMSBtn;
     /* Page 2 */
-
+    private ImageView mUserHeadImg;
+    private MaterialEditText mRealName;
+    private RadioGroup mGender;
+    private TextView mBirthday, mAge;
+    private Spinner mProvince, mCity, mDistrict;
     /* Vars */
     private String PHONE_NUMBER;
+    private String USER_HEAD_PATH, localCameraPath;
     private AppUserModel register;
 
     @Override
@@ -88,31 +106,86 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    /* PagerAdapter */
+    /* PagerAdapter TODO:初始化环节太繁琐 能否精简  */
     class RegisterAdapter extends PagerAdapter {
-
-        private int[] ids = new int[]{
-                R.layout.page_register_1,
-                R.layout.page_register_2,
-        };
         private ArrayList<View> views = new ArrayList<>();
 
         public RegisterAdapter() {
-            for (int id : ids)
-                views.add(LayoutInflater.from(RegisterActivity.this).inflate(id, mViewPager, false));
             /* Page 1 */
-            View v = views.get(0);
-            mPhoneNumber = (EditText) v.findViewById(R.id.page1_phoneNumber);
-            mSMSCode = (EditText) v.findViewById(R.id.page1_smsCode);
-            mSMSBtn = (Button) v.findViewById(R.id.page1_smsBtn);
-            mPassword = (EditText) v.findViewById(R.id.page1_pwd);
-            mConfirm = (EditText) v.findViewById(R.id.page1_confirm);
+            View page1 = LayoutInflater.from(RegisterActivity.this).inflate(R.layout.page_register_1, mViewPager, false);
+            views.add(page1);
+            mPhoneNumber = (EditText) page1.findViewById(R.id.page1_phoneNumber);
+            mSMSCode = (EditText) page1.findViewById(R.id.page1_smsCode);
+            mSMSBtn = (Button) page1.findViewById(R.id.page1_smsBtn);
+            mPassword = (EditText) page1.findViewById(R.id.page1_pwd);
+            mConfirm = (EditText) page1.findViewById(R.id.page1_confirm);
 
             mPhoneNumber.addTextChangedListener(phoneNumberWatcher);
             mSMSBtn.setEnabled(false);
             mSMSBtn.setOnClickListener(pagerClickController);
-            views.get(0).findViewById(R.id.btn_next1).setOnClickListener(pagerClickController);
+            page1.findViewById(R.id.btn_next1).setOnClickListener(pagerClickController);
             /* Page 2 */
+            View page2 = LayoutInflater.from(RegisterActivity.this).inflate(R.layout.page_register_2, mViewPager, false);
+            views.add(page2);
+            mUserHeadImg = (ImageView) page2.findViewById(R.id.register_photo);
+            mRealName = (MaterialEditText) page2.findViewById(R.id.register_username);
+            mBirthday = (TextView) page2.findViewById(R.id.register_birthday);
+            mAge = (TextView) page2.findViewById(R.id.register_age);
+            mProvince = (Spinner) page2.findViewById(R.id.spinner);
+            mCity = (Spinner) page2.findViewById(R.id.spinner2);
+            mDistrict = (Spinner) page2.findViewById(R.id.spinner3);
+            page2.findViewById(R.id.btn_next2).setOnClickListener(pagerClickController);
+
+            mBirthday.setClickable(true);
+            mBirthday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                            new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePickerDialog datePickerDialog, int i, int i1, int i2) {
+                                    String str = String.format("%04d 年 %02d 月 %02d 日", i, i1, i2);
+                        /* 填入生日 */
+                                    mBirthday.setText(str);
+                        /* 计算年龄 */
+                                    mAge.setText(Calendar.getInstance().get(Calendar.YEAR) - i+"岁");
+                                }
+                            }, 1980, 0, 1);
+                    datePickerDialog.setVibrate(false);
+                    datePickerDialog.show(getSupportFragmentManager(), "PICKER");
+                }
+            });
+
+            mProvince.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    LocationParser.getInstance(RegisterActivity.this).getProvinces()));
+            mProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    mCity.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            LocationParser.getInstance(RegisterActivity.this).getCitiesByProvince(parent.getSelectedItem().toString())));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            mCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    mDistrict.setAdapter(new ArrayAdapter<>(RegisterActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            LocationParser.getInstance(RegisterActivity.this).getDistrictsByCity(parent.getSelectedItem().toString())));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
         @Override
@@ -128,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return ids.length;
+            return 2;
         }
 
         @Override
@@ -137,19 +210,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_register, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /* PhoneNumber watcher */
+    /* 检查用户输入的手机号是否正确 */
     private TextWatcher phoneNumberWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -175,13 +236,15 @@ public class RegisterActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_next1:
+                    /* 跳转到第二页 */
                     verifyCode();
                     break;
                 case R.id.page1_smsBtn:
                     sendSMSCode();
                     break;
                 case R.id.btn_next2:
-
+                    /* 第二个页面 此时已经注册成功 但是仅有基本信息 */
+                    submit();
                     break;
             }
         }
@@ -232,22 +295,8 @@ public class RegisterActivity extends AppCompatActivity {
                public void done(BmobException e) {
                    if(e == null){
                        Log.i("smile", "验证通过");
+                       /* 采用带校验的√  附带动画效果 */
                        mVerified = true;
-                    /* 根据号码读取配置 */
-                       BmobQuery<Invite> query = new BmobQuery<>();
-                       query.addWhereEqualTo("PatientPhone", PHONE_NUMBER);
-                       query.findObjects(RegisterActivity.this, new FindListener<Invite>() {
-                           @Override
-                           public void onSuccess(List<Invite> list) {
-                               if (list.size() > 0) {
-                                   mInviteInformation = list.get(0);
-                               }
-                           }
-                           @Override
-                           public void onError(int i, String s) {
-                            /* TODO:有漏洞，如果为读取失败 而并非不存在该条数据怎么办 */
-                           }
-                       });
                    }else{
                        mVerified = false;
                        Log.i("SMS Verify", "验证失败：code =" + e.getErrorCode() + ",msg = " + e.getLocalizedMessage());
@@ -270,6 +319,69 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    void uploadUserHead(File file){
+        BTPFileResponse response = BmobProFile.getInstance(this).upload(file.getPath(), new com.bmob.btp.callback.UploadListener() {
+            @Override
+            public void onSuccess(String fileName, String url) {
+                String URL =BmobProFile.getInstance(RegisterActivity.this)
+                        .signURL(fileName, url, "eb5830969fd9f69c26e4e4f57ec772f7", 0, null);
+            }
+
+            @Override
+            public void onProgress(int ratio) {
+                Log.e("Progress", "" + ratio);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+    }
+
+    /* 提交注册信息 并返回注册结果 自动跳转 */
+    void submit() {
+        /* 校验相关字段是否完整 或使用InputChecker 或 EditText Wrapper */
+        /* 组装Register数据 提交 并显示进度条 */
+        JSONObject location = null, extend = null;
+        try {
+            location = new JSONObject();
+            location.put("province", mProvince.getSelectedItem().toString());
+            location.put("province", mProvince.getSelectedItem().toString());
+            location.put("province", mProvince.getSelectedItem().toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        register = new AppUserModel();
+        register.setUsername(PHONE_NUMBER);
+        register.setPassword(mPassword.getText().toString());
+        register.setRealName(mRealName.getText().toString());
+        register.setUserHeadSrc("http://apks.bj.bcebos.com/head.jpg?responseContentDisposition=attachment");
+        register.setEmail("308802880@qq.com");
+        register.setBirthday(mBirthday.getText().toString());
+        register.setLocation(location == null? "{}" : location.toString());
+        register.setRole("patient");
+        /* Extra */
+        /* 必须采用 signUp方法进行注册 */
+        register.signUp(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.e("Save Success", "ID: " + register.getObjectId());
+                Snackbar.make(mToolbar, "注册成功", Snackbar.LENGTH_SHORT).show();
+                BmobUserManager.getInstance(RegisterActivity.this).bindInstallationForRegister(register.getObjectId());
+                /* 更新地理信息 跳转到页面三 */
+                mViewPager.setCurrentItem(2, true);
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Log.e("Save Failed", s);
+            }
+        });
+    }
+
+
+
     /* 如果被邀请 则读取配置文件生成填写的表单 */
     void makeSpecialForm(String doc, String array) {
         BmobQuery<DoctorSetting> query = new BmobQuery<>();
@@ -287,42 +399,16 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+
     /* 未被邀请的则只填写基本情况 */
     void makeNormalForm(){
 
     }
 
-    /* 提交注册信息 并返回注册结果 自动跳转 */
-    void submit() {
-        /* 校验相关字段是否完整 或使用InputChecker 或 EditText Wrapper */
+    /* 日后在填写内容 */
+    void fullfillLater() {
 
-        /* 组装Register数据 提交 并显示进度条 */
-        register = new AppUserModel();
-        register.setUsername(PHONE_NUMBER);
-        register.setPassword("taaita1314");
-        register.setEmail("308802880@qq.com");
-        register.setRole("patient");
-        /* Extra */
-//        register.setRealName(mRealname.getText().toString());
-        /* 必须采用 signUp方法进行注册 */
-        register.signUp(this, new SaveListener() {
-            @Override
-            public void onSuccess() {
-                Log.e("Save Success", "ID: " + register.getObjectId());
-                Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                BmobUserManager.getInstance(RegisterActivity.this).bindInstallationForRegister(register.getObjectId());
-                /* 更新地理信息 */
-                setResult(RESULT_OK);
-                finish();
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                Log.e("Save Failed", s);
-            }
-        });
     }
-
 
     @Override
     protected void onResume() {
@@ -374,5 +460,49 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+
+    void capturePhtot() {
+        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        File dir = new File(StorageConfig.BMOB_PICTURE_PATH);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File file = new File(dir, String.valueOf(System.currentTimeMillis())
+                + ".jpg");
+        localCameraPath = file.getPath();
+        Uri imageUri = Uri.fromFile(file);
+        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(openCameraIntent,
+                StorageConfig.REQUESTCODE_TAKE_CAMERA);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case StorageConfig.REQUESTCODE_TAKE_CAMERA:
+                    USER_HEAD_PATH = PictureUtils.compressBitmap(localCameraPath);
+                    /* 展示图片 */
+                    ImageLoader.getInstance().displayImage("file://" + USER_HEAD_PATH, mUserHeadImg);
+                    /* 出现确认/重选按钮 以及进度条? 其他APP如何使用该方式*/
+                    break;
+            }
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_register, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
     }
 }

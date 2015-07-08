@@ -23,7 +23,6 @@ public class FullfillProfile extends AppCompatActivity {
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
     /*User Info*/
-
     @InjectView(R.id.register_birthday) TextView mBirthday;
     @InjectView(R.id.register_age) TextView mAge;
     @InjectView(R.id.register_username) MaterialEditText mRealname;

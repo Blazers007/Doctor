@@ -16,6 +16,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blazers.app.doctor.R;
+import com.blazers.app.doctor.library.view.NewMessageNotification;
 import com.blazers.app.doctor.ui.activity.register.RegisterActivity;
 import com.blazers.app.doctor.model.bmob.AppUserModel;
 
@@ -45,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        /* For test */
+        NewMessageNotification.notify(this, "Test", 1);
     }
 
     public void doRegister(View view) {

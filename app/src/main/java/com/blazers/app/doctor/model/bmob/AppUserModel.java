@@ -1,6 +1,7 @@
 package com.blazers.app.doctor.model.bmob;
 
 import cn.bmob.im.bean.BmobChatUser;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by liang on 2015/5/25.
@@ -8,43 +9,58 @@ import cn.bmob.im.bean.BmobChatUser;
 public class AppUserModel extends BmobChatUser {
 
     /* 自带的 用户名 密码 电子邮件 */
-    /* 拓展部分 */
-    private String realName;
-    private String userPhone;
-    private String userHead;
-
-    /* TAG部分 */
-    private String role;
+    private String RealName;
+    private String UserHeadSrc;
+    private String Birthday;
+    private String Location;
+    private String Role;
+    private String JSONExtend;
 
     public String getRealName() {
-        return realName;
+        return RealName;
     }
 
     public void setRealName(String realName) {
-        this.realName = realName;
+        RealName = realName;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getUserHeadSrc() {
+        return UserHeadSrc;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setUserHeadSrc(String userHeadSrc) {
+        UserHeadSrc = userHeadSrc;
     }
 
-    public String getUserHead() {
-        return userHead;
+    public String getBirthday() {
+        return Birthday;
     }
 
-    public void setUserHead(String userHead) {
-        this.userHead = userHead;
+    public void setBirthday(String birthday) {
+        Birthday = birthday;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
     }
 
     public String getRole() {
-        return role;
+        return Role;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        Role = role;
+    }
+
+    public String getJSONExtend() {
+        return JSONExtend;
+    }
+
+    public void setJSONExtend(String JSONExtend) {
+        this.JSONExtend = JSONExtend;
     }
 }
