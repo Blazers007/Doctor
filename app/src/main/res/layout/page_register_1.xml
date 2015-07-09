@@ -1,79 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription,RtlHardcoded"
+        >
     <EditText
+            android:id="@+id/page1_phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/page1_phoneNumber" android:layout_marginTop="96dp"
-            android:inputType="phone" android:hint="@string/account_name" android:paddingLeft="64dp"
-            android:gravity="bottom"
-            android:paddingBottom="16dp" android:textColor="#666" android:textColorHint="#888"
-            android:textSize="18sp" android:background="@drawable/edit_corner_upper"/>
+            android:layout_marginTop="96dp"
+            style="@style/EDIT_PHONE"
+            />
     <EditText
+            android:id="@+id/page1_smsCode"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:inputType="number"
-            android:ems="6"
-            android:id="@+id/page1_smsCode" android:layout_below="@+id/page1_phoneNumber"
-            android:hint="@string/account_verify"
-            android:paddingLeft="64dp" android:gravity="bottom" android:paddingBottom="16dp"
-            android:textColor="#666" android:textColorHint="#888" android:textSize="18sp"
-            android:background="@drawable/edit_corner_middle"/>
+            android:layout_below="@+id/page1_phoneNumber"
+            style="@style/EDIT_SMS_CODE"
+            />
     <EditText
+            android:id="@+id/page1_pwd"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/page1_pwd" android:hint="@string/account_pwd"
-            android:paddingLeft="64dp" android:gravity="bottom" android:paddingBottom="16dp"
-            android:textColor="#666" android:textColorHint="#888" android:textSize="18sp"
-            android:background="@drawable/edit_corner_middle" android:layout_below="@+id/page1_smsCode"
-            android:layout_marginTop="8dp"/>
+            android:layout_below="@+id/page1_smsCode"
+            android:layout_marginTop="@dimen/s_divide"
+            style="@style/EDIT_PWD"
+            />
     <!-- Icon-->
-    <EditText android:layout_width="match_parent" android:layout_height="56dp" android:inputType="textPassword"
-              android:ems="10" android:id="@+id/page1_confirm" android:layout_below="@+id/page1_pwd"
-              android:hint="@string/account_confirm_pwd" android:paddingLeft="64dp" android:gravity="bottom"
-              android:paddingBottom="16dp" android:textColor="#666" android:textColorHint="#888"
-              android:textSize="18sp" android:background="@drawable/edit_corner_bottom"/>
+    <EditText
+            android:id="@+id/page1_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@+id/page1_pwd"
+            android:background="@drawable/edit_corner_bottom"
+            style="@style/EDIT_PWD_CONFIRM"
+            />
     <!-- Send SMS Code -->
-    <Button
+    <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/page1_smsBtn"
             android:text="@string/send_sms_code"
+            android:background="#1E88E5"
             android:layout_width="96dp"
             android:layout_height="48dp"
             android:layout_alignTop="@+id/page1_phoneNumber"
             android:layout_alignRight="@+id/page1_phoneNumber"
-            android:layout_marginTop="4dp" android:layout_marginRight="8dp" android:gravity="center"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            />
     <!-- Icon-->
     <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
             android:id="@+id/ic_phone"
             android:layout_alignLeft="@+id/page1_phoneNumber"
             android:layout_alignTop="@+id/page1_phoneNumber"
-            android:layout_marginLeft="8dp"
             android:src="@drawable/ic_stay_primary_portrait_grey600_36dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="12dp"/>
-    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/ic_code"
-               android:layout_alignLeft="@+id/page1_phoneNumber" android:layout_alignTop="@+id/page1_smsCode"
-               android:layout_marginLeft="8dp" android:src="@drawable/ic_sms_failed_grey600_36dp"
-               android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="12dp"/>
-    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/ic_pwd"
-               android:layout_alignLeft="@+id/page1_phoneNumber" android:layout_alignTop="@+id/page1_pwd"
-               android:layout_marginLeft="8dp" android:src="@drawable/ic_vpn_key_grey600_36dp"
-               android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="12dp"/>
-    <ImageView android:layout_width="48dp" android:layout_height="48dp" android:id="@+id/ic_confirm"
-               android:layout_alignLeft="@+id/page1_phoneNumber" android:layout_alignTop="@+id/page1_confirm"
-               android:layout_marginLeft="8dp" android:src="@drawable/ic_done_grey600_36dp"
-               android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="12dp"/>
+            style="@style/ICON_48_GREY"
+            />
+    <ImageView
+            android:id="@+id/ic_code"
+            android:layout_alignLeft="@+id/page1_phoneNumber"
+            android:layout_alignTop="@+id/page1_smsCode"
+            android:src="@drawable/ic_sms_failed_grey600_36dp"
+            style="@style/ICON_48_GREY"
+            />
+    <ImageView
+            android:id="@+id/ic_pwd"
+            android:layout_alignLeft="@+id/page1_phoneNumber"
+            android:layout_alignTop="@+id/page1_pwd"
+            android:src="@drawable/ic_vpn_key_grey600_36dp"
+            style="@style/ICON_48_GREY"
+            />
+    <ImageView
+            android:id="@+id/ic_confirm"
+            android:layout_alignLeft="@+id/page1_phoneNumber"
+            android:layout_alignTop="@+id/page1_confirm"
+            android:src="@drawable/ic_done_grey600_36dp"
+            style="@style/ICON_48_GREY"
+            />
     <Button
+            android:id="@+id/btn_next1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="下一步"
-            android:id="@+id/btn_next1"
-            android:layout_alignParentBottom="true" android:layout_marginBottom="28dp"/>
+            android:text="@string/next"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="28dp"
+            />
 </RelativeLayout>

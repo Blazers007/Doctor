@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
-                android:layout_above="@+id/btn_next2">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="ContentDescription,RtlHardcoded"
+        >
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_next2"
+            >
         <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="24dp" android:paddingLeft="8dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="24dp"
+                android:paddingLeft="8dp"
                 android:paddingRight="8dp">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#ccc"
-                    android:text="基本信息" android:paddingTop="4dp" android:paddingBottom="4dp"
-                    android:paddingLeft="4dp" android:layout_marginBottom="8dp" android:textColor="#666"/>
+                    android:text="基本信息"
+                    style="@style/TEXT_DIVIDER"
+                   />
             <!-- 基本信息-->
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp" android:paddingLeft="8dp" android:paddingRight="8dp">
@@ -67,8 +76,12 @@
                         android:layout_alignBottom="@+id/register_username" android:layout_toRightOf="@+id/register_photo"
                         android:layout_marginLeft="32dp" android:src="@drawable/ic_person_grey600_36dp"/>
             </RelativeLayout>
-            <!--  手机号 -->
-            <!-- 生日 自动计算出年龄-->
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="生日地址"
+                    style="@style/TEXT_DIVIDER"
+                    />
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"

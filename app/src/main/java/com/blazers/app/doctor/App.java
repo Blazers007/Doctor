@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import cn.bmob.im.BmobChat;
 import cn.bmob.im.BmobUserManager;
 import cn.bmob.im.bean.BmobChatUser;
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -24,18 +23,13 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.orm.SugarApp;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by liang on 2015/5/25.
- */
 public class App extends SugarApp {
 
     private static App instance;
-
     /* Vars */
     public LocationClient mLocationClient;
     public MyLocationListener mMyLocationListener;
@@ -44,18 +38,20 @@ public class App extends SugarApp {
     @Override
     public void onCreate() {
         super.onCreate();
+        /*http://facebook.github.io/stetho/*/
+//        Stetho.initialize(
+//                Stetho.newInitializerBuilder(this)
+//                        .enableDumpapp(
+//                                Stetho.defaultDumperPluginsProvider(this))
+//                        .enableWebKitInspector(
+//                                Stetho.defaultInspectorModulesProvider(this))
+//                        .build());
         /* Bmob Init */
-//        Bmob.initialize(this, "f0d74dc5fda96aa9becdbd2a0875225c");
         BmobChat.DEBUG_MODE = true;
         BmobChat.getInstance(this).init("f0d74dc5fda96aa9becdbd2a0875225c");
-//        BmobChat.getInstance(this).startPollService(30);
         /* Baidu map */
         SDKInitializer.initialize(getApplicationContext());
         initBaiduLocClient();
-        /* MediaPlayer */
-        mMediaPlayer = MediaPlayer.create(this, R.raw.notify);
-        /* Notication */
-        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         /* Universal Image Loader */
         initImageLoader(getApplicationContext());
         /* Fresco Instead pf UILoader */

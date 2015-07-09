@@ -15,6 +15,9 @@
 
     <string name="hello_world">Hello world!</string>
 
+    <!--通用-->
+    <string name="next">下一步</string>
+
     <!-- LoginActivity -->
     <string name="send_sms_code">发送验证码</string>
     <string name="sending_sms_code">发送中...</string>
@@ -89,6 +92,7 @@
     <string name="action_reply">Reply</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="title_activity_lost_my_password">LostMyPassword</string>
 
 
     <!-- For  test -->

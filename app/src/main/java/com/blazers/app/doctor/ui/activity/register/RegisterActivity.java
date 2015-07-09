@@ -45,6 +45,7 @@ import com.blazers.app.doctor.util.StorageConfig;
 import com.bmob.BTPFileResponse;
 import com.bmob.BmobProFile;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.gc.materialdesign.views.ButtonRectangle;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONObject;
@@ -65,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Invite mInviteInformation;
     /* Page 1 */
     private EditText mPhoneNumber, mSMSCode, mPassword, mConfirm;;
-    private Button mSMSBtn;
+    private ButtonRectangle mSMSBtn;
     /* Page 2 */
     private ImageView mUserHeadImg;
     private MaterialEditText mRealName;
@@ -224,8 +225,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            mSMSBtn.setEnabled(s.length() >= 11);
-            PHONE_NUMBER = mPhoneNumber.getText().toString();
+            if (s.length() >= 11)
+                checkIfRegistered();
+            else
+                mSMSBtn.setEnabled(false);
         }
     };
 
@@ -250,8 +253,38 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
+    /* 校验是否已经注册过 */
+    void checkIfRegistered() {
+        BmobQuery<AppUserModel> query = new BmobQuery<>();
+        query.addWhereEqualTo("username",mPhoneNumber.getText().toString());
+        query.findObjects(this, new FindListener<AppUserModel>() {
+            @Override
+            public void onSuccess(List<AppUserModel> list) {
+                if(list.size() > 0) {
+                    Snackbar.make(mToolbar, "该手机号码已经注册过，您是否需要:",Snackbar.LENGTH_LONG)
+                            .setAction("找回密码", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(RegisterActivity.this, LostMyPassword.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .show();
+                }else {
+                    mSMSBtn.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                mSMSBtn.setEnabled(true);
+            }
+        });
+    };
+
     /* 发送验证码 */
     void sendSMSCode() {
+        PHONE_NUMBER = mPhoneNumber.getText().toString();
         mSMSBtn.setText(getString(R.string.sending_sms_code));
         mSMSBtn.setEnabled(false);
         /* 发送 */

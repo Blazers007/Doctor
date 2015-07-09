@@ -218,10 +218,16 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/medical_notify_info" />
         </receiver>
+
+        <activity
+            android:name=".ui.activity.register.LostMyPassword"
+            android:label="@string/title_activity_lost_my_password" >
+        </activity>
     </application>
 
 </manifest>

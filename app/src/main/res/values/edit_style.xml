@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 普通带有图标的编辑框 -->
+    <style name="EDIT_BASE">
+        <item name="android:paddingLeft">64dp</item>
+        <item name="android:textColor">#666</item>
+        <item name="android:textColorHint">#888</item>
+        <item name="android:textSize">@dimen/edit_text_size</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/edit_corner_middle</item>
+    </style>
+
+    <!-- 电话编辑框 -->
+    <style name="EDIT_PHONE" parent="EDIT_BASE">
+        <item name="android:maxLength">11</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:hint">@string/account_name</item>
+        <item name="android:background">@drawable/edit_corner_upper</item>
+    </style>
+
+    <!-- 验证码输入框 -->
+    <style name="EDIT_SMS_CODE" parent="EDIT_BASE">
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">6</item>
+        <item name="android:hint">@string/account_verify</item>
+    </style>
+
+    <!-- 密码框-->
+    <style name="EDIT_PWD" parent="EDIT_BASE">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:maxLength">18</item>
+        <item name="android:hint">@string/account_pwd</item>
+    </style>
+    <!-- 确认密码框-->
+    <style name="EDIT_PWD_CONFIRM" parent="EDIT_PWD">
+        <item name="android:hint">@string/account_confirm_pwd</item>
+    </style>
+</resources>

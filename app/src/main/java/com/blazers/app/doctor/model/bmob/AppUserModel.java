@@ -15,6 +15,7 @@ public class AppUserModel extends BmobChatUser {
     private String Location;
     private String Role;
     private String JSONExtend;
+    /* 与医生的关联? */
 
     public String getRealName() {
         return RealName;

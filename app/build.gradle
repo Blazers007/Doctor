@@ -34,22 +34,19 @@ dependencies {
     /* https://github.com/rey5137/material */
     /* https://github.com/hdodenhof/CircleImageView */
     /* Form Cards https://github.com/gabrielemariotti/cardslib */
-
     //Core
     //Optional for built-in cards
     /* Inject Views */
     /* Use new material drawer instead */
-    compile('com.mikepenz:materialdrawer:2.9.8@aar') {
+    compile('com.mikepenz:materialdrawer:3.1.1@aar') {
         transitive = true
     }
     /* Material Dialog https://github.com/afollestad/material-dialogs */
     /* EventBus */
     /* SMS Service http://dashboard.mob.com/Sms/#/quickstarts/android */
-
     /* Wave View */
     /* PhotoView https://github.com/chrisbanes/PhotoView */
     /* Use Fresco instead of UILoader */
-
     /* http://blog.honx.in/dev-only/   DEV ONLY honx */
     /* Use OK HTTP */
     compile('com.github.florent37:materialviewpager:1.0.4@aar') {
@@ -79,7 +76,7 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.1.0'
     compile 'com.jakewharton:butterknife:6.1.0'
-    compile 'com.afollestad:material-dialogs:0.7.4.2'
+    compile 'com.afollestad:material-dialogs:0.7.6.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.github.john990:WaveView:16a10c1f9b'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
@@ -88,4 +85,6 @@ dependencies {
     compile 'it.neokree:MaterialTabs:0.11'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.android.support:design:22.2.0'
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    compile files('libs/stetho-1.1.1-fatjar.jar')
 }
